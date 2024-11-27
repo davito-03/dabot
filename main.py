@@ -262,26 +262,33 @@ async def operaciones(ctx, operacion: str):
         await ctx.send(f"No se pudo realizar la operación. Detalles: {e}")
 
 @bot.command()
-async def quote(ctx, estado: str):
+async def cita(ctx):
     try:
-        with open("quotes.json", "r", encoding="utf-8") as f:
-            quotes_data = json.load(f)
+        response = requests.get("https://zenquotes.io/api/random")
+        quote_data = response.json()
 
-        if estado not in quotes_data:
-            await ctx.send(f"Estado de ánimo '{estado}' no encontrado. Usa uno de los siguientes: {', '.join(quotes_data.keys())}")
-            return
+        quote = quote_data[0]['q']
+        author = quote_data[0]['a']
 
-        quote_list = quotes_data[estado]
-        quote = random.choice(quote_list)
-
+        # Evitar que se repita la cita
         while quote in used_quotes:
-            quote = random.choice(quote_list)
+            response = requests.get("https://zenquotes.io/api/random")
+            quote_data = response.json()
+            quote = quote_data[0]['q']
+            author = quote_data[0]['a']
 
         used_quotes.append(quote)
 
-        await ctx.send(f"Cita de estado '{estado}': {quote}")
+        quote_text = f"**{quote}**\nPor: {author}"
+
+        translator = Translator()
+        translated_quote = translator.translate(quote_text, src='en', dest='es').text
+
+        await ctx.send(f"Aquí tienes una cita:\n\n{translated_quote}")
+
     except Exception as e:
         await ctx.send(f"Hubo un error al obtener la cita. Detalles: {e}")
+        print(f"Error: {e}")
 
 @bot.command()
 async def resolver(ctx, *args):
