@@ -1,0 +1,13 @@
+discord.py
+requests
+python-chess
+numpy  # Opcional, para operaciones matemáticas avanzadas
+chess
+python-dotenv
+sympy
+googletrans
+praw
+flask
+pyngrok
+flask-ngrok
+xds-protos
