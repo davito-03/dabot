@@ -1,7 +1,7 @@
 discord.py
 requests
 python-chess
-numpy  # Opcional, para operaciones matemáticas avanzadas
+numpy 
 chess
 python-dotenv
 sympy
