@@ -297,16 +297,19 @@ async def play(ctx, *, query: str):
 
     # Configurar las opciones de búsqueda y descarga
     ydl_opts = {
-        'format': 'bestaudio/best',
-        'noplaylist': True,  # Evita que se descargue toda una lista de reproducción
-        'quiet': True,  # No mostrar mensajes extra
-        'postprocessors': [{
-            'key': 'FFmpegAudioConvertor',  # Nombre corregido del postprocesador
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-        'outtmpl': 'downloads/%(id)s.%(ext)s',
+    'format': 'bestaudio/best',  # Selecciona la mejor calidad de audio
+    'postprocessors': [{
+        'key': 'FFmpegAudioConvertor',  # Usa FFmpeg para convertir el audio
+        'preferredquality': '192',  # Calidad de audio (puedes ajustarla a tu preferencia)
+    }],
+    'postprocessor_args': ['-vn'],  # Sin video
+    'prefer_ffmpeg': True,  # Prefiere FFmpeg si está disponible
+    'extractaudio': True,  # Solo extrae el audio
+    'audioquality': 1,  # Calidad de audio
+    'outtmpl': 'downloads/%(id)s.%(ext)s',  # Ruta de salida
+    'restrictfilenames': True,  # Nombres de archivo restrictivos
     }
+
 
     # Realizar la búsqueda con yt-dlp
     with ytdlp.YoutubeDL(ydl_opts) as ydl:
