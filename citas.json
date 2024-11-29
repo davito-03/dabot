@@ -1,0 +1,822 @@
+[
+    {
+        "quote": "La vida es lo que pasa mientras estás ocupado haciendo otros planes.",
+        "author": "John Lennon"
+    },
+    {
+        "quote": "No es lo que tenemos, sino lo que disfrutamos, lo que nos hace felices.",
+        "author": "Charles Spurgeon"
+    },
+    {
+        "quote": "Lo único imposible es aquello que no intentas.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "La felicidad no es algo hecho. Proviene de tus propias acciones.",
+        "author": "Dalai Lama"
+    },
+    {
+        "quote": "Haz lo que puedas, con lo que tengas, donde estés.",
+        "author": "Theodore Roosevelt"
+    },
+    {
+        "quote": "La vida no se trata de encontrarse a uno mismo, sino de crearse a uno mismo.",
+        "author": "George Bernard Shaw"
+    },
+    {
+        "quote": "El conocimiento es poder.",
+        "author": "Francis Bacon"
+    },
+    {
+        "quote": "Si puedes soñarlo, puedes hacerlo.",
+        "author": "Walt Disney"
+    },
+    {
+        "quote": "El que no lucha por lo que quiere, no merece lo que desea.",
+        "author": "Proverbio"
+    },
+    {
+        "quote": "El único límite para lograr nuestros logros de mañana son nuestras dudas y vacilaciones de hoy.",
+        "author": "Franklin D. Roosevelt"
+    },
+    {
+        "quote": "La vida es un 10% lo que te sucede y un 90% cómo reaccionas.",
+        "author": "Charles R. Swindoll"
+    },
+    {
+        "quote": "La mejor forma de predecir el futuro es inventarlo.",
+        "author": "Alan Kay"
+    },
+    {
+        "quote": "Un viaje de mil millas comienza con un solo paso.",
+        "author": "Lao Tse"
+    },
+    {
+        "quote": "No busques el momento perfecto, busca el momento y hazlo perfecto.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "El hombre que mueve montañas comienza cargando pequeñas piedras.",
+        "author": "Confucio"
+    },
+    {
+        "quote": "No llores porque terminó, sonríe porque sucedió.",
+        "author": "Dr. Seuss"
+    },
+    {
+        "quote": "No puedes detener las olas, pero puedes aprender a surfear.",
+        "author": "Jon Kabat-Zinn"
+    },
+    {
+        "quote": "Si no te esfuerzas hasta el máximo, ¿cómo sabrás donde está tu límite?",
+        "author": "Cristiano Ronaldo"
+    },
+    {
+        "quote": "La vida es corta, y el arte largo.",
+        "author": "Hipócrates"
+    },
+    {
+        "quote": "La felicidad no es algo hecho. Proviene de tus propias acciones.",
+        "author": "Dalai Lama"
+    },
+    {
+        "quote": "Donde hay amor, hay vida.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "quote": "Un día sin reír es un día perdido.",
+        "author": "Charlie Chaplin"
+    },
+    {
+        "quote": "La mente es todo. Lo que piensas, en eso te conviertes.",
+        "author": "Buda"
+    },
+    {
+        "quote": "Lo que no nos mata, nos hace más fuertes.",
+        "author": "Friedrich Nietzsche"
+    },
+    {
+        "quote": "La vida comienza donde termina tu zona de confort.",
+        "author": "Neale Donald Walsch"
+    },
+    {
+        "quote": "La mente es como un paracaídas, solo funciona si se abre.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "El mayor riesgo es no tomar ninguno.",
+        "author": "Mark Zuckerberg"
+    },
+    {
+        "quote": "La libertad no es un derecho, es una responsabilidad.",
+        "author": "Albert Camus"
+    },
+    {
+        "quote": "El coraje no siempre ruge. A veces, el coraje es la pequeña voz al final del día que dice: lo intentaré de nuevo mañana.",
+        "author": "Mary Anne Radmacher"
+    },
+    {
+        "quote": "Es nuestra elección lo que determina lo que somos.",
+        "author": "J.K. Rowling"
+    },
+    {
+        "quote": "Piensa en grande y no escuches a los que te dicen que no se puede hacer.",
+        "author": "Tim Ferriss"
+    }
+      {
+        "quote": "La vida es como andar en bicicleta. Para mantener el equilibrio, debes seguir adelante.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "El futuro pertenece a aquellos que creen en la belleza de sus sueños.",
+        "author": "Eleanor Roosevelt"
+    },
+    {
+        "quote": "No hay camino hacia la felicidad. La felicidad es el camino.",
+        "author": "Thich Nhat Hanh"
+    },
+    {
+        "quote": "El que no se atreve a dar un paso hacia lo desconocido nunca conocerá el verdadero valor de la vida.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida no está hecha de lo que vivimos, sino de lo que recordamos.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La felicidad depende de ti mismo.",
+        "author": "Aristóteles"
+    },
+    {
+        "quote": "Lo que no te mata te hace más fuerte.",
+        "author": "Friedrich Nietzsche"
+    },
+    {
+        "quote": "La imaginación es más importante que el conocimiento.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "Lo que somos es el resultado de lo que hemos pensado.",
+        "author": "Buda"
+    },
+    {
+        "quote": "La vida es como un espejo: te sonríe si la miras sonriendo.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "El verdadero viaje de descubrimiento no consiste en buscar nuevos paisajes, sino en tener nuevos ojos.",
+        "author": "Marcel Proust"
+    },
+    {
+        "quote": "El conocimiento nos da poder, pero el carácter nos da respeto.",
+        "author": "Bruce Lee"
+    },
+    {
+        "quote": "La mente que se abre a una nueva idea nunca vuelve a su tamaño original.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "Vivir es lo más raro en el mundo, la mayoría de la gente solo existe.",
+        "author": "Oscar Wilde"
+    },
+    {
+        "quote": "El éxito es la habilidad de ir de fracaso en fracaso sin perder el entusiasmo.",
+        "author": "Winston Churchill"
+    },
+    {
+        "quote": "El amor es la única realidad, y no es simplemente un sentimiento. Es la verdad última que está en el corazón de la creación.",
+        "author": "Rabindranath Tagore"
+    },
+    {
+        "quote": "La vida es corta, y es un hecho que no se puede cambiar.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Cualquier cosa que la mente humana pueda concebir y creer, puede lograr.",
+        "author": "Napoleon Hill"
+    },
+    {
+        "quote": "Los sueños son las respuestas de hoy a las preguntas del mañana.",
+        "author": "Edgar Cayce"
+    },
+    {
+        "quote": "El mundo es un libro, y aquellos que no viajan leen solo una página.",
+        "author": "San Agustín"
+    },
+    {
+        "quote": "Si no arriesgas nada, entonces no arriesgas nada.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "No sueñes tu vida, vive tus sueños.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida es demasiado importante para ser tomada en serio.",
+        "author": "Oscar Wilde"
+    },
+    {
+        "quote": "El que busca un amigo sin defectos se queda sin amigos.",
+        "author": "Proverbio turco"
+    },
+    {
+        "quote": "No cuentes los días, haz que los días cuenten.",
+        "author": "Muhammad Ali"
+    },
+    {
+        "quote": "Todo lo que siempre has querido está al otro lado del miedo.",
+        "author": "George Addair"
+    },
+    {
+        "quote": "La verdadera amistad es como la salud: nunca sabemos lo que tenemos hasta que la perdemos.",
+        "author": "Charles Caleb Colton"
+    },
+    {
+        "quote": "Un hombre que no ha hecho cosas tontas antes, nunca hará nada grande.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "Nunca te rindas, porque nunca sabes si el siguiente intento será el que funcione.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "El éxito es la suma de pequeños esfuerzos repetidos día tras día.",
+        "author": "Robert Collier"
+    },
+    {
+        "quote": "La única manera de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "Quien no vive para servir, no sirve para vivir.",
+        "author": "Berta von Suttner"
+    },
+    {
+        "quote": "Lo que haces hoy puede mejorar todos tus mañanas.",
+        "author": "Ralph Marston"
+    },
+    {
+        "quote": "El éxito es la habilidad de ir de fracaso en fracaso sin perder el entusiasmo.",
+        "author": "Winston Churchill"
+    },
+    {
+        "quote": "La vida te da lo que aceptas.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "No se puede encontrar la paz evitando la vida.",
+        "author": "Virginia Woolf"
+    },
+    {
+        "quote": "Es mejor ser odiado por lo que eres, que ser amado por lo que no eres.",
+        "author": "Andre Gide"
+    },
+    {
+        "quote": "La belleza comienza en el momento en que decides ser tú mismo.",
+        "author": "Coco Chanel"
+    },
+    {
+        "quote": "La vida es como un eco, lo que envías regresa.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Tu vida no mejora por casualidad, mejora por el cambio.",
+        "author": "Jim Rohn"
+    },
+    {
+        "quote": "Haz lo que amas y no trabajarás un solo día en tu vida.",
+        "author": "Confucio"
+    },
+    {
+        "quote": "El tiempo es el mejor autor; siempre encuentra un final perfecto.",
+        "author": "Charles Chaplin"
+    },
+    {
+        "quote": "Todo lo que somos es el resultado de lo que hemos pensado.",
+        "author": "Buda"
+    }
+    {
+        "quote": "La vida es un 10% lo que me ocurre y un 90% cómo reacciono ante ello.",
+        "author": "Charles R. Swindoll"
+    },
+    {
+        "quote": "No se trata de cuántas veces caes, sino de cuántas veces te levantas.",
+        "author": "Vince Lombardi"
+    },
+    {
+        "quote": "La vida no se trata de encontrarse a uno mismo, sino de crearse a uno mismo.",
+        "author": "George Bernard Shaw"
+    },
+    {
+        "quote": "La verdadera medida de nuestra riqueza es cuánto valdríamos si perdiéramos todo nuestro dinero.",
+        "author": "John Henry Jowett"
+    },
+    {
+        "quote": "En medio de la dificultad yace la oportunidad.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "No es lo que te sucede, sino cómo respondes a lo que te sucede lo que cuenta.",
+        "author": "Epicteto"
+    },
+    {
+        "quote": "El mayor placer en la vida es hacer lo que la gente dice que no puedes hacer.",
+        "author": "Walter Bagehot"
+    },
+    {
+        "quote": "Hazlo con pasión o no lo hagas en absoluto.",
+        "author": "Roy T. Bennett"
+    },
+    {
+        "quote": "Un hombre sabio aprende más de sus enemigos que un tonto de sus amigos.",
+        "author": "Nicolás Maquiavelo"
+    },
+    {
+        "quote": "Lo que se obtiene con demasiada facilidad, se valora demasiado poco.",
+        "author": "Thomas Paine"
+    },
+    {
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "Cuando todo parece ir en tu contra, recuerda que los aviones despegan contra el viento, no a favor de él.",
+        "author": "Henry Ford"
+    },
+    {
+        "quote": "La sabiduría comienza en la reflexión.",
+        "author": "Sócrates"
+    },
+    {
+        "quote": "El éxito es la suma de pequeños esfuerzos, repetidos día tras día.",
+        "author": "Robert Collier"
+    },
+    {
+        "quote": "Las personas que están lo suficientemente locas como para pensar que pueden cambiar el mundo son las que lo hacen.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "No importa cuántas veces fracases, lo importante es cuántas veces te levantes.",
+        "author": "Mary Pickford"
+    },
+    {
+        "quote": "El verdadero amor es aquel que se da sin esperar nada a cambio.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida es aquello que pasa mientras estás ocupado haciendo otros planes.",
+        "author": "John Lennon"
+    },
+    {
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "No llores porque terminó, sonríe porque sucedió.",
+        "author": "Dr. Seuss"
+    },
+    {
+        "quote": "La creatividad es la inteligencia divirtiéndose.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "La vida se encoge o se expande en proporción al coraje de uno.",
+        "author": "Anaïs Nin"
+    },
+    {
+        "quote": "Lo único imposible es aquello que no intentas.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La suerte es lo que sucede cuando la preparación se encuentra con la oportunidad.",
+        "author": "Seneca"
+    },
+    {
+        "quote": "La felicidad no es algo hecho. Viene de tus propias acciones.",
+        "author": "Dalai Lama"
+    },
+    {
+        "quote": "La vida no se mide por las veces que respiras, sino por los momentos que te quitan el aliento.",
+        "author": "George Carlin"
+    },
+    {
+        "quote": "Nunca dejes que tus miedos decidan tu futuro.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "El hombre que mueve montañas comienza cargando pequeñas piedras.",
+        "author": "Confucio"
+    },
+    {
+        "quote": "Lo único que se interpone entre tú y tu objetivo es la historia de excusas que te sigues contando.",
+        "author": "Jordan Belfort"
+    },
+    {
+        "quote": "Es mejor ser una persona que nunca ha tenido éxito que una persona que nunca lo ha intentado.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Donde hay amor, hay vida.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "quote": "La vida es lo que pasa mientras estás ocupado haciendo otros planes.",
+        "author": "John Lennon"
+    },
+    {
+        "quote": "Nunca te rindas, porque nunca sabes si el siguiente intento será el que funcione.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida es 10% lo que te sucede y 90% cómo reaccionas ante ello.",
+        "author": "Charles R. Swindoll"
+    },
+    {
+        "quote": "No te preocupes por el fracaso; solo tienes que estar en lo correcto una vez.",
+        "author": "Drew Houston"
+    },
+    {
+        "quote": "Los sueños no tienen fecha de caducidad.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Haz lo que puedas, con lo que tengas, donde estés.",
+        "author": "Theodore Roosevelt"
+    },
+    {
+        "quote": "El miedo es el asesino de la mente.",
+        "author": "Frank Herbert"
+    },
+    {
+        "quote": "Una persona con una nueva idea es un loco hasta que la idea tiene éxito.",
+        "author": "Mark Twain"
+    },
+    {
+        "quote": "Nunca sabrás de lo que eres capaz hasta que lo intentes.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Una actitud positiva puede no resolver todos tus problemas, pero va a molestar a suficiente gente como para que valga la pena.",
+        "author": "Herm Albright"
+    },
+    {
+        "quote": "No importa cuántas veces fracases, lo importante es cuántas veces te levantes.",
+        "author": "Mary Pickford"
+    },
+    {
+        "quote": "La felicidad no es algo hecho. Viene de tus propias acciones.",
+        "author": "Dalai Lama"
+    },
+    {
+        "quote": "Si tienes un sueño, no lo dejes ir.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Nunca es tarde para ser lo que podrías haber sido.",
+        "author": "George Eliot"
+    },
+    {
+        "quote": "Tu tiempo es limitado, no lo desperdicies viviendo la vida de otro.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "La actitud es una pequeña cosa que hace una gran diferencia.",
+        "author": "Winston Churchill"
+    },
+    {
+        "quote": "No busques el éxito, busca la felicidad.",
+        "author": "Albert Schweitzer"
+    },
+    {
+        "quote": "La creatividad es la inteligencia divirtiéndose.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "Nunca se es demasiado viejo para establecer otro objetivo o soñar un nuevo sueño.",
+        "author": "C.S. Lewis"
+    },
+    {
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "El futuro pertenece a aquellos que creen en la belleza de sus sueños.",
+        "author": "Eleanor Roosevelt"
+    },
+    {
+        "quote": "Haz hoy lo que otros no quieren, haz mañana lo que otros no pueden.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "No importa cuántas veces fracases, lo importante es cuántas veces te levantes.",
+        "author": "Mary Pickford"
+    },
+    {
+        "quote": "La vida es corta, hazla dulce.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida es un regalo, disfrútala.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Nunca es demasiado tarde para ser lo que podrías haber sido.",
+        "author": "George Eliot"
+    },
+    {
+        "quote": "No busques la perfección, busca lo mejor de ti.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Todo lo que siempre has querido está al otro lado del miedo.",
+        "author": "George Addair"
+    },
+    {
+        "quote": "Si quieres algo que nunca has tenido, debes estar dispuesto a hacer algo que nunca has hecho.",
+        "author": "Thomas Jefferson"
+    },
+    {
+        "quote": "Lo único que se interpone entre tú y tu objetivo es la historia de excusas que te sigues contando.",
+        "author": "Jordan Belfort"
+    },
+    {
+        "quote": "El mayor placer en la vida es hacer lo que la gente dice que no puedes hacer.",
+        "author": "Walter Bagehot"
+    },
+    {
+        "quote": "Hazlo con pasión o no lo hagas en absoluto.",
+        "author": "Roy T. Bennett"
+    },
+    {
+        "quote": "El camino hacia el éxito es siempre en construcción.",
+        "author": "Lily Tomlin"
+    }
+    {
+        "quote": "La vida es 10% lo que te sucede y 90% cómo reaccionas ante ello.",
+        "author": "Charles R. Swindoll"
+    },
+    {
+        "quote": "Lo único imposible es aquello que no intentas.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La felicidad no es algo hecho. Viene de tus propias acciones.",
+        "author": "Dalai Lama"
+    },
+    {
+        "quote": "No llores porque terminó, sonríe porque sucedió.",
+        "author": "Dr. Seuss"
+    },
+    {
+        "quote": "Los sueños no tienen fecha de caducidad.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "La vida se encoge o se expande en proporción al coraje de uno.",
+        "author": "Anaïs Nin"
+    },
+    {
+        "quote": "La vida no se mide por las veces que respiras, sino por los momentos que te quitan el aliento.",
+        "author": "George Carlin"
+    },
+    {
+        "quote": "Nunca dejes que tus miedos decidan tu futuro.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La actitud es una pequeña cosa que hace una gran diferencia.",
+        "author": "Winston Churchill"
+    },
+    {
+        "quote": "La única manera de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "La vida es lo que pasa mientras estás ocupado haciendo otros planes.",
+        "author": "John Lennon"
+    },
+    {
+        "quote": "Una persona con una nueva idea es un loco hasta que la idea tiene éxito.",
+        "author": "Mark Twain"
+    },
+    {
+        "quote": "La vida es como montar en bicicleta. Para mantener el equilibrio, debes seguir adelante.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "La vida es aquello que pasa mientras estás ocupado haciendo otros planes.",
+        "author": "John Lennon"
+    },
+    {
+        "quote": "El secreto para salir adelante es comenzar.",
+        "author": "Mark Twain"
+    },
+    {
+        "quote": "Si puedes soñarlo, puedes lograrlo.",
+        "author": "Walt Disney"
+    },
+    {
+        "quote": "Nunca dejes que nadie te diga que no puedes hacer algo.",
+        "author": "Matt Damon"
+    },
+    {
+        "quote": "Un gran poder conlleva una gran responsabilidad.",
+        "author": "Voltaire"
+    },
+    {
+        "quote": "No se trata de cuántas veces caes, sino de cuántas veces te levantas.",
+        "author": "Vince Lombardi"
+    },
+    {
+        "quote": "Lo que obtienes al alcanzar tus metas no es tan importante como en quién te conviertes al alcanzarlas.",
+        "author": "Zig Ziglar"
+    },
+    {
+        "quote": "No te detengas hasta estar orgulloso.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "No es lo que te pasa, es lo que haces con lo que te pasa.",
+        "author": "W. Mitchell"
+    },
+    {
+        "quote": "No puedes esperar resultados diferentes si haces siempre lo mismo.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "No te rindas, las mejores cosas toman tiempo.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida se mide no por los respiros que tomamos, sino por los momentos que nos quitan el aliento.",
+        "author": "George Carlin"
+    },
+    {
+        "quote": "Los únicos límites en nuestra vida son los que nosotros mismos nos imponemos.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "El miedo es el asesino de la mente.",
+        "author": "Frank Herbert"
+    },
+    {
+        "quote": "Si quieres cambiar el mundo, cámbiate a ti mismo.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "quote": "No dejes que el ruido de las opiniones ajenas ahogue tu propia voz interior.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "Haz hoy lo que otros no quieren, haz mañana lo que otros no pueden.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida comienza donde termina tu zona de confort.",
+        "author": "Neale Donald Walsch"
+    },
+    {
+        "quote": "La vida es una aventura, atrévete a vivirla.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Donde no hay lucha, no hay progreso.",
+        "author": "Frederick Douglass"
+    },
+    {
+        "quote": "El éxito es la suma de pequeños esfuerzos, repetidos día tras día.",
+        "author": "Robert Collier"
+    },
+    {
+        "quote": "La suerte favorece a la mente preparada.",
+        "author": "Louis Pasteur"
+    },
+    {
+        "quote": "No importa cuántas veces fracases, lo importante es cuántas veces te levantes.",
+        "author": "Mary Pickford"
+    },
+    {
+        "quote": "La única forma de hacer un excelente trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "No puedes cambiar lo que te pasó, pero puedes cambiar lo que pasa de aquí en adelante.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La vida no es esperar a que pase la tormenta, es aprender a bailar bajo la lluvia.",
+        "author": "Vivian Greene"
+    },
+    {
+        "quote": "Los desafíos son lo que hacen la vida interesante; superarlos es lo que hace la vida significativa.",
+        "author": "Joshua Marine"
+    },
+    {
+        "quote": "Si no te desafía, no te cambia.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "No dejes que el miedo te detenga, deja que la motivación te impulse.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Sé el cambio que deseas ver en el mundo.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "quote": "La mente es todo. Lo que piensas, en eso te conviertes.",
+        "author": "Buda"
+    },
+    {
+        "quote": "Lo que no te mata te hace más fuerte.",
+        "author": "Friedrich Nietzsche"
+    },
+    {
+        "quote": "No te conformes con lo que necesitas, lucha por lo que te mereces.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Tu tiempo es limitado, no lo desperdicies viviendo la vida de otro.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "La vida es una aventura, atrévete a vivirla.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La gratitud convierte lo que tenemos en suficiente.",
+        "author": "Melody Beattie"
+    },
+    {
+        "quote": "Lo único imposible es aquello que no intentas.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "La suerte es lo que sucede cuando la preparación se encuentra con la oportunidad.",
+        "author": "Seneca"
+    },
+    {
+        "quote": "Si puedes soñarlo, puedes hacerlo.",
+        "author": "Walt Disney"
+    },
+    {
+        "quote": "No busques el éxito, busca la felicidad.",
+        "author": "Albert Schweitzer"
+    },
+    {
+        "quote": "La creatividad es la inteligencia divirtiéndose.",
+        "author": "Albert Einstein"
+    },
+    {
+        "quote": "Nunca se es demasiado viejo para establecer otro objetivo o soñar un nuevo sueño.",
+        "author": "C.S. Lewis"
+    },
+    {
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "quote": "El futuro pertenece a aquellos que creen en la belleza de sus sueños.",
+        "author": "Eleanor Roosevelt"
+    },
+    {
+        "quote": "Haz hoy lo que otros no quieren, haz mañana lo que otros no pueden.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Nunca es demasiado tarde para ser lo que podrías haber sido.",
+        "author": "George Eliot"
+    },
+    {
+        "quote": "No busques la perfección, busca lo mejor de ti.",
+        "author": "Anónimo"
+    },
+    {
+        "quote": "Todo lo que siempre has querido está al otro lado del miedo.",
+        "author": "George Addair"
+    },
+    {
+        "quote": "Si quieres algo que nunca has tenido, debes estar dispuesto a hacer algo que nunca has hecho.",
+        "author": "Thomas Jefferson"
+    },
+    {
+        "quote": "El éxito no es el final, el fracaso no es fatal: es el coraje para continuar lo que cuenta.",
+        "author": "Winston Churchill"
+    },
+    {
+        "quote": "La felicidad no es algo hecho. Viene de tus propias acciones.",
+        "author": "Dalai Lama"
+    }
+]
