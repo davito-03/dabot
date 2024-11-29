@@ -270,6 +270,38 @@ async def guessnum(ctx):
         except ValueError:
             await ctx.send("Por favor, ingresa un número válido.")
 
+@bot.command()
+async def gato(ctx):
+    response = requests.get("https://api.thecatapi.com/v1/images/search")
+    data = response.json()
+    await ctx.send(data[0]["url"])
+
+@bot.command()
+async def perro(ctx):
+    response = requests.get("https://dog.ceo/api/breeds/image/random")
+    data = response.json()
+    await ctx.send(data["message"])
+
+@bot.command()
+async def ppt(ctx, choice: str):
+    choices = ["piedra", "papel", "tijera"]
+    if choice.lower() not in choices:
+        await ctx.send("Por favor, elige entre piedra, papel o tijera.")
+        return
+    
+    bot_choice = random.choice(choices)
+    result = ""
+    
+    if choice.lower() == bot_choice:
+        result = "Es un empate."
+    elif (choice.lower() == "piedra" and bot_choice == "tijera") or \
+         (choice.lower() == "papel" and bot_choice == "piedra") or \
+         (choice.lower() == "tijera" and bot_choice == "papel"):
+        result = "¡Ganaste!"
+    else:
+        result = "¡Perdiste!"
+
+    await ctx.send(f"Tu elección: {choice}\nElección del bot: {bot_choice}\n{result}")
 
 def run():
     bot.run(TOKEN)
