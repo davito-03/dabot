@@ -64,7 +64,6 @@ async def ping(ctx):
 
 @bot.command()
 async def adivina_palabra(ctx):
-    palabras = cargar_palabras()
     await ctx.send("¿Cuál es la dificultad que prefieres? (fácil, medio, difícil)")
 
     def check(msg):
@@ -73,37 +72,62 @@ async def adivina_palabra(ctx):
     msg = await bot.wait_for('message', check=check)
     dificultad = msg.content.lower()
 
-    if dificultad in palabras:
-        palabra = random.choice(palabras[dificultad])
-    else:
-        await ctx.send("Dificultad no válida. Usando 'medio'.")
-        palabra = random.choice(palabras["medio"])
+    if dificultad not in ["fácil", "medio", "difícil"]:
+        await ctx.send("Dificultad no válida. Por defecto se usará 'medio'.")
+        dificultad = "medio"
 
-    guessed_word = ['_'] * len(palabra)
-    attempts = 6  
+    # Cargar palabras desde el archivo JSON
+    try:
+        with open("palabras.json", "r") as f:
+            palabras_data = json.load(f)
+            palabras = palabras_data.get(dificultad, [])
+    except FileNotFoundError:
+        await ctx.send("El archivo de palabras no se encontró. Por favor, asegúrate de que 'palabras.json' está presente.")
+        return
 
-    await ctx.send(f"¡Adivina la palabra! Tienes {attempts} intentos. La palabra tiene {len(palabra)} letras.")
+    if not palabras:
+        await ctx.send(f"No hay palabras disponibles para la dificultad '{dificultad}'.")
+        return
 
-    while attempts > 0 and '_' in guessed_word:
-        await ctx.send(f"Palabra: {''.join(guessed_word)}")
+    # Elegir una palabra aleatoria
+    palabra_secreta = random.choice(palabras).lower()
+    guessed_word = ['_'] * len(palabra_secreta)
+    letras_adivinadas = set()
+
+    # Determinar intentos según dificultad
+    intentos = {"fácil": 8, "medio": 6, "difícil": 4}[dificultad]
+
+    await ctx.send(f"¡Adivina la palabra! Tienes {intentos} intentos. La palabra tiene {len(palabra_secreta)} letras.")
+
+    while intentos > 0 and '_' in guessed_word:
+        await ctx.send(f"Palabra: {' '.join(guessed_word)}\nIntentos restantes: {intentos}")
         msg = await bot.wait_for('message', check=check)
         guess = msg.content.lower()
 
-        if guess in palabra:
-            for i, letter in enumerate(palabra):
+        # Validación de la entrada
+        if len(guess) != 1 or not guess.isalpha():
+            await ctx.send("Por favor, ingresa solo una letra válida.")
+            continue
+
+        if guess in letras_adivinadas:
+            await ctx.send(f"Ya intentaste la letra '{guess}'. Prueba con otra.")
+            continue
+
+        letras_adivinadas.add(guess)
+
+        if guess in palabra_secreta:
+            for i, letter in enumerate(palabra_secreta):
                 if letter == guess:
                     guessed_word[i] = guess
-            await ctx.send(f"¡Bien! {guess} está en la palabra.")
+            await ctx.send(f"¡Bien hecho! '{guess}' está en la palabra.")
         else:
-            attempts -= 1
-            await ctx.send(f"Incorrecto, te quedan {attempts} intentos.")
+            intentos -= 1
+            await ctx.send(f"¡Fallaste! La letra '{guess}' no está en la palabra.")
 
-        if '_' not in guessed_word:
-            await ctx.send(f"¡Felicidades! Adivinaste la palabra: {''.join(guessed_word)}")
-            break
-
-    if attempts == 0:
-        await ctx.send(f"Se te acabaron los intentos. La palabra era: {palabra}")
+    if '_' not in guessed_word:
+        await ctx.send(f"¡Felicidades! Adivinaste la palabra: {''.join(guessed_word)}")
+    else:
+        await ctx.send(f"Se acabaron los intentos. La palabra era: {palabra_secreta}.")
 
 
 @bot.command()
