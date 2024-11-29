@@ -13,6 +13,10 @@ import os
 import time
 import sympy as sp
 
+def cargar_palabras():
+    with open("palabras.json", "r", encoding="utf-8") as file:
+        return json.load(file)
+
 def traducir_palabra(palabra):
     url = 'https://libretranslate.de/translate'
     params = {
@@ -60,43 +64,33 @@ async def ping(ctx):
 
 @bot.command()
 async def adivina_palabra(ctx):
+    palabras = cargar_palabras()
     await ctx.send("¿Cuál es la dificultad que prefieres? (fácil, medio, difícil)")
+
     def check(msg):
         return msg.author == ctx.author and msg.channel == ctx.channel
 
     msg = await bot.wait_for('message', check=check)
     dificultad = msg.content.lower()
 
-    if dificultad == 'fácil':
-        min_len, max_len = 3, 5
-    elif dificultad == 'medio':
-        min_len, max_len = 6, 8
-    elif dificultad == 'difícil':
-        min_len, max_len = 9, 12
+    if dificultad in palabras:
+        palabra = random.choice(palabras[dificultad])
     else:
         await ctx.send("Dificultad no válida. Usando 'medio'.")
-        min_len, max_len = 6, 8
+        palabra = random.choice(palabras["medio"])
 
-    response = requests.get(f"https://random-word-api.herokuapp.com/word?number=1")
-    word = response.json()[0]  
-
-    while not (min_len <= len(word) <= max_len):
-        response = requests.get(f"https://random-word-api.herokuapp.com/word?number=1")
-        word = response.json()[0]
-
-    palabra_traducida = traducir_palabra(word)
-    guessed_word = ['_'] * len(palabra_traducida)
+    guessed_word = ['_'] * len(palabra)
     attempts = 6  
 
-    await ctx.send(f"¡Adivina la palabra! Tienes {attempts} intentos. La palabra traducida tiene {len(palabra_traducida)} letras.")
+    await ctx.send(f"¡Adivina la palabra! Tienes {attempts} intentos. La palabra tiene {len(palabra)} letras.")
 
     while attempts > 0 and '_' in guessed_word:
         await ctx.send(f"Palabra: {''.join(guessed_word)}")
         msg = await bot.wait_for('message', check=check)
         guess = msg.content.lower()
 
-        if guess in palabra_traducida:
-            for i, letter in enumerate(palabra_traducida):
+        if guess in palabra:
+            for i, letter in enumerate(palabra):
                 if letter == guess:
                     guessed_word[i] = guess
             await ctx.send(f"¡Bien! {guess} está en la palabra.")
@@ -109,7 +103,8 @@ async def adivina_palabra(ctx):
             break
 
     if attempts == 0:
-        await ctx.send(f"Se te acabaron los intentos. La palabra era: {palabra_traducida}")
+        await ctx.send(f"Se te acabaron los intentos. La palabra era: {palabra}")
+
 
 @bot.command()
 async def cita(ctx):
