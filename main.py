@@ -5,7 +5,6 @@ import asyncio
 import praw
 import json
 from flask import Flask
-from pyngrok import ngrok
 from threading import Thread
 import requests
 from googletrans import Translator
@@ -13,20 +12,6 @@ from dotenv import load_dotenv
 import os
 import time
 import sympy as sp
-
-
-app = Flask(__name__)
-public_url = ngrok.connect(8080)
-print(f"Túnel público generado: {public_url}")
-
-@app.route("/")
-def home():
-    return "¡Hola Mundo!"
-
-def run():
-    app.run(host='0.0.0.0', port=5000)
-
-Thread(target=run).start()
 
 def traducir_palabra(palabra):
     url = 'https://libretranslate.de/translate'
