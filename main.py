@@ -249,7 +249,17 @@ async def operaciones(ctx, operacion: str):
 async def cita(ctx):
     try:
         response = requests.get("https://zenquotes.io/api/random")
+        
+        # Verificar que la respuesta sea exitosa
+        if response.status_code != 200:
+            await ctx.send(f"Hubo un error al obtener la cita. Código de estado: {response.status_code}")
+            return
+
         quote_data = response.json()
+
+        if not quote_data or len(quote_data) == 0:
+            await ctx.send("No se pudo obtener una cita válida.")
+            return
 
         quote = quote_data[0]['q']
         author = quote_data[0]['a']
@@ -258,6 +268,9 @@ async def cita(ctx):
         while quote in used_quotes:
             response = requests.get("https://zenquotes.io/api/random")
             quote_data = response.json()
+            if not quote_data or len(quote_data) == 0:
+                await ctx.send("No se pudo obtener una cita válida.")
+                return
             quote = quote_data[0]['q']
             author = quote_data[0]['a']
 
@@ -273,6 +286,7 @@ async def cita(ctx):
     except Exception as e:
         await ctx.send(f"Hubo un error al obtener la cita. Detalles: {e}")
         print(f"Error: {e}")
+
 
 @bot.command()
 async def resolver(ctx, *args):
