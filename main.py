@@ -287,6 +287,14 @@ async def guessnum(ctx):
         except ValueError:
             await ctx.send("Por favor, ingresa un número válido.")
 
+import discord
+from discord.ext import commands
+import yt_dlp as ytdlp
+import asyncio
+
+# Configuración básica del bot
+bot = commands.Bot(command_prefix="dabot ")
+
 # Conectar al canal de voz y reproducir música
 @bot.command()
 async def play(ctx, *, query: str):
@@ -300,7 +308,7 @@ async def play(ctx, *, query: str):
         'noplaylist': True,  # Evita que se descargue toda una lista de reproducción
         'quiet': True,  # No mostrar mensajes extra
         'postprocessors': [{
-            'key': 'FFmpegAudioConvertor',
+            'key': 'FFmpegAudioConvertor',  # Nombre corregido del postprocesador
             'preferredcodec': 'mp3',
             'preferredquality': '192',
         }],
@@ -324,6 +332,10 @@ async def stop(ctx):
     """Detiene la reproducción y desconecta el bot del canal de voz."""
     await ctx.voice_client.disconnect()
     await ctx.send("Desconectado del canal de voz.")
+
+# Ejecuta el bot con tu token de Discord
+bot.run('TU_TOKEN_DE_DISCORD')
+
 
 
 def run():
