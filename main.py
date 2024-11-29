@@ -95,7 +95,7 @@ async def adivina_palabra(ctx):
     letras_adivinadas = set()
 
     # Determinar intentos según dificultad
-    intentos = {"fácil": 8, "medio": 6, "difícil": 4}[dificultad]
+    intentos = {"fácil": 12, "medio": 9, "difícil": 6}[dificultad]
 
     await ctx.send(f"¡Adivina la palabra! Tienes {intentos} intentos. La palabra tiene {len(palabra_secreta)} letras.")
 
@@ -133,43 +133,32 @@ async def adivina_palabra(ctx):
 @bot.command()
 async def cita(ctx):
     try:
-        response = requests.get("https://zenquotes.io/api/random")
+        # Cargar citas desde el archivo JSON
+        with open('citas.json', 'r', encoding='utf-8') as f:
+            citas_data = json.load(f)
+
+        # Si ya se han mostrado todas las citas, reiniciamos la lista de citas usadas
+        if len(used_quotes) >= len(citas_data):
+            used_quotes.clear()
+
+        # Elegir una cita aleatoria que no se haya mostrado antes
+        available_quotes = [cita for cita in citas_data if cita['quote'] not in used_quotes]
         
-        if response.status_code != 200:
-            await ctx.send(f"Hubo un error al obtener la cita. Código de estado: {response.status_code}")
+        if not available_quotes:
+            await ctx.send("No hay citas disponibles.")
             return
-
-        quote_data = response.json()
-
-        if not quote_data or len(quote_data) == 0:
-            await ctx.send("No se pudo obtener una cita válida.")
-            return
-
-        quote = quote_data[0].get('q', '')
-        author = quote_data[0].get('a', '')
-
-        if not quote or not author:
-            await ctx.send("Cita o autor no válidos recibidos.")
-            return
+        
+        random_quote = random.choice(available_quotes)
+        quote = random_quote['quote']
+        author = random_quote['author']
 
         # Evitar que se repita la cita
-        while quote in used_quotes:
-            response = requests.get("https://zenquotes.io/api/random")
-            quote_data = response.json()
-            if not quote_data or len(quote_data) == 0:
-                await ctx.send("No se pudo obtener una cita válida.")
-                return
-            quote = quote_data[0].get('q', '')
-            author = quote_data[0].get('a', '')
-
         used_quotes.append(quote)
 
         quote_text = f"**{quote}**\nPor: {author}"
 
-        translator = Translator()
-        translated_quote = translator.translate(quote_text, src='en', dest='es').text
 
-        await ctx.send(f"Aquí tienes una cita:\n\n{translated_quote}")
+        await ctx.send(f"Aquí tienes una cita:\n\n{quote_text}")
 
     except Exception as e:
         await ctx.send(f"Hubo un error al obtener la cita. Detalles: {e}")
