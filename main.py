@@ -63,7 +63,7 @@ async def ping(ctx):
     await ctx.send('pong🏓')
 
 @bot.command()
-async def adivina_palabra(ctx):
+async def guessword(ctx):
     await ctx.send("¿Cuál es la dificultad que prefieres? (fácil, medio, difícil)")
 
     def check(msg):
@@ -164,83 +164,46 @@ async def cita(ctx):
         await ctx.send(f"Hubo un error al obtener la cita. Detalles: {e}")
         print(f"Error: {e}")
 
-@bot.command()
-async def chiste_todos(ctx):
-    try:
-        response = requests.get("https://v2.jokeapi.dev/joke/Miscellaneous?lang=en")
-        joke_data = response.json()
-
-        if response.status_code != 200:
-            await ctx.send(f"Hubo un error con la API de chistes. Código de estado: {response.status_code}")
-            return
-
-        if joke_data.get('error'):
-            await ctx.send(f"Error en los datos recibidos de la API: {joke_data['error']}")
-            return
-
-        if joke_data['type'] == 'single':
-            joke = joke_data['joke']
-        elif joke_data['type'] == 'twopart':
-            joke = f"{joke_data['setup']} - {joke_data['delivery']}"
-
-        while joke in used_jokes:
-            response = requests.get("https://v2.jokeapi.dev/joke/Miscellaneous?lang=en")
-            joke_data = response.json()
-            if joke_data['type'] == 'single':
-                joke = joke_data['joke']
-            elif joke_data['type'] == 'twopart':
-                joke = f"{joke_data['setup']} - {joke_data['delivery']}"
-
-        used_jokes.append(joke)
-
-        translator = Translator()
-        translated_joke = translator.translate(joke, src='auto', dest='es').text
-
-        await ctx.send(f"Aquí tienes un chiste:\n\n{translated_joke}")
-
-    except Exception as e:
-        await ctx.send(f"Hubo un error al obtener el chiste. Detalles: {e}")
-        print(f"Error: {e}")
-
+# Comando para enviar un chiste
 @bot.command()
 async def chiste(ctx):
     try:
-        response = requests.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
+        # Cargar los chistes desde el archivo JSON
+        with open('chistes.json', 'r', encoding='utf-8') as file:
+            chistes_data = json.load(file)
 
-        if response.status_code != 200:
-            await ctx.send(f"Hubo un error con la API de chistes. Código de estado: {response.status_code}")
+        # Verificar si el archivo JSON tiene chistes
+        if not chistes_data:
+            await ctx.send("No hay chistes disponibles.")
             return
 
-        joke_data = response.json()
+        # Escoger un chiste aleatorio
+        chiste_data = random.choice(chistes_data)
+        joke = chiste_data.get('joke', '')
+        delivery = chiste_data.get('delivery', '')
 
-        if joke_data.get('error'):
-            await ctx.send(f"Error en los datos recibidos de la API: {joke_data['error']}")
-            return
-
-        if joke_data['type'] == 'single':
-            joke = joke_data['joke']
-        elif joke_data['type'] == 'twopart':
-            joke = f"{joke_data['setup']} - {joke_data['delivery']}"
-        else:
+        # Verificar si el chiste tiene contenido
+        if not joke:
             await ctx.send("No se pudo obtener un chiste válido.")
             return
 
+        # Asegurarse de que el chiste no se repita
         while joke in used_jokes:
-            response = requests.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
-            joke_data = response.json()
-            if joke_data['type'] == 'single':
-                joke = joke_data['joke']
-            elif joke_data['type'] == 'twopart':
-                joke = f"{joke_data['setup']} - {joke_data['delivery']}"
-            if not joke_data.get('error') and joke:
-                break
+            chiste_data = random.choice(chistes_data)
+            joke = chiste_data.get('joke', '')
+            delivery = chiste_data.get('delivery', '')
 
+        # Añadir el chiste a la lista de usados
         used_jokes.append(joke)
 
-        translator = Translator()
-        translated_joke = translator.translate(joke, src='auto', dest='es').text
+        # Componer el chiste completo
+        if delivery:
+            full_joke = f"{joke} - {delivery}"
+        else:
+            full_joke = joke
 
-        await ctx.send(f"Aquí tienes un chiste:\n\n{translated_joke}")
+        # Enviar el chiste tal cual está
+        await ctx.send(f"Aquí tienes un chiste:\n\n{full_joke}")
 
     except Exception as e:
         await ctx.send(f"Hubo un error al obtener el chiste. Detalles: {e}")
