@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands, tasks
 import random
+import yt_dlp as ytdlp
 import asyncio
 import praw
 import json
@@ -285,6 +286,44 @@ async def guessnum(ctx):
                 break
         except ValueError:
             await ctx.send("Por favor, ingresa un número válido.")
+
+# Conectar al canal de voz y reproducir música
+@bot.command()
+async def play(ctx, *, query: str):
+    """Busca y reproduce música en un canal de voz"""
+    channel = ctx.author.voice.channel  # Obtener el canal de voz
+    voice = await channel.connect()  # Conectar al canal de voz
+
+    # Configurar las opciones de búsqueda y descarga
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'noplaylist': True,  # Evita que se descargue toda una lista de reproducción
+        'quiet': True,  # No mostrar mensajes extra
+        'postprocessors': [{
+            'key': 'FFmpegAudioConvertor',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        'outtmpl': 'downloads/%(id)s.%(ext)s',
+    }
+
+    # Realizar la búsqueda con yt-dlp
+    with ytdlp.YoutubeDL(ydl_opts) as ydl:
+        # Buscar el primer resultado de la consulta
+        info = ydl.extract_info(f"ytsearch:{query}", download=False)
+        # Extraer la URL del primer video encontrado
+        video_url = info['entries'][0]['url']
+        title = info['entries'][0]['title']
+
+    # Reproducir el audio en el canal de voz
+    voice.play(discord.FFmpegPCMAudio(video_url))
+    await ctx.send(f"Reproduciendo: {title}")
+
+@bot.command()
+async def stop(ctx):
+    """Detiene la reproducción y desconecta el bot del canal de voz."""
+    await ctx.voice_client.disconnect()
+    await ctx.send("Desconectado del canal de voz.")
 
 
 def run():
