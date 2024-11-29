@@ -4,7 +4,6 @@ import random
 import asyncio
 import praw
 import json
-from flask import Flask
 from threading import Thread
 import requests
 from googletrans import Translator
@@ -238,7 +237,6 @@ async def chiste(ctx):
         await ctx.send(f"Hubo un error al obtener el chiste. Detalles: {e}")
         print(f"Error: {e}")
 
-
 @bot.command()
 async def meme(ctx, subreddit_name="memes"):
     try:
@@ -288,6 +286,9 @@ async def guessnum(ctx):
         except ValueError:
             await ctx.send("Por favor, ingresa un número válido.")
 
-# Iniciar el bot con el TOKEN
+
 def run():
     bot.run(TOKEN)
+
+if __name__ == "__main__":
+    run()
