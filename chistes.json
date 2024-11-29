@@ -1,258 +1,1026 @@
 [
-    {"joke": "¿Por qué el libro de matemáticas se deprimió?", "delivery": "Porque tenía demasiados problemas."},
-    {"joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?", "delivery": "Un thesaurus."},
-    {"joke": "¿Por qué no puedes confiar en los átomos?", "delivery": "Porque hacen todo lo que está a su alrededor."},
-    {"joke": "¿Qué le dice un gusano a otro gusano?", "delivery": "¡Voy a dar una vuelta a la manzana!"},
-    {"joke": "¿Por qué los pájaros no usan Facebook?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Qué le dijo el semáforo al coche?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Qué hace una abeja en el gimnasio?", "delivery": "¡Zum-ba!"},
-    {"joke": "¿Por qué las vacas no usan Whatsapp?", "delivery": "Porque ya tienen vaca-nal."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué le dice un gusano a otro gusano?", "delivery": "¡Voy a dar una vuelta a la manzana!"},
-    {"joke": "¿Por qué los esqueletos no pelean entre ellos?", "delivery": "Porque no tienen agallas."},
-    {"joke": "¿Cómo se llama un perro que hace yoga?", "delivery": "Un labra-cuerpo."},
-    {"joke": "¿Por qué los pájaros no usan WhatsApp?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Por qué el libro de matemáticas se deprimió?", "delivery": "Porque tenía demasiados problemas."},
-    {"joke": "¿Qué le dijo el semáforo al coche?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Por qué los pájaros no usan Facebook?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?", "delivery": "Un thesaurus."},
-    {"joke": "¿Por qué no puedes confiar en los átomos?", "delivery": "Porque hacen todo lo que está a su alrededor."},
-    {"joke": "¿Por qué el libro de matemáticas se deprimió?", "delivery": "Porque tenía demasiados problemas."},
-    {"joke": "¿Qué le dice un gusano a otro gusano?", "delivery": "¡Voy a dar una vuelta a la manzana!"},
-    {"joke": "¿Por qué los pájaros no usan Facebook?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Qué le dijo el semáforo al coche?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Qué hace una abeja en el gimnasio?", "delivery": "¡Zum-ba!"},
-    {"joke": "¿Por qué las vacas no usan Whatsapp?", "delivery": "Porque ya tienen vaca-nal."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué le dice un gusano a otro gusano?", "delivery": "¡Voy a dar una vuelta a la manzana!"},
-    {"joke": "¿Por qué los esqueletos no pelean entre ellos?", "delivery": "Porque no tienen agallas."},
-    {"joke": "¿Cómo se llama un perro que hace yoga?", "delivery": "Un labra-cuerpo."},
-    {"joke": "¿Por qué los pájaros no usan WhatsApp?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Por qué el libro de matemáticas se deprimió?", "delivery": "Porque tenía demasiados problemas."},
-    {"joke": "¿Qué le dijo el semáforo al coche?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Por qué los pájaros no usan Facebook?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?", "delivery": "Un thesaurus."},
-    {"joke": "¿Por qué no puedes confiar en los átomos?", "delivery": "Porque hacen todo lo que está a su alrededor."},
-    {"joke": "¿Por qué las vacas no usan WhatsApp?", "delivery": "Porque ya tienen vaca-nal."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué le dice un gusano a otro gusano?", "delivery": "¡Voy a dar una vuelta a la manzana!"},
-    {"joke": "¿Por qué los esqueletos no pelean entre ellos?", "delivery": "Porque no tienen agallas."},
-    {"joke": "¿Cómo se llama un perro que hace yoga?", "delivery": "Un labra-cuerpo."},
-    {"joke": "¿Por qué los pájaros no usan WhatsApp?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Por qué el libro de matemáticas se deprimió?", "delivery": "Porque tenía demasiados problemas."},
-    {"joke": "¿Qué le dijo el semáforo al coche?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Por qué los pájaros no usan Facebook?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?", "delivery": "Un thesaurus."},
-    {"joke": "¿Por qué no puedes confiar en los átomos?", "delivery": "Porque hacen todo lo que está a su alrededor."},
-    {"joke": "¿Por qué las vacas no usan Whatsapp?", "delivery": "Porque ya tienen vaca-nal."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."}
-    {"joke": "¿Qué hace una abeja en el gimnasio?", "delivery": "¡Zum-ba!"},
-    {"joke": "¿Qué le dice una iguana a su hermana gemela?", "delivery": "Iguanita."},
-    {"joke": "¿Por qué el perro se sentó frente al ventilador?", "delivery": "Porque quería estar fresquito."},
-    {"joke": "¿Por qué los pájaros no usan WhatsApp?", "delivery": "Porque ya tienen Twitter."},
-    {"joke": "¿Cómo se llama un campeón de karate japonés?", "delivery": "Karateto."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Subkarate."},
-    {"joke": "¿Por qué las vacas usan campanas?", "delivery": "Porque sus cuernos no funcionan."},
-    {"joke": "¿Cómo se llama un dinosaurio que canta?", "delivery": "Dino-singer."},
-    {"joke": "¿Por qué el libro de historia no quería salir?", "delivery": "Porque no quería ser olvidado."},
-    {"joke": "¿Qué hace un pez en un cine?", "delivery": "Nada."},
-    {"joke": "¿Qué le dijo el semáforo al coche?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Qué hace un perro con un taladro?", "delivery": "Un agujero."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Por qué el libro de matemáticas se deprimió?", "delivery": "Porque tenía demasiados problemas."},
-    {"joke": "¿Cómo se llama un perro mágico?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué le dice un gusano a otro gusano?", "delivery": "¡Voy a dar una vuelta a la manzana!"},
-    {"joke": "¿Qué le dice un árbol a otro árbol?", "delivery": "¡Nos vemos cuando haga raíces!"}, 
-    {"joke": "¿Cómo se llama un perro que hace yoga?", "delivery": "Un labra-cuerpo."},
-    {"joke": "¿Por qué las vacas no usan Whatsapp?", "delivery": "Porque ya tienen vaca-nal."},
-    {"joke": "¿Qué hace una abeja en el gimnasio?", "delivery": "¡Zum-ba!"},
-    {"joke": "¿Cómo se llama un gato que estudia medicina?", "delivery": "Un medicat."},
-    {"joke": "¿Qué le dice un cactus a otro cactus?", "delivery": "¡Te pincho!"}, 
-    {"joke": "¿Por qué el perro no usa reloj?", "delivery": "Porque ya tiene su propio tiempo."},
-    {"joke": "¿Qué le dijo la luna al sol?", "delivery": "Te echo de menos."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué hace un perro con un sombrero?", "delivery": "¡Es un perro elegante!"}, 
-    {"joke": "¿Por qué el perro lleva gafas?", "delivery": "Porque tiene una vista de perro."},
-    {"joke": "¿Cómo se llama un dinosaurio con una guitarra?", "delivery": "Un dino-guitarista."},
-    {"joke": "¿Por qué las ballenas no usan Facebook?", "delivery": "Porque ya tienen un perfil en el agua."},
-    {"joke": "¿Cómo se llama un gato sin orejas?", "delivery": "Un miau-quito."},
-    {"joke": "¿Qué le dice un semáforo a otro semáforo?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro cantante?", "delivery": "Un labra-cantante."},
-    {"joke": "¿Por qué el sol no es simpático?", "delivery": "Porque siempre está tan caliente."},
-    {"joke": "¿Cómo se llama un pez músico?", "delivery": "Un bass."},
-    {"joke": "¿Qué le dijo el pepino al tomate?", "delivery": "¡No te pongas rojo!"}, 
-    {"joke": "¿Cómo se llama un perro detective?", "delivery": "Un labra-caso."},
-    {"joke": "¿Qué le dijo el uno al diez?", "delivery": "Para ser como yo, tienes que ser impar."},
-    {"joke": "¿Por qué el perro siempre está feliz?", "delivery": "Porque sabe que es su turno de comer."},
-    {"joke": "¿Cómo se llama un gato que canta?", "delivery": "Un miau-sico."},
-    {"joke": "¿Qué hace un león en un semáforo?", "delivery": "Esperar a que cambie el color."},
-    {"joke": "¿Cómo se llama un conejo que toca la guitarra?", "delivery": "Un conejito músico."},
-    {"joke": "¿Qué le dice el tomate al pepino?", "delivery": "¡No te pongas tan rojo!"}, 
-    {"joke": "¿Cómo se llama el campeón de salto de altura?", "delivery": "Salto Grande."},
-    {"joke": "¿Por qué el perro nunca tiene frío?", "delivery": "Porque siempre está cubierto de amor."},
-    {"joke": "¿Cómo se llama un pez que toca la guitarra?", "delivery": "Un bass."},
-    {"joke": "¿Por qué las vacas usan campanas?", "delivery": "Porque sus cuernos no suenan."},
-    {"joke": "¿Qué le dice una paloma a otra?", "delivery": "¡Nos vemos volando!"}, 
-    {"joke": "¿Qué le dice un gusano a otro?", "delivery": "¡Vamos a dar una vuelta a la manzana!"},
-    {"joke": "¿Por qué las vacas no usan gafas?", "delivery": "Porque no pueden ver la vaca-nal."},
-    {"joke": "¿Cómo se llama un perro que baila?", "delivery": "Un labra-rumba."},
-    {"joke": "¿Qué hace un gato en el ordenador?", "delivery": "Miau-sca."},
-    {"joke": "¿Cómo se llama un perro que hace karate?", "delivery": "Un labra-te."},
-    {"joke": "¿Qué hace una vaca en la luna?", "delivery": "¡Vaca-luna!"}, 
-    {"joke": "¿Qué hace un pájaro en un restaurante?", "delivery": "Pedir un pichón."},
-    {"joke": "¿Por qué el perro no quería estudiar?", "delivery": "Porque ya sabía cómo ladrar."},
-    {"joke": "¿Cómo se llama un gato sabio?", "delivery": "Un miau-teórico."},
-    {"joke": "¿Por qué los elefantes nunca usan computador?", "delivery": "Porque les cuesta encontrar el ratón."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Cómo se llama un perro ninja?", "delivery": "Un labra-ninja."},
-    {"joke": "¿Qué hace un pez en un cine?", "delivery": "Nada."},
-    {"joke": "¿Cómo se llama un perro que hace yoga?", "delivery": "Un labra-cuerpo."},
-    {"joke": "¿Qué le dice un cactus a otro cactus?", "delivery": "¡Te pincho!"}, 
-    {"joke": "¿Por qué el perro no usa reloj?", "delivery": "Porque ya tiene su propio tiempo."},
-    {"joke": "¿Qué le dijo la luna al sol?", "delivery": "Te echo de menos."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué hace un perro con un sombrero?", "delivery": "¡Es un perro elegante!"}, 
-    {"joke": "¿Por qué el perro lleva gafas?", "delivery": "Porque tiene una vista de perro."},
-    {"joke": "¿Cómo se llama un dinosaurio con una guitarra?", "delivery": "Un dino-guitarista."},
-    {"joke": "¿Por qué las ballenas no usan Facebook?", "delivery": "Porque ya tienen un perfil en el agua."},
-    {"joke": "¿Cómo se llama un gato sin orejas?", "delivery": "Un miau-quito."},
-    {"joke": "¿Qué le dice un semáforo a otro semáforo?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro cantante?", "delivery": "Un labra-cantante."},
-    {"joke": "¿Por qué el sol no es simpático?", "delivery": "Porque siempre está tan caliente."},
-    {"joke": "¿Cómo se llama un pez músico?", "delivery": "Un bass."},
-    {"joke": "¿Qué le dijo el pepino al tomate?", "delivery": "¡No te pongas rojo!"},
-    {"joke": "¿Cómo se llama un perro detective?", "delivery": "Un labra-caso."},
-    {"joke": "¿Qué le dijo el uno al diez?", "delivery": "Para ser como yo, tienes que ser impar."},
-    {"joke": "¿Por qué el perro siempre está feliz?", "delivery": "Porque sabe que es su turno de comer."},
-    {"joke": "¿Cómo se llama un gato que canta?", "delivery": "Un miau-sico."},
-    {"joke": "¿Qué hace un león en un semáforo?", "delivery": "Esperar a que cambie el color."},
-    {"joke": "¿Cómo se llama un conejo que toca la guitarra?", "delivery": "Un conejito músico."},
-    {"joke": "¿Qué le dice el tomate al pepino?", "delivery": "¡No te pongas tan rojo!"},
-    {"joke": "¿Cómo se llama el campeón de salto de altura?", "delivery": "Salto Grande."},
-    {"joke": "¿Por qué el perro nunca tiene frío?", "delivery": "Porque siempre está cubierto de amor."},
-    {"joke": "¿Cómo se llama un pez que toca la guitarra?", "delivery": "Un bass."},
-    {"joke": "¿Por qué las vacas usan campanas?", "delivery": "Porque sus cuernos no suenan."},
-    {"joke": "¿Qué le dice una paloma a otra?", "delivery": "¡Nos vemos volando!"},
-    {"joke": "¿Qué le dice un gusano a otro?", "delivery": "¡Vamos a dar una vuelta a la manzana!"},
-    {"joke": "¿Por qué las vacas no usan gafas?", "delivery": "Porque no pueden ver la vaca-nal."},
-    {"joke": "¿Cómo se llama un perro que baila?", "delivery": "Un labra-rumba."},
-    {"joke": "¿Qué hace un gato en el ordenador?", "delivery": "Miau-sca."},
-    {"joke": "¿Cómo se llama un perro que hace karate?", "delivery": "Un labra-te."},
-    {"joke": "¿Qué hace una vaca en la luna?", "delivery": "¡Vaca-luna!"},
-    {"joke": "¿Qué hace un pájaro en un restaurante?", "delivery": "Pedir un pichón."},
-    {"joke": "¿Por qué el perro no quería estudiar?", "delivery": "Porque ya sabía cómo ladrar."},
-    {"joke": "¿Cómo se llama un gato sabio?", "delivery": "Un miau-teórico."},
-    {"joke": "¿Por qué los elefantes nunca usan computador?", "delivery": "Porque les cuesta encontrar el ratón."},
-    {"joke": "¿Cómo se llama el campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Cómo se llama un perro ninja?", "delivery": "Un labra-ninja."},
-    {"joke": "¿Qué hace un pez en un cine?", "delivery": "Nada."},
-    {"joke": "¿Cómo se llama un perro que hace yoga?", "delivery": "Un labra-cuerpo."},
-    {"joke": "¿Qué le dice un cactus a otro cactus?", "delivery": "¡Te pincho!"},
-    {"joke": "¿Por qué el perro no usa reloj?", "delivery": "Porque ya tiene su propio tiempo."},
-    {"joke": "¿Qué le dijo la luna al sol?", "delivery": "Te echo de menos."},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué hace un perro con un sombrero?", "delivery": "¡Es un perro elegante!"},
-    {"joke": "¿Por qué el perro lleva gafas?", "delivery": "Porque tiene una vista de perro."},
-    {"joke": "¿Cómo se llama un dinosaurio con una guitarra?", "delivery": "Un dino-guitarista."},
-    {"joke": "¿Por qué las ballenas no usan Facebook?", "delivery": "Porque ya tienen un perfil en el agua."},
-    {"joke": "¿Cómo se llama un gato sin orejas?", "delivery": "Un miau-quito."},
-    {"joke": "¿Qué le dice un semáforo a otro semáforo?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un perro cantante?", "delivery": "Un labra-cantante."},
-    {"joke": "¿Por qué el sol no es simpático?", "delivery": "Porque siempre está tan caliente."},
-    {"joke": "¿Cómo se llama un pez músico?", "delivery": "Un bass."},
-    {"joke": "¿Qué le dijo el pepino al tomate?", "delivery": "¡No te pongas rojo!"},
-    {"joke": "¿Cómo se llama un perro detective?", "delivery": "Un labra-caso."},
-    {"joke": "¿Qué le dijo el uno al diez?", "delivery": "Para ser como yo, tienes que ser impar."},
-    {"joke": "¿Por qué el perro siempre está feliz?", "delivery": "Porque sabe que es su turno de comer."},
-    {"joke": "¿Cómo se llama un gato que canta?", "delivery": "Un miau-sico."},
-    {"joke": "¿Qué hace un león en un semáforo?", "delivery": "Esperar a que cambie el color."},
-    {"joke": "¿Cómo se llama un conejo que toca la guitarra?", "delivery": "Un conejito músico."},
-    {"joke": "¿Qué le dice el tomate al pepino?", "delivery": "¡No te pongas tan rojo!"},
-    {"joke": "¿Cómo se llama el campeón de salto de altura?", "delivery": "Salto Grande."},
-    {"joke": "¿Por qué el perro nunca tiene frío?", "delivery": "Porque siempre está cubierto de amor."},
-    {"joke": "¿Cómo se llama un pez que toca la guitarra?", "delivery": "Un bass."},
-    {"joke": "¿Por qué las vacas usan campanas?", "delivery": "Porque sus cuernos no suenan."},
-    {"joke": "¿Qué le dice una paloma a otra?", "delivery": "¡Nos vemos volando!"},
-    {"joke": "¿Qué le dice un gusano a otro?", "delivery": "¡Vamos a dar una vuelta a la manzana!"}
-      {"joke": "¿Por qué las focas miran siempre hacia arriba?", "delivery": "Porque ahí están los focos."},
-    {"joke": "¿Qué le dice un gusano a otro?", "delivery": "¡Voy a dar una vuelta a la manzana!"},
-    {"joke": "¿Cómo se llama un campeón de buceo japonés?", "delivery": "Tokofondo."},
-    {"joke": "¿Y el subcampeón?", "delivery": "Kasitoko."},
-    {"joke": "¿Qué hace un pez en un cine?", "delivery": "Nada."},
-    {"joke": "¿Cómo se llama un perro que hace yoga?", "delivery": "Un labra-cuerpo."},
-    {"joke": "¿Qué le dice una paloma a otra?", "delivery": "Nos vemos volando."},
-    {"joke": "¿Por qué los elefantes nunca usan computador?", "delivery": "Porque les cuesta encontrar el ratón."},
-    {"joke": "¿Cómo se llama el campeón de salto de altura?", "delivery": "Salto Grande."},
-    {"joke": "¿Por qué el perro nunca tiene frío?", "delivery": "Porque siempre está cubierto de amor."},
-    {"joke": "¿Cómo se llama un pez que toca la guitarra?", "delivery": "Un bass."},
-    {"joke": "¿Por qué las vacas usan campanas?", "delivery": "Porque sus cuernos no suenan."},
-    {"joke": "¿Qué hace un pájaro en un restaurante?", "delivery": "Pedir un pichón."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué le dijo el uno al diez?", "delivery": "Para ser como yo, tienes que ser impar."},
-    {"joke": "¿Qué le dice un semáforo a otro?", "delivery": "No me mires, me estoy cambiando."},
-    {"joke": "¿Cómo se llama un gato sin orejas?", "delivery": "Un miau-quito."},
-    {"joke": "¿Por qué el perro siempre está feliz?", "delivery": "Porque sabe que es su turno de comer."},
-    {"joke": "¿Cómo se llama un perro cantante?", "delivery": "Un labra-cantante."},
-    {"joke": "¿Por qué el sol no es simpático?", "delivery": "Porque siempre está tan caliente."},
-    {"joke": "¿Cómo se llama un pez músico?", "delivery": "Un bass."},
-    {"joke": "¿Qué le dijo el pepino al tomate?", "delivery": "¡No te pongas rojo!"},
-    {"joke": "¿Cómo se llama un perro detective?", "delivery": "Un labra-caso."},
-    {"joke": "¿Qué le dice una paloma a otra?", "delivery": "¡Nos vemos volando!"},
-    {"joke": "¿Qué hace un gato en el ordenador?", "delivery": "Miau-sca."},
-    {"joke": "¿Qué hace un perro con un sombrero?", "delivery": "¡Es un perro elegante!"},
-    {"joke": "¿Qué le dijo el tomate al pepino?", "delivery": "¡No te pongas tan rojo!"},
-    {"joke": "¿Qué le dijo el gato a la gata?", "delivery": "¡Vamos a hacer un gato-puebo!"},
-    {"joke": "¿Cómo se llama un perro que baila?", "delivery": "Un labra-rumba."},
-    {"joke": "¿Por qué el perro no usa reloj?", "delivery": "Porque ya tiene su propio tiempo."},
-    {"joke": "¿Cómo se llama un perro mago?", "delivery": "Un labracadabrador."},
-    {"joke": "¿Qué le dijo un cactus a otro cactus?", "delivery": "¡Te pincho!"},
-    {"joke": "¿Cómo se llama un perro sin patas?", "delivery": "No importa cómo lo llames, no va a venir."},
-    {"joke": "¿Qué le dice el sol a la luna?", "delivery": "Te echo de menos."},
-    {"joke": "¿Qué hace una vaca en la luna?", "delivery": "¡Vaca-luna!"},
-    {"joke": "¿Qué le dice un gusano a otro?", "delivery": "¡Vamos a dar una vuelta a la manzana!"},
-    {"joke": "¿Qué le dice una vaca a otra vaca?", "delivery": "¡Muu-cho gusto!" },
-    {"joke": "¿Cómo se llama un perro ninja?", "delivery": "Un labra-ninja."},
-    {"joke": "¿Qué hace un pez en un cine?", "delivery": "Nada."},
-    {"joke": "¿Cómo se llama un dinosaurio con una guitarra?", "delivery": "Un dino-guitarista."},
-    {"joke": "¿Qué le dijo el pepino al tomate?", "delivery": "¡No te pongas tan rojo!"},
-    {"joke": "¿Qué hace una vaca en la luna?", "delivery": "¡Vaca-luna!"},
-    {"joke": "¿Por qué el perro nunca tiene frío?", "delivery": "Porque siempre está cubierto de amor."},
-    {"joke": "¿Qué le dice una paloma a otra?", "delivery": "¡Nos vemos volando!"},
-    {"joke": "¿Por qué las vacas no usan gafas?", "delivery": "Porque no pueden ver la vaca-nal."},
-    {"joke": "¿Cómo se llama un conejo que toca la guitarra?", "delivery": "Un conejito músico."},
-    {"joke": "¿Por qué el sol no es simpático?", "delivery": "Porque siempre está tan caliente."},
-    {"joke": "¿Qué le dijo el uno al diez?", "delivery": "Para ser como yo, tienes que ser impar."},
-    {"joke": "¿Por qué el perro siempre está feliz?", "delivery": "Porque sabe que es su turno de comer."},
-    {"joke": "¿Cómo se llama un gato que canta?", "delivery": "Un miau-sico."},
-    {"joke": "¿Qué hace un león en un semáforo?", "delivery": "Esperar a que cambie el color."},
-    {"joke": "¿Cómo se llama un conejo que toca la guitarra?", "delivery": "Un conejito músico."},
-    {"joke": "¿Qué le dice el tomate al pepino?", "delivery": "¡No te pongas tan rojo!"},
-    {"joke": "¿Cómo se llama el campeón de salto de altura?", "delivery": "Salto Grande."},
-    {"joke": "¿Por qué el perro nunca tiene frío?", "delivery": "Porque siempre está cubierto de amor."},
-    {"joke": "¿Cómo se llama un pez que toca la guitarra?", "delivery": "Un bass."},
-    {"joke": "¿Por qué las vacas usan campanas?", "delivery": "Porque sus cuernos no suenan."},
-    {"joke": "¿Qué le dice una paloma a otra?", "delivery": "¡Nos vemos volando!"},
-    {"joke": "¿Qué le dice un gusano a otro?", "delivery": "¡Vamos a dar una vuelta a la manzana!"}
+    {
+        "joke": "¿Por qué el libro de matemáticas se deprimió?",
+        "delivery": "Porque tenía demasiados problemas."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?",
+        "delivery": "Un thesaurus."
+    },
+    {
+        "joke": "¿Por qué no puedes confiar en los átomos?",
+        "delivery": "Porque hacen todo lo que está a su alrededor."
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro gusano?",
+        "delivery": "¡Voy a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan Facebook?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Qué le dijo el semáforo al coche?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Qué hace una abeja en el gimnasio?",
+        "delivery": "¡Zum-ba!"
+    },
+    {
+        "joke": "¿Por qué las vacas no usan Whatsapp?",
+        "delivery": "Porque ya tienen vaca-nal."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro gusano?",
+        "delivery": "¡Voy a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué los esqueletos no pelean entre ellos?",
+        "delivery": "Porque no tienen agallas."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace yoga?",
+        "delivery": "Un labra-cuerpo."
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan WhatsApp?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Por qué el libro de matemáticas se deprimió?",
+        "delivery": "Porque tenía demasiados problemas."
+    },
+    {
+        "joke": "¿Qué le dijo el semáforo al coche?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan Facebook?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?",
+        "delivery": "Un thesaurus."
+    },
+    {
+        "joke": "¿Por qué no puedes confiar en los átomos?",
+        "delivery": "Porque hacen todo lo que está a su alrededor."
+    },
+    {
+        "joke": "¿Por qué el libro de matemáticas se deprimió?",
+        "delivery": "Porque tenía demasiados problemas."
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro gusano?",
+        "delivery": "¡Voy a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan Facebook?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Qué le dijo el semáforo al coche?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Qué hace una abeja en el gimnasio?",
+        "delivery": "¡Zum-ba!"
+    },
+    {
+        "joke": "¿Por qué las vacas no usan Whatsapp?",
+        "delivery": "Porque ya tienen vaca-nal."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro gusano?",
+        "delivery": "¡Voy a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué los esqueletos no pelean entre ellos?",
+        "delivery": "Porque no tienen agallas."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace yoga?",
+        "delivery": "Un labra-cuerpo."
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan WhatsApp?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Por qué el libro de matemáticas se deprimió?",
+        "delivery": "Porque tenía demasiados problemas."
+    },
+    {
+        "joke": "¿Qué le dijo el semáforo al coche?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan Facebook?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?",
+        "delivery": "Un thesaurus."
+    },
+    {
+        "joke": "¿Por qué no puedes confiar en los átomos?",
+        "delivery": "Porque hacen todo lo que está a su alrededor."
+    },
+    {
+        "joke": "¿Por qué las vacas no usan WhatsApp?",
+        "delivery": "Porque ya tienen vaca-nal."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro gusano?",
+        "delivery": "¡Voy a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué los esqueletos no pelean entre ellos?",
+        "delivery": "Porque no tienen agallas."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace yoga?",
+        "delivery": "Un labra-cuerpo."
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan WhatsApp?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Por qué el libro de matemáticas se deprimió?",
+        "delivery": "Porque tenía demasiados problemas."
+    },
+    {
+        "joke": "¿Qué le dijo el semáforo al coche?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan Facebook?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con un gran vocabulario?",
+        "delivery": "Un thesaurus."
+    },
+    {
+        "joke": "¿Por qué no puedes confiar en los átomos?",
+        "delivery": "Porque hacen todo lo que está a su alrededor."
+    },
+    {
+        "joke": "¿Por qué las vacas no usan Whatsapp?",
+        "delivery": "Porque ya tienen vaca-nal."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué hace una abeja en el gimnasio?",
+        "delivery": "¡Zum-ba!"
+    },
+    {
+        "joke": "¿Qué le dice una iguana a su hermana gemela?",
+        "delivery": "Iguanita."
+    },
+    {
+        "joke": "¿Por qué el perro se sentó frente al ventilador?",
+        "delivery": "Porque quería estar fresquito."
+    },
+    {
+        "joke": "¿Por qué los pájaros no usan WhatsApp?",
+        "delivery": "Porque ya tienen Twitter."
+    },
+    {
+        "joke": "¿Cómo se llama un campeón de karate japonés?",
+        "delivery": "Karateto."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Subkarate."
+    },
+    {
+        "joke": "¿Por qué las vacas usan campanas?",
+        "delivery": "Porque sus cuernos no funcionan."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio que canta?",
+        "delivery": "Dino-singer."
+    },
+    {
+        "joke": "¿Por qué el libro de historia no quería salir?",
+        "delivery": "Porque no quería ser olvidado."
+    },
+    {
+        "joke": "¿Qué hace un pez en un cine?",
+        "delivery": "Nada."
+    },
+    {
+        "joke": "¿Qué le dijo el semáforo al coche?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Qué hace un perro con un taladro?",
+        "delivery": "Un agujero."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Por qué el libro de matemáticas se deprimió?",
+        "delivery": "Porque tenía demasiados problemas."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mágico?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro gusano?",
+        "delivery": "¡Voy a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Qué le dice un árbol a otro árbol?",
+        "delivery": "¡Nos vemos cuando haga raíces!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace yoga?",
+        "delivery": "Un labra-cuerpo."
+    },
+    {
+        "joke": "¿Por qué las vacas no usan Whatsapp?",
+        "delivery": "Porque ya tienen vaca-nal."
+    },
+    {
+        "joke": "¿Qué hace una abeja en el gimnasio?",
+        "delivery": "¡Zum-ba!"
+    },
+    {
+        "joke": "¿Cómo se llama un gato que estudia medicina?",
+        "delivery": "Un medicat."
+    },
+    {
+        "joke": "¿Qué le dice un cactus a otro cactus?",
+        "delivery": "¡Te pincho!"
+    },
+    {
+        "joke": "¿Por qué el perro no usa reloj?",
+        "delivery": "Porque ya tiene su propio tiempo."
+    },
+    {
+        "joke": "¿Qué le dijo la luna al sol?",
+        "delivery": "Te echo de menos."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué hace un perro con un sombrero?",
+        "delivery": "¡Es un perro elegante!"
+    },
+    {
+        "joke": "¿Por qué el perro lleva gafas?",
+        "delivery": "Porque tiene una vista de perro."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con una guitarra?",
+        "delivery": "Un dino-guitarista."
+    },
+    {
+        "joke": "¿Por qué las ballenas no usan Facebook?",
+        "delivery": "Porque ya tienen un perfil en el agua."
+    },
+    {
+        "joke": "¿Cómo se llama un gato sin orejas?",
+        "delivery": "Un miau-quito."
+    },
+    {
+        "joke": "¿Qué le dice un semáforo a otro semáforo?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro cantante?",
+        "delivery": "Un labra-cantante."
+    },
+    {
+        "joke": "¿Por qué el sol no es simpático?",
+        "delivery": "Porque siempre está tan caliente."
+    },
+    {
+        "joke": "¿Cómo se llama un pez músico?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Qué le dijo el pepino al tomate?",
+        "delivery": "¡No te pongas rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro detective?",
+        "delivery": "Un labra-caso."
+    },
+    {
+        "joke": "¿Qué le dijo el uno al diez?",
+        "delivery": "Para ser como yo, tienes que ser impar."
+    },
+    {
+        "joke": "¿Por qué el perro siempre está feliz?",
+        "delivery": "Porque sabe que es su turno de comer."
+    },
+    {
+        "joke": "¿Cómo se llama un gato que canta?",
+        "delivery": "Un miau-sico."
+    },
+    {
+        "joke": "¿Qué hace un león en un semáforo?",
+        "delivery": "Esperar a que cambie el color."
+    },
+    {
+        "joke": "¿Cómo se llama un conejo que toca la guitarra?",
+        "delivery": "Un conejito músico."
+    },
+    {
+        "joke": "¿Qué le dice el tomate al pepino?",
+        "delivery": "¡No te pongas tan rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de salto de altura?",
+        "delivery": "Salto Grande."
+    },
+    {
+        "joke": "¿Por qué el perro nunca tiene frío?",
+        "delivery": "Porque siempre está cubierto de amor."
+    },
+    {
+        "joke": "¿Cómo se llama un pez que toca la guitarra?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Por qué las vacas usan campanas?",
+        "delivery": "Porque sus cuernos no suenan."
+    },
+    {
+        "joke": "¿Qué le dice una paloma a otra?",
+        "delivery": "¡Nos vemos volando!"
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro?",
+        "delivery": "¡Vamos a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué las vacas no usan gafas?",
+        "delivery": "Porque no pueden ver la vaca-nal."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que baila?",
+        "delivery": "Un labra-rumba."
+    },
+    {
+        "joke": "¿Qué hace un gato en el ordenador?",
+        "delivery": "Miau-sca."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace karate?",
+        "delivery": "Un labra-te."
+    },
+    {
+        "joke": "¿Qué hace una vaca en la luna?",
+        "delivery": "¡Vaca-luna!"
+    },
+    {
+        "joke": "¿Qué hace un pájaro en un restaurante?",
+        "delivery": "Pedir un pichón."
+    },
+    {
+        "joke": "¿Por qué el perro no quería estudiar?",
+        "delivery": "Porque ya sabía cómo ladrar."
+    },
+    {
+        "joke": "¿Cómo se llama un gato sabio?",
+        "delivery": "Un miau-teórico."
+    },
+    {
+        "joke": "¿Por qué los elefantes nunca usan computador?",
+        "delivery": "Porque les cuesta encontrar el ratón."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Cómo se llama un perro ninja?",
+        "delivery": "Un labra-ninja."
+    },
+    {
+        "joke": "¿Qué hace un pez en un cine?",
+        "delivery": "Nada."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace yoga?",
+        "delivery": "Un labra-cuerpo."
+    },
+    {
+        "joke": "¿Qué le dice un cactus a otro cactus?",
+        "delivery": "¡Te pincho!"
+    },
+    {
+        "joke": "¿Por qué el perro no usa reloj?",
+        "delivery": "Porque ya tiene su propio tiempo."
+    },
+    {
+        "joke": "¿Qué le dijo la luna al sol?",
+        "delivery": "Te echo de menos."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué hace un perro con un sombrero?",
+        "delivery": "¡Es un perro elegante!"
+    },
+    {
+        "joke": "¿Por qué el perro lleva gafas?",
+        "delivery": "Porque tiene una vista de perro."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con una guitarra?",
+        "delivery": "Un dino-guitarista."
+    },
+    {
+        "joke": "¿Por qué las ballenas no usan Facebook?",
+        "delivery": "Porque ya tienen un perfil en el agua."
+    },
+    {
+        "joke": "¿Cómo se llama un gato sin orejas?",
+        "delivery": "Un miau-quito."
+    },
+    {
+        "joke": "¿Qué le dice un semáforo a otro semáforo?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro cantante?",
+        "delivery": "Un labra-cantante."
+    },
+    {
+        "joke": "¿Por qué el sol no es simpático?",
+        "delivery": "Porque siempre está tan caliente."
+    },
+    {
+        "joke": "¿Cómo se llama un pez músico?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Qué le dijo el pepino al tomate?",
+        "delivery": "¡No te pongas rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro detective?",
+        "delivery": "Un labra-caso."
+    },
+    {
+        "joke": "¿Qué le dijo el uno al diez?",
+        "delivery": "Para ser como yo, tienes que ser impar."
+    },
+    {
+        "joke": "¿Por qué el perro siempre está feliz?",
+        "delivery": "Porque sabe que es su turno de comer."
+    },
+    {
+        "joke": "¿Cómo se llama un gato que canta?",
+        "delivery": "Un miau-sico."
+    },
+    {
+        "joke": "¿Qué hace un león en un semáforo?",
+        "delivery": "Esperar a que cambie el color."
+    },
+    {
+        "joke": "¿Cómo se llama un conejo que toca la guitarra?",
+        "delivery": "Un conejito músico."
+    },
+    {
+        "joke": "¿Qué le dice el tomate al pepino?",
+        "delivery": "¡No te pongas tan rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de salto de altura?",
+        "delivery": "Salto Grande."
+    },
+    {
+        "joke": "¿Por qué el perro nunca tiene frío?",
+        "delivery": "Porque siempre está cubierto de amor."
+    },
+    {
+        "joke": "¿Cómo se llama un pez que toca la guitarra?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Por qué las vacas usan campanas?",
+        "delivery": "Porque sus cuernos no suenan."
+    },
+    {
+        "joke": "¿Qué le dice una paloma a otra?",
+        "delivery": "¡Nos vemos volando!"
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro?",
+        "delivery": "¡Vamos a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué las vacas no usan gafas?",
+        "delivery": "Porque no pueden ver la vaca-nal."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que baila?",
+        "delivery": "Un labra-rumba."
+    },
+    {
+        "joke": "¿Qué hace un gato en el ordenador?",
+        "delivery": "Miau-sca."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace karate?",
+        "delivery": "Un labra-te."
+    },
+    {
+        "joke": "¿Qué hace una vaca en la luna?",
+        "delivery": "¡Vaca-luna!"
+    },
+    {
+        "joke": "¿Qué hace un pájaro en un restaurante?",
+        "delivery": "Pedir un pichón."
+    },
+    {
+        "joke": "¿Por qué el perro no quería estudiar?",
+        "delivery": "Porque ya sabía cómo ladrar."
+    },
+    {
+        "joke": "¿Cómo se llama un gato sabio?",
+        "delivery": "Un miau-teórico."
+    },
+    {
+        "joke": "¿Por qué los elefantes nunca usan computador?",
+        "delivery": "Porque les cuesta encontrar el ratón."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Cómo se llama un perro ninja?",
+        "delivery": "Un labra-ninja."
+    },
+    {
+        "joke": "¿Qué hace un pez en un cine?",
+        "delivery": "Nada."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace yoga?",
+        "delivery": "Un labra-cuerpo."
+    },
+    {
+        "joke": "¿Qué le dice un cactus a otro cactus?",
+        "delivery": "¡Te pincho!"
+    },
+    {
+        "joke": "¿Por qué el perro no usa reloj?",
+        "delivery": "Porque ya tiene su propio tiempo."
+    },
+    {
+        "joke": "¿Qué le dijo la luna al sol?",
+        "delivery": "Te echo de menos."
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué hace un perro con un sombrero?",
+        "delivery": "¡Es un perro elegante!"
+    },
+    {
+        "joke": "¿Por qué el perro lleva gafas?",
+        "delivery": "Porque tiene una vista de perro."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con una guitarra?",
+        "delivery": "Un dino-guitarista."
+    },
+    {
+        "joke": "¿Por qué las ballenas no usan Facebook?",
+        "delivery": "Porque ya tienen un perfil en el agua."
+    },
+    {
+        "joke": "¿Cómo se llama un gato sin orejas?",
+        "delivery": "Un miau-quito."
+    },
+    {
+        "joke": "¿Qué le dice un semáforo a otro semáforo?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un perro cantante?",
+        "delivery": "Un labra-cantante."
+    },
+    {
+        "joke": "¿Por qué el sol no es simpático?",
+        "delivery": "Porque siempre está tan caliente."
+    },
+    {
+        "joke": "¿Cómo se llama un pez músico?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Qué le dijo el pepino al tomate?",
+        "delivery": "¡No te pongas rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro detective?",
+        "delivery": "Un labra-caso."
+    },
+    {
+        "joke": "¿Qué le dijo el uno al diez?",
+        "delivery": "Para ser como yo, tienes que ser impar."
+    },
+    {
+        "joke": "¿Por qué el perro siempre está feliz?",
+        "delivery": "Porque sabe que es su turno de comer."
+    },
+    {
+        "joke": "¿Cómo se llama un gato que canta?",
+        "delivery": "Un miau-sico."
+    },
+    {
+        "joke": "¿Qué hace un león en un semáforo?",
+        "delivery": "Esperar a que cambie el color."
+    },
+    {
+        "joke": "¿Cómo se llama un conejo que toca la guitarra?",
+        "delivery": "Un conejito músico."
+    },
+    {
+        "joke": "¿Qué le dice el tomate al pepino?",
+        "delivery": "¡No te pongas tan rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de salto de altura?",
+        "delivery": "Salto Grande."
+    },
+    {
+        "joke": "¿Por qué el perro nunca tiene frío?",
+        "delivery": "Porque siempre está cubierto de amor."
+    },
+    {
+        "joke": "¿Cómo se llama un pez que toca la guitarra?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Por qué las vacas usan campanas?",
+        "delivery": "Porque sus cuernos no suenan."
+    },
+    {
+        "joke": "¿Qué le dice una paloma a otra?",
+        "delivery": "¡Nos vemos volando!"
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro?",
+        "delivery": "¡Vamos a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Por qué las focas miran siempre hacia arriba?",
+        "delivery": "Porque ahí están los focos."
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro?",
+        "delivery": "¡Voy a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Cómo se llama un campeón de buceo japonés?",
+        "delivery": "Tokofondo."
+    },
+    {
+        "joke": "¿Y el subcampeón?",
+        "delivery": "Kasitoko."
+    },
+    {
+        "joke": "¿Qué hace un pez en un cine?",
+        "delivery": "Nada."
+    },
+    {
+        "joke": "¿Cómo se llama un perro que hace yoga?",
+        "delivery": "Un labra-cuerpo."
+    },
+    {
+        "joke": "¿Qué le dice una paloma a otra?",
+        "delivery": "Nos vemos volando."
+    },
+    {
+        "joke": "¿Por qué los elefantes nunca usan computador?",
+        "delivery": "Porque les cuesta encontrar el ratón."
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de salto de altura?",
+        "delivery": "Salto Grande."
+    },
+    {
+        "joke": "¿Por qué el perro nunca tiene frío?",
+        "delivery": "Porque siempre está cubierto de amor."
+    },
+    {
+        "joke": "¿Cómo se llama un pez que toca la guitarra?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Por qué las vacas usan campanas?",
+        "delivery": "Porque sus cuernos no suenan."
+    },
+    {
+        "joke": "¿Qué hace un pájaro en un restaurante?",
+        "delivery": "Pedir un pichón."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué le dijo el uno al diez?",
+        "delivery": "Para ser como yo, tienes que ser impar."
+    },
+    {
+        "joke": "¿Qué le dice un semáforo a otro?",
+        "delivery": "No me mires, me estoy cambiando."
+    },
+    {
+        "joke": "¿Cómo se llama un gato sin orejas?",
+        "delivery": "Un miau-quito."
+    },
+    {
+        "joke": "¿Por qué el perro siempre está feliz?",
+        "delivery": "Porque sabe que es su turno de comer."
+    },
+    {
+        "joke": "¿Cómo se llama un perro cantante?",
+        "delivery": "Un labra-cantante."
+    },
+    {
+        "joke": "¿Por qué el sol no es simpático?",
+        "delivery": "Porque siempre está tan caliente."
+    },
+    {
+        "joke": "¿Cómo se llama un pez músico?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Qué le dijo el pepino al tomate?",
+        "delivery": "¡No te pongas rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro detective?",
+        "delivery": "Un labra-caso."
+    },
+    {
+        "joke": "¿Qué le dice una paloma a otra?",
+        "delivery": "¡Nos vemos volando!"
+    },
+    {
+        "joke": "¿Qué hace un gato en el ordenador?",
+        "delivery": "Miau-sca."
+    },
+    {
+        "joke": "¿Qué hace un perro con un sombrero?",
+        "delivery": "¡Es un perro elegante!"
+    },
+    {
+        "joke": "¿Qué le dijo el tomate al pepino?",
+        "delivery": "¡No te pongas tan rojo!"
+    },
+    {
+        "joke": "¿Qué le dijo el gato a la gata?",
+        "delivery": "¡Vamos a hacer un gato-puebo!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro que baila?",
+        "delivery": "Un labra-rumba."
+    },
+    {
+        "joke": "¿Por qué el perro no usa reloj?",
+        "delivery": "Porque ya tiene su propio tiempo."
+    },
+    {
+        "joke": "¿Cómo se llama un perro mago?",
+        "delivery": "Un labracadabrador."
+    },
+    {
+        "joke": "¿Qué le dijo un cactus a otro cactus?",
+        "delivery": "¡Te pincho!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro sin patas?",
+        "delivery": "No importa cómo lo llames, no va a venir."
+    },
+    {
+        "joke": "¿Qué le dice el sol a la luna?",
+        "delivery": "Te echo de menos."
+    },
+    {
+        "joke": "¿Qué hace una vaca en la luna?",
+        "delivery": "¡Vaca-luna!"
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro?",
+        "delivery": "¡Vamos a dar una vuelta a la manzana!"
+    },
+    {
+        "joke": "¿Qué le dice una vaca a otra vaca?",
+        "delivery": "¡Muu-cho gusto!"
+    },
+    {
+        "joke": "¿Cómo se llama un perro ninja?",
+        "delivery": "Un labra-ninja."
+    },
+    {
+        "joke": "¿Qué hace un pez en un cine?",
+        "delivery": "Nada."
+    },
+    {
+        "joke": "¿Cómo se llama un dinosaurio con una guitarra?",
+        "delivery": "Un dino-guitarista."
+    },
+    {
+        "joke": "¿Qué le dijo el pepino al tomate?",
+        "delivery": "¡No te pongas tan rojo!"
+    },
+    {
+        "joke": "¿Qué hace una vaca en la luna?",
+        "delivery": "¡Vaca-luna!"
+    },
+    {
+        "joke": "¿Por qué el perro nunca tiene frío?",
+        "delivery": "Porque siempre está cubierto de amor."
+    },
+    {
+        "joke": "¿Qué le dice una paloma a otra?",
+        "delivery": "¡Nos vemos volando!"
+    },
+    {
+        "joke": "¿Por qué las vacas no usan gafas?",
+        "delivery": "Porque no pueden ver la vaca-nal."
+    },
+    {
+        "joke": "¿Cómo se llama un conejo que toca la guitarra?",
+        "delivery": "Un conejito músico."
+    },
+    {
+        "joke": "¿Por qué el sol no es simpático?",
+        "delivery": "Porque siempre está tan caliente."
+    },
+    {
+        "joke": "¿Qué le dijo el uno al diez?",
+        "delivery": "Para ser como yo, tienes que ser impar."
+    },
+    {
+        "joke": "¿Por qué el perro siempre está feliz?",
+        "delivery": "Porque sabe que es su turno de comer."
+    },
+    {
+        "joke": "¿Cómo se llama un gato que canta?",
+        "delivery": "Un miau-sico."
+    },
+    {
+        "joke": "¿Qué hace un león en un semáforo?",
+        "delivery": "Esperar a que cambie el color."
+    },
+    {
+        "joke": "¿Cómo se llama un conejo que toca la guitarra?",
+        "delivery": "Un conejito músico."
+    },
+    {
+        "joke": "¿Qué le dice el tomate al pepino?",
+        "delivery": "¡No te pongas tan rojo!"
+    },
+    {
+        "joke": "¿Cómo se llama el campeón de salto de altura?",
+        "delivery": "Salto Grande."
+    },
+    {
+        "joke": "¿Por qué el perro nunca tiene frío?",
+        "delivery": "Porque siempre está cubierto de amor."
+    },
+    {
+        "joke": "¿Cómo se llama un pez que toca la guitarra?",
+        "delivery": "Un bass."
+    },
+    {
+        "joke": "¿Por qué las vacas usan campanas?",
+        "delivery": "Porque sus cuernos no suenan."
+    },
+    {
+        "joke": "¿Qué le dice una paloma a otra?",
+        "delivery": "¡Nos vemos volando!"
+    },
+    {
+        "joke": "¿Qué le dice un gusano a otro?",
+        "delivery": "¡Vamos a dar una vuelta a la manzana!"
+    }
 ]
