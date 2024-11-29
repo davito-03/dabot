@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands, tasks
 import random
-import yt_dlp as ytdlp
 import asyncio
 import praw
 import json
@@ -52,6 +51,19 @@ async def clear_used_data():
     used_jokes.clear()
     used_quotes.clear()
     print("Chistes y citas almacenadas limpiadas.")
+
+@bot.event
+async def on_message(message):
+    # Evitar que el bot responda a sí mismo
+    if message.author == bot.user:
+        return
+
+    # Si el mensaje contiene 'hola', el bot responde mencionando al autor
+    if 'hola' in message.content.lower():
+        await message.channel.send(f"¡Hola {message.author.mention}! ¿Cómo estás?")
+
+    # Esto es necesario para que los comandos sigan funcionando
+    await bot.process_commands(message)
 
 @bot.event
 async def on_ready():
@@ -257,48 +269,6 @@ async def guessnum(ctx):
                 break
         except ValueError:
             await ctx.send("Por favor, ingresa un número válido.")
-
-
-# Conectar al canal de voz y reproducir música
-@bot.command()
-async def play(ctx, *, query: str):
-    """Busca y reproduce música en un canal de voz"""
-    channel = ctx.author.voice.channel  # Obtener el canal de voz
-    voice = await channel.connect()  # Conectar al canal de voz
-
-    # Configurar las opciones de búsqueda y descarga
-    ydl_opts = {
-    'format': 'bestaudio/best',  # Selecciona la mejor calidad de audio
-    'postprocessors': [{
-        'key': 'FFmpegAudioConvertor',  # Usa FFmpeg para convertir el audio
-        'preferredquality': '192',  # Calidad de audio (puedes ajustarla a tu preferencia)
-    }],
-    'postprocessor_args': ['-vn'],  # Sin video
-    'prefer_ffmpeg': True,  # Prefiere FFmpeg si está disponible
-    'extractaudio': True,  # Solo extrae el audio
-    'audioquality': 1,  # Calidad de audio
-    'outtmpl': 'downloads/%(id)s.%(ext)s',  # Ruta de salida
-    'restrictfilenames': True,  # Nombres de archivo restrictivos
-    }
-
-
-    # Realizar la búsqueda con yt-dlp
-    with ytdlp.YoutubeDL(ydl_opts) as ydl:
-        # Buscar el primer resultado de la consulta
-        info = ydl.extract_info(f"ytsearch:{query}", download=False)
-        # Extraer la URL del primer video encontrado
-        video_url = info['entries'][0]['url']
-        title = info['entries'][0]['title']
-
-    # Reproducir el audio en el canal de voz
-    voice.play(discord.FFmpegPCMAudio(video_url))
-    await ctx.send(f"Reproduciendo: {title}")
-
-@bot.command()
-async def stop(ctx):
-    """Detiene la reproducción y desconecta el bot del canal de voz."""
-    await ctx.voice_client.disconnect()
-    await ctx.send("Desconectado del canal de voz.")
 
 
 def run():
