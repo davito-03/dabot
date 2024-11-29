@@ -154,11 +154,12 @@ async def chiste_todos(ctx):
 async def chiste(ctx):
     try:
         response = requests.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
-        joke_data = response.json()
 
         if response.status_code != 200:
             await ctx.send(f"Hubo un error con la API de chistes. Código de estado: {response.status_code}")
             return
+
+        joke_data = response.json()
 
         if joke_data.get('error'):
             await ctx.send(f"Error en los datos recibidos de la API: {joke_data['error']}")
@@ -168,6 +169,9 @@ async def chiste(ctx):
             joke = joke_data['joke']
         elif joke_data['type'] == 'twopart':
             joke = f"{joke_data['setup']} - {joke_data['delivery']}"
+        else:
+            await ctx.send("No se pudo obtener un chiste válido.")
+            return
 
         while joke in used_jokes:
             response = requests.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
@@ -176,6 +180,8 @@ async def chiste(ctx):
                 joke = joke_data['joke']
             elif joke_data['type'] == 'twopart':
                 joke = f"{joke_data['setup']} - {joke_data['delivery']}"
+            if not joke_data.get('error') and joke:
+                break
 
         used_jokes.append(joke)
 
@@ -187,6 +193,7 @@ async def chiste(ctx):
     except Exception as e:
         await ctx.send(f"Hubo un error al obtener el chiste. Detalles: {e}")
         print(f"Error: {e}")
+
 
 @bot.command()
 async def meme(ctx, subreddit_name="memes"):
@@ -250,7 +257,6 @@ async def cita(ctx):
     try:
         response = requests.get("https://zenquotes.io/api/random")
         
-        # Verificar que la respuesta sea exitosa
         if response.status_code != 200:
             await ctx.send(f"Hubo un error al obtener la cita. Código de estado: {response.status_code}")
             return
@@ -261,8 +267,12 @@ async def cita(ctx):
             await ctx.send("No se pudo obtener una cita válida.")
             return
 
-        quote = quote_data[0]['q']
-        author = quote_data[0]['a']
+        quote = quote_data[0].get('q', '')
+        author = quote_data[0].get('a', '')
+
+        if not quote or not author:
+            await ctx.send("Cita o autor no válidos recibidos.")
+            return
 
         # Evitar que se repita la cita
         while quote in used_quotes:
@@ -271,8 +281,8 @@ async def cita(ctx):
             if not quote_data or len(quote_data) == 0:
                 await ctx.send("No se pudo obtener una cita válida.")
                 return
-            quote = quote_data[0]['q']
-            author = quote_data[0]['a']
+            quote = quote_data[0].get('q', '')
+            author = quote_data[0].get('a', '')
 
         used_quotes.append(quote)
 
