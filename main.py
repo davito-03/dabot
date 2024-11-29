@@ -56,7 +56,7 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send('pong')
+    await ctx.send('pong🏓')
 
 @bot.command()
 async def adivina_palabra(ctx):
@@ -111,6 +111,50 @@ async def adivina_palabra(ctx):
     if attempts == 0:
         await ctx.send(f"Se te acabaron los intentos. La palabra era: {palabra_traducida}")
 
+@bot.command()
+async def cita(ctx):
+    try:
+        response = requests.get("https://zenquotes.io/api/random")
+        
+        if response.status_code != 200:
+            await ctx.send(f"Hubo un error al obtener la cita. Código de estado: {response.status_code}")
+            return
+
+        quote_data = response.json()
+
+        if not quote_data or len(quote_data) == 0:
+            await ctx.send("No se pudo obtener una cita válida.")
+            return
+
+        quote = quote_data[0].get('q', '')
+        author = quote_data[0].get('a', '')
+
+        if not quote or not author:
+            await ctx.send("Cita o autor no válidos recibidos.")
+            return
+
+        # Evitar que se repita la cita
+        while quote in used_quotes:
+            response = requests.get("https://zenquotes.io/api/random")
+            quote_data = response.json()
+            if not quote_data or len(quote_data) == 0:
+                await ctx.send("No se pudo obtener una cita válida.")
+                return
+            quote = quote_data[0].get('q', '')
+            author = quote_data[0].get('a', '')
+
+        used_quotes.append(quote)
+
+        quote_text = f"**{quote}**\nPor: {author}"
+
+        translator = Translator()
+        translated_quote = translator.translate(quote_text, src='en', dest='es').text
+
+        await ctx.send(f"Aquí tienes una cita:\n\n{translated_quote}")
+
+    except Exception as e:
+        await ctx.send(f"Hubo un error al obtener la cita. Detalles: {e}")
+        print(f"Error: {e}")
 
 @bot.command()
 async def chiste_todos(ctx):
@@ -244,68 +288,6 @@ async def guessnum(ctx):
         except ValueError:
             await ctx.send("Por favor, ingresa un número válido.")
 
-@bot.command()
-async def operaciones(ctx, operacion: str):
-    try:
-        result = eval(operacion)
-        await ctx.send(f"El resultado de {operacion} es: {result}")
-    except Exception as e:
-        await ctx.send(f"No se pudo realizar la operación. Detalles: {e}")
-
-@bot.command()
-async def cita(ctx):
-    try:
-        response = requests.get("https://zenquotes.io/api/random")
-        
-        if response.status_code != 200:
-            await ctx.send(f"Hubo un error al obtener la cita. Código de estado: {response.status_code}")
-            return
-
-        quote_data = response.json()
-
-        if not quote_data or len(quote_data) == 0:
-            await ctx.send("No se pudo obtener una cita válida.")
-            return
-
-        quote = quote_data[0].get('q', '')
-        author = quote_data[0].get('a', '')
-
-        if not quote or not author:
-            await ctx.send("Cita o autor no válidos recibidos.")
-            return
-
-        # Evitar que se repita la cita
-        while quote in used_quotes:
-            response = requests.get("https://zenquotes.io/api/random")
-            quote_data = response.json()
-            if not quote_data or len(quote_data) == 0:
-                await ctx.send("No se pudo obtener una cita válida.")
-                return
-            quote = quote_data[0].get('q', '')
-            author = quote_data[0].get('a', '')
-
-        used_quotes.append(quote)
-
-        quote_text = f"**{quote}**\nPor: {author}"
-
-        translator = Translator()
-        translated_quote = translator.translate(quote_text, src='en', dest='es').text
-
-        await ctx.send(f"Aquí tienes una cita:\n\n{translated_quote}")
-
-    except Exception as e:
-        await ctx.send(f"Hubo un error al obtener la cita. Detalles: {e}")
-        print(f"Error: {e}")
-
-
-@bot.command()
-async def resolver(ctx, *args):
-    try:
-        exp = " ".join(args)
-        expr = sp.sympify(exp)
-        result = sp.solve(expr)
-        await ctx.send(f"Solución: {result}")
-    except Exception as e:
-        await ctx.send(f"No se pudo resolver la ecuación. Detalles: {e}")
-
-bot.run(TOKEN)
+# Iniciar el bot con el TOKEN
+def run():
+    bot.run(TOKEN)
