@@ -6,7 +6,6 @@ import praw
 import json
 from flask import Flask
 from pyngrok import ngrok
-from google.cloud import translate_v2 as translate
 from threading import Thread
 import requests
 from googletrans import Translator
