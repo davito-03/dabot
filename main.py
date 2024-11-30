@@ -58,8 +58,11 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    # Si el mensaje contiene 'hola', el bot responde mencionando al autor
-    if 'hola' in message.content.lower():
+    # Lista de palabras clave para saludar
+    saludos = ['hola', 'hi', 'holi', 'ola', '🌊', 'qué tal', 'hello', 'buenas', 'saludos']
+
+    # Verificar si alguna palabra clave está en el mensaje
+    if any(saludo in message.content.lower() for saludo in saludos):
         await message.channel.send(f"¡Hola {message.author.mention}! ¿Cómo estás?")
 
     # Esto es necesario para que los comandos sigan funcionando
