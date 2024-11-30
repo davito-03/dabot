@@ -78,7 +78,7 @@ async def ping(ctx):
     await ctx.send('pong🏓')
 
 @bot.command()
-async def guessword(ctx):
+async def ahorcado(ctx):
     await ctx.send("¿Cuál es la dificultad que prefieres? (fácil, medio, difícil)")
 
     def check(msg):
