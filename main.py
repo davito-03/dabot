@@ -179,6 +179,41 @@ async def ping(ctx):
     await ctx.send('pong🏓')
 
 @bot.command()
+@commands.has_permissions(ban_members=True)
+async def banear(ctx, user_id: int, *, reason=None):
+    try:
+        # Buscar al usuario por su ID
+        user = await bot.fetch_user(user_id)
+
+        # Obtener el miembro en el servidor
+        member = ctx.guild.get_member(user_id)
+        
+        # Si no es un miembro del servidor, enviar un mensaje
+        if member is None:
+            await ctx.send(f"No se encontró un miembro con el ID {user_id} en este servidor.")
+            return
+
+        # Si se encuentra el miembro, proceder al baneo
+        await member.ban(reason=reason)
+
+        # Informar al canal
+        await ctx.send(f"El usuario {user.name} ha sido baneado correctamente.")
+
+        # Enviar un mensaje directo al usuario baneado
+        try:
+            await user.send(f"Has sido baneado del servidor {ctx.guild.name}. Razón: {reason if reason else 'No se proporcionó una razón.'}")
+        except discord.errors.Forbidden:
+            pass  # En caso de que no se pueda enviar mensaje directo al usuario
+
+    except discord.NotFound:
+        await ctx.send(f"No se pudo encontrar el usuario con el ID {user_id}.")
+    except discord.Forbidden:
+        await ctx.send("No tengo permisos para banear a este usuario.")
+    except discord.HTTPException as e:
+        await ctx.send(f"Ocurrió un error al intentar banear: {e}")
+
+
+@bot.command()
 async def ahorcado(ctx):
     await ctx.send("¿Cuál es la dificultad que prefieres? (fácil, medio, difícil)")
 
