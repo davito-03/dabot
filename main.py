@@ -140,7 +140,7 @@ async def ahorcado(ctx):
             await ctx.send(f"¡Fallaste! La letra '{guess}' no está en la palabra.")
 
     if '_' not in guessed_word:
-        await ctx.send(f"¡Felicidades! Adivinaste la palabra: {''.join(guessed_word)}")
+        await ctx.send(f"¡Felicidades! Adivinaste la palabra: {''.join(guessed_word)}. Si quieres volvere a jugar pon de nuevo el comando.")
     else:
         await ctx.send(f"Se acabaron los intentos. La palabra era: {palabra_secreta}.")
 
@@ -305,6 +305,22 @@ async def ppt(ctx, choice: str):
         result = "¡Perdiste!"
 
     await ctx.send(f"Tu elección: {choice}\nElección del bot: {bot_choice}\n{result}")
+
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(title="Comandos Disponibles", description="Aquí tienes una lista de los comandos que puedes usar con este bot:", color=0x00ff00)
+    
+    embed.add_field(name="`ping`", value="Responde con 'pong 🏓'. Ideal para probar si el bot está funcionando.", inline=False)
+    embed.add_field(name="`ahorcado`", value="Inicia un juego de ahorcado. Puedes elegir entre diferentes niveles de dificultad.", inline=False)
+    embed.add_field(name="`cita`", value="Muestra una cita motivacional o reflexiva aleatoria.", inline=False)
+    embed.add_field(name="`chiste`", value="Cuenta un chiste aleatorio para alegrarte el día.", inline=False)
+    embed.add_field(name="`meme [subreddit]`", value="Muestra un meme aleatorio del subreddit especificado (por defecto, 'memes').", inline=False)
+    embed.add_field(name="`guessnum`", value="Adivina un número entre 1 y 100. El bot te guía si estás cerca.", inline=False)
+    embed.add_field(name="`gato`", value="Envía una imagen aleatoria de un gato.", inline=False)
+    embed.add_field(name="`perro`", value="Envía una imagen aleatoria de un perro.", inline=False)
+    embed.add_field(name="`ppt [piedra/papel/tijera]`", value="Juega piedra, papel o tijera contra el bot.", inline=False)
+    
+    await ctx.send(embed=embed)
 
 def run():
     bot.run(TOKEN)
