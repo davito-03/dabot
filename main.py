@@ -10,6 +10,7 @@ from googletrans import Translator
 from dotenv import load_dotenv
 import os
 import time
+from datetime import datetime, timedelta
 import sympy as sp
 
 def cargar_palabras():
@@ -29,6 +30,8 @@ def traducir_palabra(palabra):
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
+
+WARNINGS_FILE = "warnings.json"
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
@@ -66,6 +69,104 @@ async def on_message(message):
         await message.channel.send(f"¡Hola {message.author.mention}! ¿Cómo estás?")
 
     # Esto es necesario para que los comandos sigan funcionando
+    await bot.process_commands(message)
+
+# Función para cargar las advertencias desde el archivo
+def load_warnings():
+    try:
+        with open(WARNINGS_FILE, "r") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+# Función para guardar las advertencias en el archivo
+def save_warnings(warnings_data):
+    with open(WARNINGS_FILE, "w") as f:
+        json.dump(warnings_data, f, indent=4)
+
+# Inicializar advertencias
+warnings = load_warnings()
+
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+
+    # Detectar más de 12 letras consecutivas en mayúsculas
+    if any(len(word) > 12 and word.isupper() for word in message.content.split()):
+        try:
+            await message.delete()
+
+            user_id = str(message.author.id)
+            user_name = str(message.author.name)
+            if user_id not in warnings:
+                warnings[user_id] = {"name": user_name, "count": 1}
+            else:
+                warnings[user_id]["count"] += 1
+
+            count = warnings[user_id]["count"]
+            save_warnings(warnings)
+
+            # Mensaje directo
+            try:
+                await message.author.send(
+                    f"Hola, {message.author.name}. Tu mensaje en **{message.guild.name}** fue eliminado porque contenía más de 12 letras consecutivas en mayúsculas. "
+                    f"Esta es tu advertencia número {count}. Por favor, evita usar mayúsculas excesivas."
+                )
+            except discord.Forbidden:
+                await message.channel.send(
+                    f"{message.author.mention}, no pude enviarte un mensaje directo. Revisa tu configuración de privacidad. Esta es tu advertencia número {count}."
+                )
+
+            # Sanciones progresivas
+            if count == 5:
+                timeout_until = datetime.utcnow() + timedelta(hours=1)
+                await message.author.timeout(timeout_until, reason="Exceso de advertencias (5). Timeout de 1 hora.")
+                await message.channel.send(f"{message.author.mention} ha recibido un timeout de 1 hora por acumular 5 advertencias.")
+
+            elif count == 10:
+                timeout_until = datetime.utcnow() + timedelta(days=1)
+                await message.author.timeout(timeout_until, reason="Exceso de advertencias (10). Timeout de 1 día.")
+                await message.channel.send(f"{message.author.mention} ha recibido un timeout de 1 día por acumular 10 advertencias.")
+
+            elif count == 15:
+                await message.guild.ban(message.author, reason="Exceso de advertencias (15). Usuario baneado.")
+                await message.channel.send(f"{message.author.mention} ha sido baneado del servidor por acumular 15 advertencias.")
+                
+        except discord.Forbidden:
+            await message.channel.send(
+                "No tengo permisos para borrar mensajes o aplicar sanciones en este canal."
+            )
+
+    # Procesar otros comandos
+    await bot.process_commands(message)
+
+@bot.event
+async def on_message(message):
+    # Evitar que el bot se responda a sí mismo
+    if message.author == bot.user:
+        return
+
+    # Detectar más de 12 letras consecutivas en mayúsculas
+    if any(len(word) > 12 and word.isupper() for word in message.content.split()):
+        try:
+            await message.delete()
+            # Intentar enviar un mensaje directo al usuario
+            try:
+                await message.author.send(
+                    f"Hola, {message.author.name}. Tu mensaje en **{message.guild.name}** fue eliminado porque contenía más de 12 letras consecutivas en mayúsculas. Por favor, evita usar mayúsculas de forma excesiva."
+                )
+            except discord.Forbidden:
+                # Si no es posible enviar un mensaje directo, notificar en el servidor
+                await message.channel.send(
+                    f"{message.author.mention}, no pude enviarte un mensaje directo. Por favor, revisa tu configuración de privacidad."
+                )
+        except discord.Forbidden:
+            await message.channel.send(
+                "No tengo permisos para borrar mensajes en este canal, pero por favor, evita usar mayúsculas excesivas."
+            )
+
+    # Procesar otros comandos
     await bot.process_commands(message)
 
 @bot.event
