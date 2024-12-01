@@ -307,7 +307,7 @@ async def ppt(ctx, choice: str):
     await ctx.send(f"Tu elección: {choice}\nElección del bot: {bot_choice}\n{result}")
 
 @bot.command()
-async def help(ctx):
+async def ayuda(ctx):
     embed = discord.Embed(title="Comandos Disponibles", description="Aquí tienes una lista de los comandos que puedes usar con este bot:", color=0x00ff00)
     
     embed.add_field(name="`ping`", value="Responde con 'pong 🏓'. Ideal para probar si el bot está funcionando.", inline=False)
