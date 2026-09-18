@@ -23,6 +23,8 @@
 
 Esta es la copia de **producción**. `dabot-v2` es un archivo de 2025 con otra arquitectura; no lo uses como base.
 
+Ficha larga (módulos, panel, OAuth, IA): [davito.es/proyectos/dabot](https://davito.es/proyectos/dabot) · diagrama interno: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ## Qué hay aquí
 
 | Capa | Qué hace |
