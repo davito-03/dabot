@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies — Dabot</title>
+    <link rel="icon" href="https://davito.es/media/dabot.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=5.8">
+</head>
+<body>
+    <div class="ambient"></div>
+    <div class="shell">
+        <header class="topnav">
+            <a class="brand" href="/"><img src="/static/img/dabot.png" alt=""> Dabot</a>
+            <nav class="topnav-links">
+                <a class="btn btn-ghost btn-sm" href="/">Inicio</a>
+                <a class="btn btn-ghost btn-sm" href="/privacy">Privacidad</a>
+            </nav>
+        </header>
+        <main class="help-wrap glass panel" style="margin: 24px auto 64px;">
+            <h1>Política de cookies</h1>
+            <p class="sub">Última actualización: 29 de agosto de 2026. Responsable: Davito (dabot.davito.es / davito.es).</p>
+            <p>Esta página es la <b>segunda capa</b> de información exigida por la <a href="https://www.aepd.es" rel="noopener">AEPD</a> (Guía sobre el uso de cookies), el <b>art. 22.2 de la LSSI-CE</b> y el RGPD. No es asesoramiento jurídico personalizado; describe lo que Dabot hace de verdad.</p>
+
+            <h3>Qué dice la norma (resumen)</h3>
+            <ul>
+                <li><b>Cookies técnicas / necesarias</b> (sesión, seguridad, idioma que tú eliges, anti-fraude de un servicio que pides): no requieren un “acepto publicidad”. Sí hay que <b>informar</b>.</li>
+                <li><b>Cookies de analítica, publicidad o personalización no esencial</b>: consentimiento previo, botones Aceptar y Rechazar al mismo nivel. Dabot <b>no las usa</b>.</li>
+                <li><b>Datos de conectividad</b>: los parámetros técnicos derivados de la conexión HTTPS se procesan con fines estrictamente operativos y de seguridad técnica.</li>
+                <li><b>Seguridad e integridad</b>: los mecanismos de verificación solicitados por el usuario emplean identificadores técnicos orientados exclusivamente a garantizar la autenticidad y prevenir abusos o accesos no autorizados.</li>
+            </ul>
+
+            <h3>Cookies que instalamos</h3>
+            <div style="overflow:auto">
+                <table>
+                    <thead>
+                        <tr><th>Nombre</th><th>Proveedor</th><th>Finalidad</th><th>Duración</th><th>Tipo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>session_id</code></td><td>Davito</td><td>Mantener la sesión OAuth de Discord en el panel</td><td>7 días</td><td>Necesaria (HttpOnly)</td></tr>
+                        <tr><td><code>csrf_token</code></td><td>Davito</td><td>Impedir envíos no autorizados de formularios (CSRF)</td><td>7 días</td><td>Necesaria</td></tr>
+                        <tr><td><code>dabot_did</code></td><td>Davito</td><td>Identificador técnico para validación de seguridad</td><td>13 meses</td><td>Necesaria / seguridad (HttpOnly)</td></tr>
+                        <tr><td><code>dabot_lang_manual</code></td><td>Davito</td><td>Recordar el idioma seleccionado en la interfaz</td><td>13 meses</td><td>Necesaria (preferencia del usuario)</td></tr>
+                        <tr><td><code>dabot_cookie_notice</code></td><td>Davito</td><td>Recordar la aceptación del aviso informativo de cookies</td><td>13 meses</td><td>Necesaria</td></tr>
+                        <tr><td><code>dabot_oauth_state</code>, <code>dabot_pkce_verifier</code></td><td>Davito</td><td>Gestión segura de autenticación OAuth2; se eliminan al completar el acceso</td><td>Minutos</td><td>Necesaria</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="sub">En los procesos de validación técnica solicitados, el navegador puede almacenar identificadores técnicos en <b>localStorage</b> con idéntica finalidad de seguridad e integridad.</p>
+
+            <h3>Información técnica de conectividad y seguridad</h3>
+            <p>Al establecer comunicación con el servicio, se transmiten datos técnicos de red estrictamente necesarios para garantizar la entrega segura y fiable de los contenidos vía HTTPS. <b>Esta información nunca se comparte con terceros con fines comerciales ni se destina a la elaboración de perfiles publicitarios.</b></p>
+            <p>En los servidores comunitarios que tengan configurado el sistema de verificación voluntaria:</p>
+            <ul>
+                <li>Se generan códigos seudonimizados mediante funciones criptográficas unidireccionales (hash) para prevenir accesos automatizados y comportamientos abusivos coordinados.</li>
+                <li>Los moderadores comunitarios únicamente tienen acceso a confirmaciones de autenticidad del proceso, sin acceso a direcciones de red en texto claro.</li>
+                <li>Se comprueba que la conexión proceda de un entorno legítimo y no de redes intermediarias anónimas para proteger la integridad de la comunidad.</li>
+                <li>Los registros de seguridad se mantienen de forma temporal y estrictamente confidencial para la auditoría técnica y prevención de abusos.</li>
+            </ul>
+            <p>Base jurídica: <b>art. 6.1.b RGPD</b> (ejecución de medidas de seguridad a petición del usuario al solicitar acceso al servidor) y <b>art. 6.1.f RGPD</b> (interés legítimo en la protección de la infraestructura informática y prevención de fraude). Puedes ejercer tus derechos de protección de datos (acceso, rectificación, supresión y limitación) a través de <a href="https://davito.es">davito.es</a>.</p>
+
+            <h3>Qué no hay</h3>
+            <ul>
+                <li>Google Analytics, Meta Pixel, TikTok, publicidad comportamental.</li>
+                <li>Consentimiento “seguir navegando” o casillas premarcadas de marketing: no aplican porque no hay esas cookies.</li>
+                <li>No puedes “rechazar” las cookies de sesión o CSRF sin romper el login; por eso el aviso es informativo (criterio AEPD para cookies exceptuadas), no un muro de tracking.</li>
+            </ul>
+
+            <h3>Cómo borrarlas</h3>
+            <p>En tu navegador: configuración → cookies → dabot.davito.es. “Cerrar sesión” en el panel borra la sesión en servidor. El enlace <b>Cookies</b> del pie (o el botón flotante) vuelve a abrir este detalle.</p>
+            <p>Contacto: <a href="https://davito.es">davito.es</a> · <a href="/privacy">Política de privacidad</a>.</p>
+        </main>
+    </div>
+    <script src="/static/js/i18n.js?v=5.7"></script>
+    <script src="/static/js/cookies.js?v=2"></script>
+</body>
+</html>

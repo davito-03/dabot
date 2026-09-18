@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="title.dashboard">Panel — Dabot</title>
+    <link rel="icon" href="https://davito.es/media/dabot.png">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/static/css/style.css?v=7.4">
+</head>
+<body>
+    <div class="ambient"></div>
+    <div class="app" id="app">
+        <aside class="sidebar glass" id="sidebar">
+            <a class="brand" href="/" style="margin: 4px 8px 18px;">
+                <img src="/static/img/dabot.png" alt=""> Dabot
+            </a>
+            
+            <div class="nav-section-title">PRINCIPAL</div>
+            <button class="nav-btn" id="nav-servers" onclick="showServers()"><i class="fas fa-server"></i> <span data-i18n="dash.nav.servers">Servidores</span></button>
+            <a class="nav-btn" href="/servers" target="_blank"><i class="fas fa-compass"></i> <span>Descubrimiento</span> <i class="fas fa-arrow-up-right-from-square" style="font-size:10px;margin-left:auto;opacity:0.5"></i></a>
+            <a class="nav-btn" href="/cuenta"><i class="fa-brands fa-spotify" style="color:#1DB954"></i> <span>Mi Música (Spotify)</span></a>
+
+            <div id="guild-nav" class="hidden">
+                <div id="sidebar-guild-card" class="sidebar-guild-card" onclick="showServers()" title="Volver a lista de servidores">
+                    <img id="sidebar-guild-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
+                    <div style="min-width:0;flex:1">
+                        <div id="sidebar-guild-name" class="guild-title truncate">Servidor</div>
+                        <div class="guild-sub"><i class="fas fa-chevron-left"></i> Cambiar servidor</div>
+                    </div>
+                </div>
+                <div class="nav-section-title">SERVIDOR</div>
+                <button class="nav-btn active" id="nav-overview" onclick="switchTab('overview')"><i class="fas fa-chart-pie"></i> <span data-i18n="dash.nav.overview">Resumen</span></button>
+                <button class="nav-btn" id="nav-config" onclick="switchTab('config')"><i class="fas fa-sliders"></i> <span data-i18n="dash.nav.config">Módulos</span></button>
+                <button class="nav-btn" id="nav-discord" onclick="switchTab('discord')"><i class="fab fa-discord"></i> <span data-i18n="dash.nav.discord">Discord</span></button>
+                <button class="nav-btn" id="nav-moderation" onclick="switchTab('moderation')"><i class="fas fa-gavel"></i> <span data-i18n="dash.nav.staffdesk">Mesa staff</span></button>
+                <button class="nav-btn" id="nav-alts" onclick="switchTab('alts')"><i class="fas fa-fingerprint"></i> <span data-i18n="dash.nav.alts">Multicuentas</span></button>
+                <button class="nav-btn" id="nav-verifications" onclick="switchTab('verifications')"><i class="fas fa-shield-halved"></i> <span data-i18n="dash.nav.verifications">Verificaciones</span></button>
+                <button class="nav-btn" id="nav-tickets" onclick="switchTab('tickets')"><i class="fas fa-ticket"></i> <span data-i18n="dash.nav.tickets">Tickets</span></button>
+                <button class="nav-btn" id="nav-logs" onclick="switchTab('logs')"><i class="fas fa-clipboard-list"></i> <span data-i18n="dash.nav.logs">Registros</span></button>
+                <button class="nav-btn" id="nav-templates" onclick="switchTab('templates')"><i class="fas fa-layer-group"></i> <span data-i18n="dash.nav.templates">Plantillas</span></button>
+                <button class="nav-btn hidden" id="nav-staff" onclick="switchTab('staff')"><i class="fas fa-users-gear"></i> <span data-i18n="dash.nav.staff">Staff</span></button>
+                <button class="nav-btn" id="nav-ranking" onclick="switchTab('ranking')"><i class="fas fa-trophy"></i> <span data-i18n="dash.nav.levels">Niveles</span></button>
+                <button class="nav-btn" id="nav-invites" onclick="switchTab('invites')"><i class="fas fa-user-plus"></i> <span data-i18n="dash.nav.invites">Invitaciones</span></button>
+                <button class="nav-btn" id="nav-economy" onclick="switchTab('economy')"><i class="fas fa-coins"></i> <span data-i18n="dash.nav.economy">Economía</span></button>
+            </div>
+
+            <div class="nav-section-title">GESTIÓN</div>
+            <button class="nav-btn hidden" id="nav-admin" onclick="showGlobalAdmin()"><i class="fas fa-crown"></i> <span data-i18n="dash.nav.admin">Admin global</span></button>
+            <button class="nav-btn" id="nav-suggest" onclick="showSuggest()"><i class="fas fa-lightbulb"></i> Sugerir a Dabot</button>
+            
+            <div class="sidebar-foot">
+                <a class="nav-btn" href="/help"><i class="fas fa-book"></i> <span data-i18n="dash.nav.help">Comandos</span></a>
+                <a class="nav-btn" href="/logout"><i class="fas fa-right-from-bracket"></i> <span data-i18n="dash.nav.logout">Salir</span></a>
+            </div>
+        </aside>
+
+        <div class="content">
+            <header class="topbar">
+                <div style="display:flex;align-items:center;gap:10px">
+                    <button class="btn btn-ghost btn-sm hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+                    <div>
+                        <div class="h-title" id="top-title" style="font-size:1.1rem" data-i18n="dash.top.servers">Tus servidores</div>
+                        <div style="font-size:12px;color:var(--muted)" id="top-sub">dabot.davito.es</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                    <a href="/cuenta" class="btn btn-ghost btn-sm" title="Música & Spotify" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;"><i class="fa-brands fa-spotify" style="color:#1DB954;font-size:1.05rem;"></i> <span>Música</span></a>
+                    <div class="lang-switch" role="group" aria-label="Language"><select data-lang-select><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="it">IT</option><option value="ja">JA</option><option value="ko">KO</option><option value="zh">ZH</option></select></div>
+                    <div class="live-sync-badge" title="Sincronización en tiempo real con Dabot Gateway"><span class="pulse-ring"></span> <span class="sync-text">EN VIVO</span></div>
+                    <div class="status-pill" id="bot-status"><span class="dot"></span> <span data-i18n="dash.checking">Comprobando bot…</span></div>
+                    <div class="userchip">
+                        <img id="me-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
+                        <div>
+                            <div class="name" id="me-name">…</div>
+                            <div class="role" id="me-role" data-i18n="dash.user">Usuario</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="page">
+                <!-- SERVER LIST -->
+                <section id="view-servers">
+                    <div class="toolbar">
+                        <h2 class="h-title" data-i18n="dash.servers">Servidores</h2>
+                        <input class="search" id="server-search" data-i18n-placeholder="dash.search" placeholder="Buscar servidor…" oninput="filterServers(this.value)">
+                    </div>
+                    <h3 data-i18n="dash.servers.active">Servidores activos (con Dabot)</h3>
+                    <div class="cards" id="active-servers-grid"><div class="empty" data-i18n="dash.loading">Cargando servidores…</div></div>
+                    <h3 style="margin-top:28px" data-i18n="dash.servers.invite">Disponibles para añadir</h3>
+                    <div class="cards" id="invitable-servers-grid"><div class="empty" data-i18n="dash.loading">Cargando…</div></div>
+                    <h3 style="margin-top:28px" data-i18n="dash.servers.member">Con rol de miembro</h3>
+                    <div class="cards" id="regular-servers-grid"><div class="empty" data-i18n="dash.loading">Cargando…</div></div>
+                </section>
+
+                <section id="view-suggest" class="hidden">
+                    <div class="toolbar">
+                        <h2 class="h-title">Sugerir a Dabot</h2>
+                    </div>
+                    <div class="panel glass stack" style="max-width:720px">
+                        <p class="sub">Owners y administradores pueden mandar ideas o mejoras. Llegan al creador de Dabot; te responde por MD.</p>
+                        <div class="field"><label>Servidor desde el que escribes</label>
+                            <select id="suggest-guild"></select>
+                        </div>
+                        <div class="field"><label>Tu sugerencia</label>
+                            <textarea id="suggest-text" rows="8" maxlength="1800" placeholder="Qué te gustaría que Dabot hiciera mejor…"></textarea>
+                        </div>
+                        <button class="btn btn-primary" onclick="submitBotSuggestion()">Enviar sugerencia</button>
+                        <p class="sub" id="suggest-hint">También puedes usar <code>/sugerir</code> o <code>!sugerir</code> en Discord.</p>
+                    </div>
+                </section>
+
+                <!-- GLOBAL ADMIN -->
+                <section id="view-admin" class="hidden">
+                    <div class="toolbar">
+                        <h2 class="h-title" data-i18n="dash.admin">Administración global</h2>
+                        <button class="btn btn-primary btn-sm" onclick="downloadDbBackup()"><i class="fas fa-download"></i> Backup DB</button>
+                    </div>
+                    <div class="stats" style="padding:0;margin:0 0 20px;max-width:none;grid-template-columns:repeat(3,1fr)">
+                        <div class="stat glass"><i class="fas fa-server" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--green)"></i><b id="diag-bot-guilds">—</b><span data-i18n="dash.admin.servers">Servidores</span></div>
+                        <div class="stat glass"><i class="fas fa-clock" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--warn)"></i><b id="diag-alt-pending">—</b><span data-i18n="dash.admin.pending">Casos pendientes</span></div>
+                        <div class="stat glass"><i class="fas fa-fingerprint" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--purple)"></i><b id="diag-alt-sights">—</b><span data-i18n="dash.admin.sightings">Huellas web</span></div>
+                        <div class="stat glass"><i class="fas fa-user-check" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--cyan)"></i><b id="diag-verify-people">—</b><span data-i18n="dash.admin.verified">Gente verificada</span></div>
+                        <div class="stat glass"><i class="fas fa-gem" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--gold)"></i><b id="diag-g-count">—</b><span data-i18n="dash.premium.servers">Servidores premium</span></div>
+                        <div class="stat glass"><i class="fas fa-bolt" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--green)"></i><b id="diag-lvl-count">—</b><span data-i18n="dash.admin.xp">Registros XP</span></div>
+                    </div>
+
+                    <div class="panel glass stack" style="margin-bottom:20px">
+                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+                            <div>
+                                <h3 style="margin:0;display:flex;align-items:center;gap:8px">
+                                    <i class="fas fa-terminal" style="color:var(--green)"></i>
+                                    <span>Logs del Sistema en Vivo</span>
+                                    <span id="live-logs-badge" class="badge" style="background:rgba(0,255,136,0.15);color:var(--green);font-size:0.75rem;padding:2px 8px;border-radius:10px">En vivo</span>
+                                </h3>
+                                <p class="sub" style="margin:4px 0 0" id="live-logs-sub">Últimas líneas del log actual del bot (sesión activa).</p>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                                <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;cursor:pointer">
+                                    <input type="checkbox" id="live-logs-auto" checked onchange="toggleLiveLogsAuto(this.checked)"> Auto-refresco (5s)
+                                </label>
+                                <select id="live-logs-lines" onchange="loadAdminLiveLogs()" style="width:auto;padding:4px 8px;font-size:0.85rem">
+                                    <option value="100">100 líneas</option>
+                                    <option value="200" selected>200 líneas</option>
+                                    <option value="500">500 líneas</option>
+                                </select>
+                                <button class="btn btn-secondary btn-sm" onclick="loadAdminLiveLogs()"><i class="fas fa-sync-alt"></i> Refrescar</button>
+                                <button class="btn btn-secondary btn-sm" onclick="downloadCurrentLog()"><i class="fas fa-file-download"></i> Descargar</button>
+                            </div>
+                        </div>
+                        <div id="live-logs-terminal" style="background:#0d1117;color:#c9d1d9;font-family:'JetBrains Mono',Consolas,monospace;font-size:0.82rem;line-height:1.45;padding:14px;border-radius:10px;height:360px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 2px 8px rgba(0,0,0,0.5)">Cargando logs del sistema...</div>
+                    </div>
+
+                    <div class="panel glass stack" style="margin-bottom:20px">
+                        <div>
+                            <h3 style="margin:0">Consola en vivo</h3>
+                            <p class="sub" style="margin:6px 0 0">Solo tú. Elige un servidor, mira el canal y habla como Dabot. Los mensajes nuevos aparecen solos para ver las respuestas.</p>
+                        </div>
+                        <div class="live-console">
+                            <div class="live-side">
+                                <div class="field">
+                                    <label>Servidor</label>
+                                    <select id="live-guild" onchange="liveSelectGuild(this.value)"></select>
+                                </div>
+                                <div id="live-channels" class="live-channels"><div class="empty">Elige un servidor</div></div>
+                            </div>
+                            <div class="live-main">
+                                <div class="live-head">
+                                    <b id="live-channel-title">Ningún canal</b>
+                                    <span class="sub" id="live-channel-sub">Los mensajes del canal aparecerán aquí</span>
+                                </div>
+                                <div id="live-messages" class="live-messages"><div class="empty">Selecciona un canal a la izquierda</div></div>
+                                <form class="live-composer" onsubmit="liveSend(event)">
+                                    <textarea id="live-input" rows="2" maxlength="2000" placeholder="Escribe como Dabot…" disabled></textarea>
+                                    <button type="submit" class="btn btn-primary" id="live-send-btn" disabled>Enviar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel glass stack" style="margin-bottom:20px">
+                        <div>
+                            <h3 style="margin:0" data-i18n="dash.admin.announcements">Anuncios globales</h3>
+                            <p class="sub" style="margin:6px 0 0" data-i18n="dash.admin.announcements.help">Todo lo que envíes en el canal privado configurado también se replica aquí. Desde este cuadro puedes enviar un anuncio a todos los servidores. Las ediciones hechas en el canal fuente se propagan a sus copias.</p>
+                        </div>
+                        <textarea id="adm-announcement-content" rows="4" maxlength="2000" placeholder="Escribe el anuncio…"></textarea>
+                        <div><button class="btn btn-primary" onclick="sendGlobalAnnouncement()"><i class="fas fa-bullhorn"></i> <span data-i18n="dash.admin.send_all">Enviar a todos</span></button></div>
+                        <div id="adm-announcement-recent" class="stack"></div>
+                        <div>
+                            <h4 style="margin-bottom:6px" data-i18n="dash.admin.destination">Canal de destino por servidor</h4>
+                            <p class="sub" data-i18n="dash.admin.destination.help">Si dejas «Predeterminado», se usa un canal llamado general. Si no existe o no se puede escribir, se prueba el primer canal de texto disponible.</p>
+                            <div id="adm-announcement-guilds" class="stack"><div class="empty">Cargando…</div></div>
+                        </div>
+                    </div>
+
+                    <div class="panel glass stack" style="margin-bottom:20px">
+                        <div class="toolbar" style="margin-bottom:0">
+                            <div>
+                                <h3 style="margin:0" data-i18n="dash.admin.alts">Multicuentas · todos los servidores</h3>
+                                <p class="sub" style="margin:6px 0 0" data-i18n="dash.admin.alts.sub">Cada detección queda aquí. Aprueba, deniega, banea o permite siempre igual que en Discord. La IP completa solo la ves tú.</p>
+                            </div>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                                <select id="adm-alts-status" onchange="loadAdminAlts()">
+                                    <option value="pending">Pendientes</option>
+                                    <option value="">Todos</option>
+                                    <option value="approved">Aprobados</option>
+                                    <option value="denied">Denegados</option>
+                                    <option value="banned">Baneados</option>
+                                    <option value="allow_always">Permitir siempre</option>
+                                </select>
+                                <input class="search" id="adm-alts-query" placeholder="ID de usuario" onkeydown="if(event.key==='Enter')loadAdminAlts()">
+                                <button class="btn btn-primary btn-sm" onclick="loadAdminAlts()" data-i18n="dash.alts.search">Buscar</button>
+                            </div>
+                        </div>
+                        <div style="overflow:auto">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Servidor</th>
+                                        <th>Usuario</th>
+                                        <th>Riesgo</th>
+                                        <th>IP / dispositivo</th>
+                                        <th>Estado</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adm-alts-body"><tr><td colspan="7" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div id="adm-alts-dossier" class="stack"></div>
+                    </div>
+
+                    <div class="panel glass stack" style="margin-bottom:20px">
+                        <div class="toolbar" style="margin-bottom:0">
+                            <div>
+                                <h3 style="margin:0" data-i18n="dash.admin.verifications">Verificaciones · todos los servidores</h3>
+                                <p class="sub" style="margin:6px 0 0" data-i18n="dash.admin.verifs.help">Todas las verificaciones de todos los servidores. Pulsa el # para ver IP completa, ISP, dispositivo, VPN y el resto de detalles. Solo tú ves esto.</p>
+                            </div>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                                <select id="adm-verify-status" onchange="loadAdminVerifications()">
+                                    <option value="" data-i18n="dash.filter.all_states">Todos los estados</option>
+                                    <option value="ok">Verificado</option>
+                                    <option value="already">Ya estaba</option>
+                                    <option value="pending">Pendiente</option>
+                                    <option value="fail">Fallido</option>
+                                    <option value="denied">Denegado</option>
+                                    <option value="vpn">VPN / proxy</option>
+                                </select>
+                                <select id="adm-verify-method" onchange="loadAdminVerifications()">
+                                    <option value="" data-i18n="dash.filter.all_methods">Todos los métodos</option>
+                                    <option value="web">Navegador</option>
+                                    <option value="emoji">Emoji</option>
+                                    <option value="math">Mates</option>
+                                    <option value="manual">Staff</option>
+                                    <option value="alt_approve">Multicuenta</option>
+                                </select>
+                                <input class="search" id="adm-verify-query" placeholder="ID o nombre" onkeydown="if(event.key==='Enter')loadAdminVerifications()">
+                                <button class="btn btn-primary btn-sm" onclick="loadAdminVerifications()">Buscar</button>
+                            </div>
+                        </div>
+                        <div style="overflow:auto">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Servidor</th>
+                                        <th>Usuario</th>
+                                        <th data-i18n="dash.table.method">Método</th>
+                                        <th>Estado</th>
+                                        <th>Red / ISP</th>
+                                        <th data-i18n="dash.raw.when">Cuándo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adm-verify-body"><tr><td colspan="7" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div id="adm-verify-detail" class="stack"></div>
+                    </div>
+
+                    <!-- PANEL PRIVACIDAD Y SOLICITUDES RGPD -->
+                    <div class="panel glass stack" style="margin-bottom:20px" id="adm-privacy-panel">
+                        <div class="toolbar" style="margin-bottom:0">
+                            <div>
+                                <h3 style="margin:0"><i class="fas fa-user-shield" style="color:var(--cyan,#06b6d4)"></i> Solicitudes RGPD / Privacidad (UE)</h3>
+                                <p class="sub" style="margin:6px 0 0">Supervisión y tramitación de derechos RGPD (Art. 15 Exportación y Art. 17 Supresión/Derecho al Olvido). Al procesar una eliminación, se respaldará la IP de forma encriptada (HMAC-SHA256 con sal) para prevención de multicuentas y abusos, y se purgará el resto de datos personales.</p>
+                            </div>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                                <select id="adm-privacy-filter" onchange="loadAdminPrivacyRequests()">
+                                    <option value="">Todas las solicitudes</option>
+                                    <option value="pending" selected>Pendientes de eliminación</option>
+                                    <option value="completed">Exportadas / Completadas</option>
+                                    <option value="approved">Aprobadas</option>
+                                    <option value="rejected">Rechazadas</option>
+                                </select>
+                                <button class="btn btn-primary btn-sm" onclick="loadAdminPrivacyRequests()"><i class="fas fa-sync"></i> Actualizar</button>
+                            </div>
+                        </div>
+
+                        <!-- Formulario de eliminación manual directa -->
+                        <div class="panel glass" style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.25);padding:14px 18px;border-radius:8px">
+                            <h4 style="margin:0 0 8px;color:#ef4444"><i class="fas fa-trash-alt"></i> Tramitación Manual Directa de Eliminación</h4>
+                            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+                                <div style="flex:1;min-width:200px" class="field">
+                                    <label style="font-size:0.82rem">ID de Usuario de Discord</label>
+                                    <input id="adm-manual-privacy-uid" class="search" placeholder="Ej: 123456789012345678" style="width:100%">
+                                </div>
+                                <div style="flex:2;min-width:260px" class="field">
+                                    <label style="font-size:0.82rem">Motivo / Notas internas</label>
+                                    <input id="adm-manual-privacy-notes" class="search" placeholder="Solicitud por ticket / derecho al olvido" style="width:100%">
+                                </div>
+                                <button class="btn btn-danger btn-sm" onclick="executeManualPrivacyDeletion()" style="height:38px"><i class="fas fa-user-slash"></i> Ejecutar Eliminación y Backup Encriptado</button>
+                            </div>
+                        </div>
+
+                        <div style="overflow:auto">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th># Caso</th>
+                                        <th>Usuario</th>
+                                        <th>Tipo Solicitud</th>
+                                        <th>Fecha Solicitada</th>
+                                        <th>Estado</th>
+                                        <th>Backup de Seguridad</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adm-privacy-body"><tr><td colspan="7" class="empty">Cargando solicitudes RGPD…</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="module-layout" style="grid-template-columns: 320px 1fr">
+                        <div class="panel glass stack">
+                            <h3>Licencias</h3>
+                            <div class="field"><label>Tipo</label>
+                                <select id="adm-target-type"><option value="guild">Servidor</option></select>
+                            </div>
+                            <div class="field"><label>ID</label><input id="adm-target-id" placeholder="Snowflake"></div>
+                            <div class="row">
+                                <div class="field"><label data-i18n="dash.raw.action">Acción</label>
+                                    <select id="adm-target-action"><option value="grant">Dar</option><option value="revoke">Quitar</option></select>
+                                </div>
+                                <div class="field"><label>Plan</label>
+                                    <select id="adm-target-plan">
+                                        <option value="monthly">Mensual (30d)</option>
+                                        <option value="yearly">Anual (365d)</option>
+                                        <option value="lifetime">Vitalicio</option>
+                                    </select>
+                                </div>
+                                <div class="field"><label data-i18n="dash.raw.custom_days">Días (si mensual custom)</label><input type="number" id="adm-target-days" value="30"></div>
+                            </div>
+                            <p class="sub" data-i18n="dash.admin.premium.id_help">El ID es el snowflake del servidor o del usuario. Vitalicio no caduca.</p>
+                            <button class="btn btn-primary" onclick="submitAdminGrant()">Aplicar</button>
+                            <div id="adm-premium-list" class="stack" style="margin-top:8px"></div>
+                        </div>
+                        <div class="panel glass">
+                            <div class="toolbar" style="margin-bottom:8px">
+                                <h3 style="margin:0" data-i18n="dash.admin.guilds">Servidores del bot</h3>
+                                <input class="search" id="adm-guild-search" placeholder="Filtrar servidores…" oninput="filterAdminGuilds(this.value)">
+                            </div>
+                            <p class="sub" data-i18n="dash.admin.any_panel.help">Abre el panel de cualquiera. Configuración, Discord, sanciones, logs y verificación: tú tienes control total aunque no estés dentro del servidor.</p>
+                            <div id="admin-bot-guilds-list" class="stack admin-guild-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GUILD DASHBOARD -->
+                <section id="view-guild" class="hidden">
+                    <div id="tab-overview" class="tab-content stack">
+                        <div class="stats" style="padding:0;margin:0;max-width:none">
+                            <div class="stat glass"><i class="fas fa-users" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--green)"></i><b id="ov-members">—</b><span data-i18n="dash.members">Miembros</span></div>
+                            <div class="stat glass"><i class="fas fa-trophy" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--gold)"></i><b id="ov-levels">—</b><span data-i18n="dash.withxp">Con XP</span></div>
+                            <div class="stat glass"><i class="fas fa-gavel" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--danger)"></i><b id="ov-infra">—</b><span data-i18n="dash.sanctions_stat">Sanciones</span></div>
+                            <div class="stat glass"><i class="fas fa-user-plus" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--cyan)"></i><b id="ov-invites">—</b><span data-i18n="dash.nav.invites">Invites</span></div>
+                            <div class="stat glass"><i class="fas fa-shield-halved" style="position:absolute;right:18px;top:18px;font-size:1.6rem;opacity:0.18;color:var(--ok)"></i><b id="ov-verifies">—</b><span data-i18n="dash.nav.verifications">Verificados</span></div>
+                        </div>
+                        <div class="panel glass stack" id="health-panel">
+                            <h2>Salud del servidor <span class="pill" id="health-score">—</span></h2>
+                            <p class="sub" data-i18n="dash.setup.gap.help">Lo que falta para que Dabot trabaje solo. Premium es opcional.</p>
+                            <div id="health-list" class="stack"></div>
+                        </div>
+                        <div class="panel glass">
+                            <h2 data-i18n="dash.quick">Acciones rápidas</h2>
+                            <p class="sub" data-i18n="dash.quick.sub">Tickets y verificación se publican en Discord con los mismos botones persistentes.</p>
+                            <div class="row">
+                                <div class="field"><label data-i18n="dash.ticket.ch">Canal para panel de tickets</label><select id="action-ticket-channel"></select></div>
+                                <div style="display:flex;align-items:end"><button class="btn btn-primary btn-block" onclick="sendTicketPanel()" data-i18n="dash.ticket.btn">Publicar panel de tickets</button></div>
+                            </div>
+                            <div class="row" style="margin-top:12px">
+                                <div class="field"><label data-i18n="dash.verify.ch">Canal para verificación</label><select id="action-verify-channel"></select></div>
+                                <div style="display:flex;align-items:end"><button class="btn btn-ghost btn-block" onclick="sendVerifyPanel()" data-i18n="dash.verify.btn">Publicar verificación web</button></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-config" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title" data-i18n="dash.config">Configuración</h2>
+                            <button class="btn btn-primary" onclick="saveAllConfig()"><i class="fas fa-floppy-disk"></i> Guardar</button>
+                        </div>
+                        <div class="module-layout">
+                            <div class="mod-nav glass">
+                                <button class="active" id="sub-nav-general" onclick="switchSubConfig('general')"><i class="fas fa-sliders" style="color:#38bdf8"></i> <span>General</span></button>
+                                <button id="sub-nav-welcome" onclick="switchSubConfig('welcome')" data-i18n="dash.btn.welcome"><i class="fas fa-door-open" style="color:#4ade80"></i> <span>Bienvenida</span></button>
+                                <button id="sub-nav-leveling" onclick="switchSubConfig('leveling')" data-i18n="nav.levels"><i class="fas fa-trophy" style="color:#facc15"></i> <span>Niveles</span></button>
+                                <button id="sub-nav-chatbot" onclick="switchSubConfig('chatbot')"><i class="fas fa-brain" style="color:#c084fc"></i> <span>IA Chatbot</span></button>
+                                <button id="sub-nav-logs" onclick="switchSubConfig('logs')"><i class="fas fa-clipboard-list" style="color:#60a5fa"></i> <span>Logs</span></button>
+                                <button id="sub-nav-tickets" onclick="switchSubConfig('tickets')" data-i18n="dash.nav.tickets"><i class="fas fa-ticket" style="color:#00ff88"></i> <span>Tickets</span></button>
+                                <button id="sub-nav-automod" onclick="switchSubConfig('automod')"><i class="fas fa-shield-halved" style="color:#fb923c"></i> <span>AutoMod</span></button>
+                                <button id="sub-nav-antiraid" onclick="switchSubConfig('antiraid')"><i class="fas fa-user-shield" style="color:#f87171"></i> <span>Anti-raid</span></button>
+                                <button id="sub-nav-antinuke" onclick="switchSubConfig('antinuke')"><i class="fas fa-radiation" style="color:#f43f5e"></i> <span>Anti-Nuke</span></button>
+                                <button id="sub-nav-suggestions" onclick="switchSubConfig('suggestions')"><i class="fas fa-lightbulb" style="color:#eab308"></i> <span>Sugerencias</span></button>
+                                <button id="sub-nav-autoresponses" onclick="switchSubConfig('autoresponses')"><i class="fas fa-reply" style="color:#22d3ee"></i> <span>Auto-Respuestas</span></button>
+                                <button id="sub-nav-starboard" onclick="switchSubConfig('starboard')"><i class="fas fa-star" style="color:#fde047"></i> <span>Starboard</span></button>
+                                <button id="sub-nav-economy" onclick="switchSubConfig('economy')" data-i18n="dash.nav.economy"><i class="fas fa-coins" style="color:#eab308"></i> <span>Economía</span></button>
+                                <button id="sub-nav-moderation" onclick="switchSubConfig('moderation')"><i class="fas fa-gavel" style="color:#ec4899"></i> <span>Sanciones</span></button>
+                                <button id="sub-nav-backup" onclick="switchSubConfig('backup')"><i class="fas fa-database" style="color:#34d399"></i> <span>Backup</span></button>
+                            </div>
+                            <div class="panel glass">
+                                <div id="sub-config-general" class="sub-config-content stack">
+                                    <h3>General</h3>
+                                    <div class="row">
+                                        <div class="field"><label>Prefijo</label><input id="cfg-prefix"></div>
+                                        <div class="field"><label>Idioma</label>
+                                            <select id="cfg-lang">
+                                                <option value="es-ES" data-i18n="dash.spanish">Español</option>
+                                                <option value="en-US">English</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-welcome" class="sub-config-content hidden stack">
+                                    <h3 data-i18n="dash.welcome.title">Bienvenida y despedida</h3>
+                                    <div class="switch-row">
+                                        <div><b data-i18n="dash.welcome.toggle">Mensaje de bienvenida</b><p data-i18n="dash.welcome.toggle.sub">También genera la tarjeta si hay canal.</p></div>
+                                        <input type="checkbox" class="toggle" id="cfg-welcome-enabled">
+                                    </div>
+                                    <div class="field"><label data-i18n="dash.welcome.channel">Canal de bienvenida</label><select id="cfg-welcome-channel"></select></div>
+                                    <div class="field"><label data-i18n="dash.welcome.message">Mensaje ({mention} {server} {count})</label><textarea id="cfg-welcome-msg" rows="3"></textarea></div>
+                                    <div class="row">
+                                        <div class="field"><label data-i18n="dash.welcome.card.heading">Texto de la tarjeta</label><input id="cfg-welcome-heading" placeholder="BIENVENIDO"></div>
+                                        <div class="field"><label data-i18n="dash.welcome.card.member">Etiqueta del contador</label><input id="cfg-welcome-member-label" placeholder="Miembro"></div>
+                                    </div>
+                                    <div class="field"><label data-i18n="dash.welcome.card.custom">Texto extra opcional</label><input id="cfg-welcome-custom-text" maxlength="60" placeholder="Tu texto personalizado"></div>
+                                    <p class="sub" data-i18n="dash.welcome.card.help">Puedes escribirlo en cualquier idioma. Variables: {mention}, {server}, {count}, {user}.</p>
+                                    <div class="panel" style="padding:12px;background:rgba(255,255,255,.03)">
+                                        <h4 data-i18n="dash.welcome.layout.title">Diseño de la tarjeta</h4>
+                                        <p class="sub" data-i18n="dash.welcome.layout.help">Coordenadas en píxeles sobre una imagen de 1024×500. X es el centro horizontal; Y es la posición vertical.</p>
+                                        <div class="row">
+                                            <div class="field"><label data-i18n="dash.welcome.layout.avatar">Avatar X / Y / tamaño</label><div style="display:flex;gap:6px"><input type="number" id="cfg-welcome-avatar-x" min="0" max="1024"><input type="number" id="cfg-welcome-avatar-y" min="0" max="500"><input type="number" id="cfg-welcome-avatar-size" min="64" max="360"></div></div>
+                                            <div class="field"><label data-i18n="dash.welcome.layout.heading">Título X / Y</label><div style="display:flex;gap:6px"><input type="number" id="cfg-welcome-heading-x" min="0" max="1024"><input type="number" id="cfg-welcome-heading-y" min="0" max="500"></div></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="field"><label data-i18n="dash.welcome.layout.name">Nombre X / Y</label><div style="display:flex;gap:6px"><input type="number" id="cfg-welcome-name-x" min="0" max="1024"><input type="number" id="cfg-welcome-name-y" min="0" max="500"></div></div>
+                                            <div class="field"><label data-i18n="dash.welcome.layout.member">Contador X / Y</label><div style="display:flex;gap:6px"><input type="number" id="cfg-welcome-member-x" min="0" max="1024"><input type="number" id="cfg-welcome-member-y" min="0" max="500"></div></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="field"><label data-i18n="dash.welcome.layout.custom">Texto extra X / Y / tamaño</label><div style="display:flex;gap:6px"><input type="number" id="cfg-welcome-custom-x" min="0" max="1024"><input type="number" id="cfg-welcome-custom-y" min="0" max="500"><input type="number" id="cfg-welcome-custom-size" min="12" max="64"></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="switch-row">
+                                        <div><b data-i18n="dash.goodbye.toggle">Despedida</b></div>
+                                        <input type="checkbox" class="toggle" id="cfg-goodbye-enabled">
+                                    </div>
+                                    <div class="field"><label data-i18n="dash.goodbye.channel">Canal de despedida</label><select id="cfg-goodbye-channel"></select></div>
+                                    <div class="field"><label data-i18n="dash.goodbye.message">Mensaje de despedida</label><textarea id="cfg-goodbye-msg" rows="2"></textarea></div>
+                                </div>
+                                <div id="sub-config-leveling" class="sub-config-content hidden stack">
+                                    <div class="switch-row"><div><b data-i18n="dash.leveling.title">Niveles</b><p data-i18n="dash.leveling.help">Desactivado por defecto. Actívalo aquí o con el panel.</p></div><input type="checkbox" class="toggle" id="cfg-leveling-enabled"></div>
+                                    <div class="switch-row"><div><b data-i18n="dash.achievements.title">Logros</b><p data-i18n="dash.achievements.help">Predefinidos; se pueden quitar con /achievements remove.</p></div><input type="checkbox" class="toggle" id="cfg-achievements-enabled"></div>
+                                    <div class="row">
+                                        <div class="field"><label data-i18n="dash.leveling.text_xp">XP texto min–máx</label>
+                                            <div style="display:flex;gap:8px"><input type="number" id="cfg-tx-min"><input type="number" id="cfg-tx-max"></div>
+                                        </div>
+                                        <div class="field"><label data-i18n="dash.leveling.voice_xp">XP voz min–máx / min</label>
+                                            <div style="display:flex;gap:8px"><input type="number" id="cfg-vx-min"><input type="number" id="cfg-vx-max"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="field"><label data-i18n="dash.leveling.channel">Canal level-up</label><select id="cfg-lvl-channel"></select></div>
+                                        <div class="field"><label data-i18n="dash.leveling.leaderboard">Canal ranking semanal</label><select id="cfg-lead-channel"></select></div>
+                                    </div>
+                                    <div class="panel" style="padding:12px;background:rgba(168,85,247,.08)">
+                                        <h4 data-i18n="dash.leveling.card.title">Tarjeta de nivel Premium</h4>
+                                        <p class="sub" data-i18n="dash.leveling.card.help">Disponible solo para Premium. Las coordenadas están en píxeles sobre una imagen de 1200×400; X/Y del avatar indican su centro.</p>
+                                        <div class="field"><label data-i18n="dash.leveling.card.custom">Texto extra opcional</label><input id="cfg-level-card-custom" maxlength="80" placeholder="Nivel {level} · {xp} XP"></div>
+                                        <div class="row">
+                                            <div class="field"><label data-i18n="dash.leveling.card.avatar">Avatar X / Y / tamaño</label><div style="display:flex;gap:6px"><input type="number" id="cfg-level-avatar-x" min="0" max="1200"><input type="number" id="cfg-level-avatar-y" min="0" max="400"><input type="number" id="cfg-level-avatar-size" min="64" max="320"></div></div>
+                                            <div class="field"><label data-i18n="dash.leveling.card.name">Nombre X / Y</label><div style="display:flex;gap:6px"><input type="number" id="cfg-level-name-x" min="0" max="1200"><input type="number" id="cfg-level-name-y" min="0" max="400"></div></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="field"><label data-i18n="dash.leveling.card.rank">Rango X / Y</label><div style="display:flex;gap:6px"><input type="number" id="cfg-level-rank-x" min="0" max="1200"><input type="number" id="cfg-level-rank-y" min="0" max="400"></div></div>
+                                            <div class="field"><label data-i18n="dash.leveling.card.level">Nivel X / Y</label><div style="display:flex;gap:6px"><input type="number" id="cfg-level-level-x" min="0" max="1200"><input type="number" id="cfg-level-level-y" min="0" max="400"></div></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="field"><label data-i18n="dash.leveling.card.bar">Barra X / Y / ancho / alto</label><div style="display:flex;gap:6px"><input type="number" id="cfg-level-bar-x" min="0" max="1200"><input type="number" id="cfg-level-bar-y" min="0" max="400"><input type="number" id="cfg-level-bar-width" min="160" max="1100"><input type="number" id="cfg-level-bar-height" min="20" max="80"></div></div>
+                                            <div class="field"><label data-i18n="dash.leveling.card.extra">Texto extra X / Y / tamaño</label><div style="display:flex;gap:6px"><input type="number" id="cfg-level-custom-x" min="0" max="1200"><input type="number" id="cfg-level-custom-y" min="0" max="400"><input type="number" id="cfg-level-custom-size" min="12" max="64"></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="panel" style="padding:12px;background:rgba(168,85,247,.08)">
+                                        <h4 data-i18n="dash.persona.title">Persona del bot Premium</h4>
+                                        <p class="sub" data-i18n="dash.persona.help">Cambia el nombre y el avatar de los mensajes enviados mediante la persona Premium. En servidores no Premium se mantiene Dabot y su avatar normal.</p>
+                                        <div class="row">
+                                            <div class="field"><label data-i18n="dash.persona.name">Nombre personalizado</label><input id="cfg-premium-bot-name" maxlength="32" placeholder="Dabot de mi servidor"></div>
+                                            <div class="field"><label data-i18n="dash.persona.avatar">Avatar personalizado (URL HTTPS)</label><input id="cfg-premium-bot-avatar" placeholder="https://…"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-chatbot" class="sub-config-content hidden stack">
+                                    <h3>Chatbot (Premium)</h3>
+                                    <div class="switch-row"><div><b>Activar chatbot</b><p data-i18n="dash.chatbot.help">Apagado por defecto. Solo servidores premium y solo en los canales indicados. El interruptor se guarda al instante.</p></div><input type="checkbox" class="toggle" id="cfg-ai-enabled" onchange="saveChatbotToggle()"></div>
+                                    <div class="field"><label>Canales permitidos (IDs, separados por coma)</label><input id="cfg-ai-channels" placeholder="123..., 456..."></div>
+                                    <div class="field"><label>Personalidad</label><textarea id="cfg-ai-prompt" rows="5" placeholder="Cómo debe hablar Dabot en este servidor"></textarea></div>
+                                    <div class="field">
+                                        <label>Umbral de toxicidad IA</label>
+                                        <input type="range" id="cfg-ai-toxicity" min="0.5" max="0.95" step="0.05" oninput="document.getElementById('toxicity-value').innerText=this.value">
+                                        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted)"><span>Estricto</span><span id="toxicity-value">0.80</span><span>Permisivo</span></div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-logs" class="sub-config-content hidden stack">
+                                    <h3>Logs</h3>
+                                    <div class="row">
+                                        <div class="field"><label>Mensajes</label><select id="cfg-log-messages"></select></div>
+                                        <div class="field"><label data-i18n="home.card.mod.cat">Moderación</label><select id="cfg-log-moderation"></select></div>
+                                        <div class="field"><label>Voz</label><select id="cfg-log-voice"></select></div>
+                                        <div class="field"><label>Miembros</label><select id="cfg-log-members"></select></div>
+                                        <div class="field"><label>Entradas / salidas</label><select id="cfg-log-joins"></select></div>
+                                        <div class="field"><label>Multicuentas</label><select id="cfg-log-alts"></select></div>
+                                        <div class="field"><label>Cuentas hackeadas</label><select id="cfg-log-hijack"></select></div>
+                                        <div class="field"><label data-i18n="dash.logs.tickets_label">Tickets (nombre + enlace web)</label><select id="cfg-log-tickets"></select></div>
+                                        <div class="field"><label data-i18n="dash.logs.verify_label">Verificaciones (quién se verifica)</label><select id="cfg-log-verification"></select></div>
+                                    </div>
+                                    <p class="sub">El canal de multicuentas recibe cada detección con botones para aprobar, denegar, banear o permitir siempre. El de tickets publica el nombre y el link a dabot.davito.es.</p>
+                                </div>
+                                <div id="sub-config-tickets" class="sub-config-content hidden stack">
+                                    <h3 data-i18n="dash.nav.tickets">Tickets</h3>
+                                    <div class="row">
+                                        <div class="field"><label>Carpeta Discord por defecto</label><input id="cfg-ticket-category"></div>
+                                        <div class="field"><label>Canal de logs de tickets (nombre + enlace web)</label><select id="cfg-ticket-transcript"></select></div>
+                                    </div>
+                                    <p class="sub">El diseño completo (embeds, fotos, desplegable de productos) está en la pestaña <b data-i18n="dash.nav.tickets">Tickets</b>. Aquí solo la carpeta por defecto y el canal de logs. Tras guardar, publica el panel desde Tickets.</p>
+                                </div>
+                                <div id="sub-config-automod" class="sub-config-content hidden stack">
+                                    <div class="switch-row"><div><b>AutoMod</b><p>Spam, flood y menciones.</p></div><input type="checkbox" class="toggle" id="cfg-automod-enabled"></div>
+                                    <div class="switch-row"><div><b>Bloquear invitaciones</b></div><input type="checkbox" class="toggle" id="cfg-automod-block-invites"></div>
+                                    <div class="switch-row"><div><b>Auto-warn</b></div><input type="checkbox" class="toggle" id="cfg-automod-auto-warn"></div>
+                                    <div class="switch-row"><div><b>Radar de secuestro</b><p data-i18n="dash.hijack.help">Imágenes de MrBeast / Nitro falso. No banea: silencia a la víctima y avisa al staff.</p></div><input type="checkbox" class="toggle" id="cfg-automod-hijack"></div>
+                                    <div class="switch-row"><div><b>Timeout al detectar secuestro</b></div><input type="checkbox" class="toggle" id="cfg-automod-hijack-timeout"></div>
+                                    <div class="row">
+                                        <div class="field"><label data-i18n="dash.raw.mention_limit">Límite de menciones</label><input type="number" id="cfg-automod-mentions"></div>
+                                        <div class="field"><label>Umbral de spam</label><input type="number" id="cfg-automod-spam-threshold"></div>
+                                    </div>
+                                    <h3 style="margin-top:18px">Anti-links</h3>
+                                    <p class="sub">Filtra URLs del chat. La lista negra gana a la blanca. Discord (cdn, invitaciones internas) se deja pasar salvo que lo bloquees a mano.</p>
+                                    <div class="switch-row"><div><b>Activar filtro de enlaces</b></div><input type="checkbox" class="toggle" id="cfg-links-enabled"></div>
+                                    <div class="switch-row"><div><b>Bloquear todos los links por defecto</b><p class="sub">Solo pasan los dominios de la lista blanca (y Discord).</p></div><input type="checkbox" class="toggle" id="cfg-links-block-all"></div>
+                                    <div class="switch-row"><div><b>Ignorar staff</b><p class="sub">Quien pueda gestionar mensajes no se ve afectado.</p></div><input type="checkbox" class="toggle" id="cfg-links-ignore-staff"></div>
+                                    <div class="row">
+                                        <div class="field"><label>Acción por defecto</label>
+                                            <select id="cfg-links-default">
+                                                <option value="delete">Borrar</option>
+                                                <option value="warn">Borrar + warn</option>
+                                                <option value="timeout">Borrar + timeout</option>
+                                                <option value="ban">Borrar + ban</option>
+                                            </select>
+                                        </div>
+                                        <div class="field"><label>Minutos de timeout</label><input type="number" id="cfg-links-timeout" min="1" value="10"></div>
+                                    </div>
+                                    <div class="field"><label>Dominios permitidos (uno por línea)</label>
+                                        <textarea id="cfg-links-allow" rows="4" placeholder="youtube.com&#10;youtu.be&#10;twitter.com"></textarea>
+                                    </div>
+                                    <div>
+                                        <label>Dominios bloqueados</label>
+                                        <div id="links-block-rows" class="stack" style="gap:8px;margin:8px 0"></div>
+                                        <button type="button" class="btn btn-ghost btn-sm" onclick="addLinkBlockRow()">Añadir dominio bloqueado</button>
+                                    </div>
+                                    <div id="links-premium-gate" class="empty" style="margin-top:12px">El corte de tracking (utm, fbclid, etc.) es <b>Premium</b>. Los referidos (ref, tag, affiliate) se pueden dejar pasar.</div>
+                                    <div id="links-premium-box" class="stack hidden" style="margin-top:12px">
+                                        <div class="switch-row"><div><b>Bloquear tracking</b><p class="sub">utm_*, fbclid, gclid y similares. Premium.</p></div><input type="checkbox" class="toggle" id="cfg-links-track"></div>
+                                        <div class="switch-row"><div><b>Permitir referidos limpios</b><p class="sub">Si el enlace solo lleva ref/tag/affiliate (sin utm ni click ids), se deja.</p></div><input type="checkbox" class="toggle" id="cfg-links-referral"></div>
+                                        <div class="row">
+                                            <div class="field"><label>Acción si hay tracking</label>
+                                                <select id="cfg-links-track-action">
+                                                    <option value="delete">Borrar</option>
+                                                    <option value="warn">Borrar + warn</option>
+                                                    <option value="timeout">Borrar + timeout</option>
+                                                    <option value="ban">Borrar + ban</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="field"><label>Dominios de referidos permitidos (opcional, uno por línea)</label>
+                                            <textarea id="cfg-links-ref-domains" rows="3" placeholder="amazon.es&#10;amazon.com"></textarea>
+                                        </div>
+                                        <div class="field"><label>Parámetros de tracking extra (opcional, uno por línea)</label>
+                                            <textarea id="cfg-links-track-params" rows="2" placeholder="mi_click_id"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-antiraid" class="sub-config-content hidden stack">
+                                    <div class="switch-row"><div><b>Anti-raid</b><p>Lockdown si entran demasiados a la vez.</p></div><input type="checkbox" class="toggle" id="cfg-raid-enabled"></div>
+                                    <div class="row">
+                                        <div class="field"><label>Joins para disparar</label><input type="number" id="cfg-raid-threshold"></div>
+                                        <div class="field"><label>Ventana (segundos)</label><input type="number" id="cfg-raid-window"></div>
+                                        <div class="field"><label>Minutos de lockdown</label><input type="number" id="cfg-raid-lock"></div>
+                                        <div class="field"><label>Canal de alertas</label><select id="cfg-raid-channel"></select></div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-antinuke" class="sub-config-content hidden stack">
+                                    <div class="switch-row">
+                                        <div>
+                                            <b style="color: #f43f5e;"><i class="fas fa-radiation"></i> Sistema Anti-Nuke</b>
+                                            <p class="sub">Protege el servidor contra ataques masivos internos (raids por administradores comprometidos, bots maliciosos o tokens filtrados).</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle" id="cfg-nuke-enabled">
+                                    </div>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label>Acción de castigo inmediata</label>
+                                            <select id="cfg-nuke-action">
+                                                <option value="strip_roles">Quitar todos los roles administrativos (Recomendado)</option>
+                                                <option value="quarantine">Poner en cuarentena</option>
+                                                <option value="ban">Banear inmediatamente</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Canal de alertas de seguridad Anti-Nuke</label>
+                                            <select id="cfg-nuke-channel"></select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label>Máx. canales borrados</label>
+                                            <input type="number" id="cfg-nuke-channels" min="1" max="20" value="3">
+                                        </div>
+                                        <div class="field">
+                                            <label>Máx. roles borrados</label>
+                                            <input type="number" id="cfg-nuke-roles" min="1" max="20" value="3">
+                                        </div>
+                                        <div class="field">
+                                            <label>Máx. expulsiones (kicks)</label>
+                                            <input type="number" id="cfg-nuke-kicks" min="1" max="50" value="5">
+                                        </div>
+                                        <div class="field">
+                                            <label>Máx. baneos</label>
+                                            <input type="number" id="cfg-nuke-bans" min="1" max="50" value="5">
+                                        </div>
+                                        <div class="field">
+                                            <label>Ventana de detección (segundos)</label>
+                                            <input type="number" id="cfg-nuke-window" min="5" max="300" value="10">
+                                        </div>
+                                    </div>
+                                    <h4 style="margin-top:16px;display:flex;align-items:center;gap:8px;"><i class="fas fa-clock-rotate-left"></i> Historial de activaciones Anti-Nuke</h4>
+                                    <div id="antinuke-logs-container" class="sub">Cargando registros...</div>
+                                </div>
+                                <div id="sub-config-suggestions" class="sub-config-content hidden stack">
+                                    <h3><i class="fas fa-lightbulb" style="color: #eab308;"></i> Sugerencias de la Comunidad</h3>
+                                    <p class="sub">Permite a los miembros usar <code>/suggest</code> o <code>!suggest</code>. Dabot enviará un embed profesional con botones de votación 👍 y 👎 y gestionará su estado automáticamente.</p>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label>Canal de sugerencias</label>
+                                            <select id="cfg-suggestions-channel"></select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Umbral de votos para auto-aprobar</label>
+                                            <input type="number" id="cfg-suggestions-threshold" min="1" max="1000" value="10" placeholder="10">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-autoresponses" class="sub-config-content hidden stack">
+                                    <h3><i class="fas fa-reply" style="color: #22d3ee;"></i> Auto-Respuestas & Comandos Personalizados</h3>
+                                    <p class="sub">Configura palabras clave para que Dabot responda automáticamente en el chat, o crea comandos de texto propios con variables (<code>{user}</code>, <code>{server}</code>, <code>{channel}</code>).</p>
+                                    
+                                    <div class="panel glass stack" style="margin-bottom: 20px; background: rgba(0,0,0,0.25);">
+                                        <h4 style="margin:0;"><i class="fas fa-plus-circle" style="color: var(--green);"></i> Crear Auto-Respuesta</h4>
+                                        <form id="form-add-autoresponse" onsubmit="addAutoResponseWeb(event)" class="row" style="align-items: flex-end;">
+                                            <div class="field" style="flex:1;">
+                                                <label>Palabra o frase clave (Trigger)</label>
+                                                <input id="ar-trigger" placeholder="ej: horario, ip, twitter" required maxlength="100">
+                                            </div>
+                                            <div class="field" style="flex:2;">
+                                                <label>Respuesta del bot</label>
+                                                <input id="ar-response" placeholder="ej: ¡Nuestro servidor abre de 10:00 a 22:00!" required maxlength="2000">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" style="height: 42px;"><i class="fas fa-plus"></i> Añadir</button>
+                                        </form>
+                                        <div id="autoresponses-table-container" style="margin-top: 10px;">Cargando respuestas...</div>
+                                    </div>
+
+                                    <div class="panel glass stack" style="background: rgba(0,0,0,0.25);">
+                                        <h4 style="margin:0;"><i class="fas fa-terminal" style="color: #38bdf8;"></i> Comandos Personalizados</h4>
+                                        <p class="sub">Comandos invocados con el prefijo (ej: <code>!normas</code>, <code>!vip</code>).</p>
+                                        <form id="form-add-customcmd" onsubmit="addCustomCommandWeb(event)" class="row" style="align-items: flex-end;">
+                                            <div class="field" style="flex:1;">
+                                                <label>Nombre del comando (sin prefijo)</label>
+                                                <input id="cc-trigger" placeholder="ej: tienda, redessociales" required maxlength="32">
+                                            </div>
+                                            <div class="field" style="flex:2;">
+                                                <label>Respuesta del comando</label>
+                                                <input id="cc-response" placeholder="ej: ¡Visita nuestra web en https://davito.es, {user}!" required maxlength="2000">
+                                            </div>
+                                            <button type="submit" class="btn btn-secondary" style="height: 42px;"><i class="fas fa-plus"></i> Crear comando</button>
+                                        </form>
+                                        <div id="customcommands-table-container" style="margin-top: 10px;">Cargando comandos...</div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-starboard" class="sub-config-content hidden stack">
+                                    <div class="switch-row"><div><b>Starboard</b></div><input type="checkbox" class="toggle" id="cfg-star-enabled"></div>
+                                    <div class="row">
+                                        <div class="field"><label>Canal</label><select id="cfg-star-channel"></select></div>
+                                        <div class="field"><label data-i18n="dash.raw.min_stars">Estrellas mínimas</label><input type="number" id="cfg-star-limit"></div>
+                                    </div>
+                                </div>
+                                <div id="sub-config-economy" class="sub-config-content hidden stack">
+                                    <div class="switch-row"><div><b data-i18n="dash.nav.economy">Economía</b></div><input type="checkbox" class="toggle" id="cfg-eco-enabled"></div>
+                                    <div class="field"><label data-i18n="dash.raw.coin_symbol">Símbolo de moneda</label><input id="cfg-eco-symbol" maxlength="4"></div>
+                                </div>
+                                <div id="sub-config-moderation" class="sub-config-content hidden stack">
+                                    <h3>Sanciones y apelaciones</h3>
+                                    <div class="switch-row"><div><b>Escalado automático</b><p class="sub">3 warns → timeout, 5 → kick, en la ventana que indiques.</p></div>
+                                        <input type="checkbox" class="toggle" id="cfg-esc-enabled"></div>
+                                    <div class="row">
+                                        <div class="field"><label>Warns → timeout</label><input type="number" id="cfg-esc-to" min="1" value="3"></div>
+                                        <div class="field"><label>Minutos de timeout</label><input type="number" id="cfg-esc-mins" min="1" value="30"></div>
+                                        <div class="field"><label>Warns → kick</label><input type="number" id="cfg-esc-kick" min="1" value="5"></div>
+                                        <div class="field"><label>Ventana (horas)</label><input type="number" id="cfg-esc-window" min="1" value="24"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="field"><label>Canal de apelaciones</label><select id="cfg-mod-appeals-channel"></select></div>
+                                        <div class="field"><label>Rol para usuarios silenciados (Mute)</label><select id="cfg-mod-mute-role"></select></div>
+                                    </div>
+                                    <h3>Cómo se ve el MD</h3>
+                                    <p class="sub">Simula el aviso que recibe el usuario. Los datos de origen (nombre, miembros, ID) se añaden siempre.</p>
+                                    <div class="row">
+                                        <div class="field"><label>Acción</label>
+                                            <select id="preview-action"><option value="warn">Warn</option><option value="kick">Kick</option><option value="ban">Ban</option><option value="timeout">Timeout</option></select>
+                                        </div>
+                                        <div class="field"><label>Motivo de prueba</label><input id="preview-reason" value="Spam"></div>
+                                    </div>
+                                    <button class="btn btn-ghost btn-sm" onclick="previewSanction()">Vista previa</button>
+                                    <div id="preview-box" class="panel" style="margin-top:10px;padding:12px;background:rgba(255,255,255,.03)"></div>
+                                    <h3>Cambios de config</h3>
+                                    <div id="config-revisions" class="sub">Cargando…</div>
+                                </div>
+                                <div id="sub-config-backup" class="sub-config-content hidden stack">
+                                    <div id="backup-premium-gate" class="hidden empty" data-i18n="dash.backup.gate">Función premium: copia canales y roles.</div>
+                                    <div id="backup-controls">
+                                        <p id="backup-status-text">Cargando…</p>
+                                        <div style="display:flex;gap:8px;flex-wrap:wrap">
+                                            <button class="btn btn-primary btn-sm" onclick="createGuildBackup()">Crear backup</button>
+                                            <button class="btn btn-danger btn-sm" id="btn-restore-backup" onclick="restoreGuildBackup()">Restaurar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-tickets" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title" data-i18n="dash.nav.tickets">Tickets</h2>
+                            <select id="tickets-filter" onchange="loadTickets()" class="search">
+                                <option value="open">Abiertos</option>
+                                <option value="closed">Cerrados</option>
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+                        <p class="sub" data-i18n="dash.ticket.design.help">Diseña el panel (embeds, fotos de producto, desplegable) y publícalo. El historial de cada ticket vive aquí aunque se borre el canal.</p>
+                        <div class="panel glass stack" id="ticket-designer" style="margin-bottom:18px">
+                            <h3 data-i18n="dash.raw.panel_design">Diseño del panel</h3>
+                            <p class="sub" data-i18n="dash.ticket.embeds.help">El mensaje de Discord puede llevar hasta 10 embeds: portada + fichas de producto con imagen. El desplegable lista todas las opciones (máx. 125).</p>
+                            <div class="row">
+                                <div class="field"><label data-i18n="dash.raw.panel_title">Título del panel</label><input id="tp-title" placeholder="🛒  Pedido de producto digital"></div>
+                                <div class="field"><label>Color</label><input id="tp-color" type="color" value="#00ff88"></div>
+                            </div>
+                            <div class="field"><label>Texto de la portada</label><textarea id="tp-desc" rows="4" placeholder="Elige el producto en el desplegable. No pagues por MD."></textarea></div>
+                            <div class="row">
+                                <div class="field"><label>Imagen de portada (https)</label><input id="tp-image" placeholder="https://…"></div>
+                                <div class="field"><label>Miniatura (https)</label><input id="tp-thumb" placeholder="https://…"></div>
+                            </div>
+                            <div class="field"><label>Pie</label><input id="tp-footer" placeholder="Dabot · dabot.davito.es"></div>
+                            <div class="toolbar" style="margin:8px 0 0">
+                                <h3 style="margin:0">Opciones del desplegable</h3>
+                                <button type="button" class="btn btn-ghost btn-sm" onclick="addTicketType()" data-i18n="dash.ticket.add">+ Añadir opción</button>
+                            </div>
+                            <div id="ticket-type-cards" class="stack"></div>
+                            <div class="row" style="margin-top:8px">
+                                <div class="field"><label>Canal donde publicar el panel</label><select id="tp-publish-channel"></select></div>
+                                <div style="display:flex;align-items:end;gap:8px;flex-wrap:wrap">
+                                    <button class="btn btn-primary btn-block" onclick="publishTicketDesigner()">Guardar y publicar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:14px;gap:12px;">
+                            <div class="panel glass" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;">
+                                <span style="font-size:2rem;">⭐</span>
+                                <div>
+                                    <div style="font-size:1.3rem;font-weight:700;" id="csat-avg-score">— / 5.0</div>
+                                    <div style="font-size:0.8rem;color:var(--muted);">Satisfacción Media (CSAT)</div>
+                                </div>
+                            </div>
+                            <div class="panel glass" style="flex:1;min-width:200px;display:flex;align-items:center;gap:14px;padding:16px;">
+                                <span style="font-size:2rem;">👥</span>
+                                <div>
+                                    <div style="font-size:1.3rem;font-weight:700;" id="csat-total-reviews">—</div>
+                                    <div style="font-size:0.8rem;color:var(--muted);">Valoraciones del Staff</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel glass stack" id="staff-csat-panel" style="margin-bottom:16px;">
+                            <h3 style="margin:0 0 8px;font-size:1rem;">Rendimiento y Valoración del Staff</h3>
+                            <table style="width:100%">
+                                <thead><tr><th>Miembro del Staff</th><th>Puntuación Media</th><th>Reseñas</th></tr></thead>
+                                <tbody id="csat-staff-body"><tr><td colspan="3" class="empty">Cargando valoraciones…</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div class="panel glass" style="overflow:auto">
+                            <table>
+                                <thead><tr><th>#</th><th>Usuario</th><th>Estado</th><th>Abierto</th><th></th></tr></thead>
+                                <tbody id="tickets-table-body"><tr><td colspan="5" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div id="ticket-thread" class="panel glass stack hidden" style="margin-top:16px"></div>
+                    </div>
+
+                    <div id="tab-logs" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title">Registros del servidor</h2>
+                            <select id="audit-filter" onchange="loadAudit()" class="search">
+                                <option value="">Todos</option>
+                                <option value="moderation" data-i18n="home.card.mod.cat">Moderación</option>
+                                <option value="messages">Mensajes</option>
+                                <option value="joins">Entradas / salidas</option>
+                                <option value="voice">Voz</option>
+                                <option value="members">Miembros</option>
+                                <option value="hijack">Cuentas hackeadas</option>
+                                <option value="verification" data-i18n="dash.nav.verifications">Verificaciones</option>
+                                <option value="tickets" data-i18n="dash.nav.tickets">Tickets</option>
+                            </select>
+                        </div>
+                        <p class="sub">Copia persistente de lo que Dabot registra en Discord. Configura canales en Configuración → Logs o usa <code>/log here</code>.</p>
+                        <div class="panel glass" style="overflow:auto">
+                            <table>
+                                <thead><tr><th data-i18n="dash.raw.when">Cuándo</th><th>Tipo</th><th>Resumen</th><th>Actor</th><th>Objetivo</th></tr></thead>
+                                <tbody id="audit-table-body"><tr><td colspan="5" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="tab-templates" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title">Plantillas de servidor</h2>
+                            <div class="lang-switch"><button type="button" id="tpl-lang-es" onclick="setTemplateLang('es')">ES</button><button type="button" id="tpl-lang-en" onclick="setTemplateLang('en')">EN</button></div>
+                        </div>
+                        <p class="sub">Desde la web la plantilla <b>reconstruye el servidor</b>: borra canales y roles actuales y monta logs, verificación, bienvenida, normas y tickets. El nuke deja solo #general.</p>
+                        <div class="cards" id="templates-grid"></div>
+                        <div class="panel glass stack" style="margin-top:24px;border-color:rgba(251,113,133,.35)">
+                            <h3>Nuke del servidor</h3>
+                            <p class="sub">Borra <b>todos</b> los canales y roles. Solo el dueño de este servidor o el superusuario de Dabot. Irreversible.</p>
+                            <button class="btn btn-danger" onclick="nukeGuild()">Nukear servidor</button>
+                        </div>
+                    </div>
+
+                    <div id="tab-discord" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title">El servidor, desde la web</h2>
+                        </div>
+                        <div class="module-layout">
+                            <div class="mod-nav glass">
+                                <button class="active" id="d-nav-server" onclick="switchDiscord('server')">Servidor</button>
+                                <button id="d-nav-channels" onclick="switchDiscord('channels')">Canales</button>
+                                <button id="d-nav-roles" onclick="switchDiscord('roles')">Roles</button>
+                                <button id="d-nav-members" onclick="switchDiscord('members')">Miembros</button>
+                                <button id="d-nav-rules" onclick="switchDiscord('rules')" data-i18n="dash.raw.public_rules">Normas públicas</button>
+                            </div>
+                            <div class="panel glass">
+                                <div id="d-pane-server" class="stack">
+                                    <div class="field"><label>Nombre del servidor</label><input id="d-guild-name"></div>
+                                    <div class="row">
+                                        <div class="field"><label data-i18n="vf.title">Verificación</label>
+                                            <select id="d-guild-verify">
+                                                <option value="0">Ninguna</option>
+                                                <option value="1">Email</option>
+                                                <option value="2">Cuenta 5 min</option>
+                                                <option value="3">Miembro 10 min</option>
+                                                <option value="4" data-i18n="dash.raw.phone">Teléfono</option>
+                                            </select>
+                                        </div>
+                                        <div class="field"><label>Notificaciones</label>
+                                            <select id="d-guild-notif">
+                                                <option value="0" data-i18n="dash.filter.all_messages">Todos los mensajes</option>
+                                                <option value="1">Solo menciones</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="saveGuildDiscord()">Guardar servidor</button>
+                                    <p class="sub" id="d-guild-meta"></p>
+                                </div>
+                                <div id="d-pane-channels" class="hidden stack">
+                                    <div class="row">
+                                        <div class="field"><label>Nombre</label><input id="d-ch-name" placeholder="nuevo-canal"></div>
+                                        <div class="field"><label>Tipo</label>
+                                            <select id="d-ch-type"><option value="0">Texto</option><option value="2">Voz</option><option value="4" data-i18n="dash.raw.category">Categoría</option></select>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm" onclick="createChannel()">Crear canal</button>
+                                    <div id="d-ch-list" class="stack"></div>
+                                </div>
+                                <div id="d-pane-roles" class="hidden stack">
+                                    <div class="row">
+                                        <div class="field"><label>Nombre</label><input id="d-role-name" placeholder="nuevo rol"></div>
+                                        <div class="field"><label>Color</label><input id="d-role-color" type="color" value="#00ff88"></div>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm" onclick="createRole()">Crear rol</button>
+                                    <div id="d-role-list" class="stack"></div>
+                                </div>
+                                <div id="d-pane-members" class="hidden stack">
+                                    <input class="search" id="d-member-q" placeholder="Buscar miembro…" onkeydown="if(event.key==='Enter')loadMembers()">
+                                    <button class="btn btn-ghost btn-sm" onclick="loadMembers()">Buscar</button>
+                                    <div id="d-member-list" class="stack"></div>
+                                </div>
+                                <div id="d-pane-rules" class="hidden stack">
+                                    <p class="sub" data-i18n="dash.rules.publish.help">Esto se publica en dabot.davito.es/normas para este servidor.</p>
+                                    <textarea id="d-rules" rows="14" placeholder="Normas de convivencia…"></textarea>
+                                    <button class="btn btn-primary" onclick="saveGuildDiscord()">Publicar normas</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-verifications" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title" data-i18n="dash.verify.title">Gente verificada</h2>
+                            <span class="pill" id="verify-stats-pill">—</span>
+                        </div>
+                        <p class="sub" data-i18n="dash.verify.sub">Registro de miembros verificados en este servidor. Los identificadores técnicos se muestran de forma seudonimizada para proteger la privacidad.</p>
+                        <div class="panel glass stack">
+                            <div class="row">
+                                <div class="field"><label>Buscar</label><input id="verify-query" placeholder="ID o nombre" onkeydown="if(event.key==='Enter')loadVerifications()"></div>
+                                <div class="field"><label data-i18n="dash.table.method">Método</label>
+                                    <select id="verify-method" onchange="loadVerifications()">
+                                        <option value="">Todos</option>
+                                        <option value="web">Navegador</option>
+                                        <option value="emoji">Emoji</option>
+                                        <option value="math">Mates</option>
+                                        <option value="manual">Staff</option>
+                                        <option value="alt_approve">Multicuenta</option>
+                                    </select>
+                                </div>
+                                <div class="field"><label>Estado</label>
+                                    <select id="verify-status" onchange="loadVerifications()">
+                                        <option value="">Todos</option>
+                                        <option value="ok">Verificado</option>
+                                        <option value="already">Ya estaba</option>
+                                        <option value="pending">Pendiente</option>
+                                        <option value="fail">Fallido</option>
+                                        <option value="denied">Denegado</option>
+                                        <option value="vpn">VPN / proxy</option>
+                                    </select>
+                                </div>
+                                <div style="display:flex;align-items:end"><button class="btn btn-primary btn-block" onclick="loadVerifications()">Actualizar</button></div>
+                            </div>
+                        </div>
+                        <div class="panel glass" style="margin-top:16px;overflow:auto">
+                            <h3>Personas verificadas</h3>
+                            <p class="sub" data-i18n="dash.verify.people.help">Última verificación correcta de cada cuenta. Pulsa un ID para filtrar el historial.</p>
+                            <table>
+                                <thead><tr><th>Usuario</th><th data-i18n="dash.table.method">Método</th><th>Riesgo</th><th data-i18n="dash.raw.codes">Códigos de red</th><th data-i18n="dash.raw.when">Cuándo</th></tr></thead>
+                                <tbody id="verify-people-body"><tr><td colspan="5" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div class="panel glass" style="margin-top:16px;overflow:auto">
+                            <h3>Historial de verificaciones</h3>
+                            <p class="sub" data-i18n="dash.verify.events.help">Cada intento: navegador, reto, staff o resolución de multicuenta.</p>
+                            <table>
+                                <thead><tr><th>#</th><th>Usuario</th><th data-i18n="dash.table.method">Método</th><th>Estado</th><th data-i18n="dash.raw.codes">Códigos de red</th><th data-i18n="dash.raw.when">Cuándo</th></tr></thead>
+                                <tbody id="verify-events-body"><tr><td colspan="6" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="tab-alts" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title" data-i18n="dash.alts.title">Rastreo de multicuentas</h2>
+                            <span class="pill" id="alts-scope" data-i18n="dash.alts.scope">Este servidor</span>
+                        </div>
+                        <p class="sub" data-i18n="dash.alts.sub">Detección de patrones y coincidencias técnicas para prevenir abusos y multicuentas no autorizadas en la comunidad.</p>
+                        <div class="panel glass stack">
+                            <div class="row">
+                                <div class="field"><label>ID de Discord</label><input id="alts-query" placeholder="600041740124160011"></div>
+                                <div style="display:flex;align-items:end"><button class="btn btn-primary btn-block" onclick="searchAlts()">Investigar</button></div>
+                            </div>
+                            <div id="alts-dossier" class="stack"></div>
+                        </div>
+                        <div class="panel glass" style="margin-top:16px;overflow:auto">
+                            <h3 data-i18n="dash.alts.cases">Casos de este servidor</h3>
+                            <p class="sub">Los mismos botones que en el canal de multicuentas: aprobar, denegar, banear o permitir siempre.</p>
+                            <table>
+                                <thead><tr><th>#</th><th>Usuario</th><th>Riesgo</th><th>Estado</th><th></th></tr></thead>
+                                <tbody id="alts-cases-body"><tr><td colspan="5" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div class="panel glass" style="margin-top:16px">
+                            <h3 data-i18n="dash.alts.alerts">Alertas recientes</h3>
+                            <table>
+                                <thead><tr><th>Cuentas</th><th>Motivo</th><th>Score</th><th data-i18n="dash.raw.when">Cuándo</th></tr></thead>
+                                <tbody id="alts-alerts-body"><tr><td colspan="4" class="empty">Cargando…</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="tab-moderation" class="tab-content hidden">
+                        <div class="toolbar">
+                            <h2 class="h-title">Mesa staff</h2>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap">
+                                <a class="btn btn-ghost btn-sm" id="btn-export-infra" href="#">Exportar CSV</a>
+                                <button class="btn btn-danger" onclick="openApplySanctionModal()" data-i18n="dash.raw.apply_sanction">Aplicar sanción</button>
+                            </div>
+                        </div>
+                        <div class="panel glass" style="margin-bottom:16px">
+                            <h3>Cola</h3>
+                            <p class="sub">Apelaciones pendientes, tickets abiertos, alts y radar. El historial de tickets sigue en su pestaña.</p>
+                            <div id="mod-queue" class="stack">Cargando…</div>
+                        </div>
+                        <div class="panel glass">
+                            <div style="overflow:auto">
+                                <table><thead><tr><th>Usuario</th><th>Tipo</th><th data-i18n="dash.table.reason">Razón</th><th>Nota staff</th><th>Fecha</th><th></th></tr></thead>
+                                <tbody id="infractions-table-body"></tbody></table>
+                            </div>
+                        </div>
+                        <div id="appeals-section" class="panel glass" style="margin-top:16px">
+                            <h3>Apelaciones</h3>
+                            <table><thead><tr><th>Caso</th><th>Usuario</th><th>Texto</th><th>Estado</th><th></th></tr></thead>
+                            <tbody id="appeals-table-body"></tbody></table>
+                        </div>
+                    </div>
+
+                    <div id="tab-staff" class="tab-content hidden">
+                        <h2 class="h-title" data-i18n="dash.staff">Quién puede usar el panel</h2>
+                        <p class="sub">Asigna a un rol de Discord permisos de mesa: sancionar, ver casos, configurar.</p>
+                        <div class="panel glass stack" style="margin-top:16px">
+                            <div class="row">
+                                <div class="field"><label>Rol</label><select id="staff-role-select"></select></div>
+                                <div class="field"><label>Alcance</label>
+                                    <select id="staff-scope-type">
+                                        <option value="global">Global</option>
+                                        <option value="channels">Canales</option>
+                                        <option value="categories" data-i18n="dash.table.categories">Categorías</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="staff-channels-container" class="field hidden">
+                                <label>Canales</label>
+                                <select id="staff-channels-select" multiple></select>
+                            </div>
+                            <div class="row">
+                                <label><input type="checkbox" class="staff-perm-checkbox" value="ban"> Ban</label>
+                                <label><input type="checkbox" class="staff-perm-checkbox" value="kick"> Kick</label>
+                                <label><input type="checkbox" class="staff-perm-checkbox" value="warn"> Warn</label>
+                                <label><input type="checkbox" class="staff-perm-checkbox" value="timeout"> Timeout</label>
+                                <label><input type="checkbox" class="staff-perm-checkbox" value="resolve_appeals"> Apelaciones</label>
+                                <label><input type="checkbox" class="staff-perm-checkbox" value="manage_config"> Config</label>
+                            </div>
+                            <button class="btn btn-primary" onclick="saveStaffPermissions()">Guardar rol</button>
+                        </div>
+                    </div>
+
+                    <div id="tab-ranking" class="tab-content hidden">
+                        <h2 class="h-title">Ranking de niveles</h2>
+                        <div class="panel glass" style="margin-top:16px;overflow:auto">
+                            <table><thead><tr><th>#</th><th>Usuario</th><th>Nivel</th><th>XP</th><th>Semanal</th></tr></thead>
+                            <tbody id="ranking-table-body"></tbody></table>
+                        </div>
+                    </div>
+
+                    <div id="tab-invites" class="tab-content hidden">
+                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+                            <h2 class="h-title">Invitaciones</h2>
+                            <button id="btn-admin-create-invite" class="btn btn-primary btn-sm hidden" onclick="createRemoteInvite(currentGuildId, currentGuildData ? currentGuildData.name : currentGuildId)"><i class="fas fa-user-plus"></i> Crear invitación remota</button>
+                        </div>
+                        <div class="panel glass" style="margin-top:16px;overflow:auto">
+                            <table><thead><tr><th>Invitador</th><th>Total</th></tr></thead>
+                            <tbody id="invites-table-body"></tbody></table>
+                        </div>
+                    </div>
+
+                    <div id="tab-economy" class="tab-content hidden">
+                        <h2 class="h-title" data-i18n="dash.economy">Economía del servidor</h2>
+                        <div class="panel glass" style="margin-top:16px;overflow:auto">
+                            <h3>Top de riqueza</h3>
+                            <table><thead><tr><th>#</th><th>Usuario</th><th>Cartera</th><th>Banco</th><th>Total</th></tr></thead>
+                            <tbody id="economy-table-body"></tbody></table>
+                        </div>
+                        <div class="panel glass" style="margin-top:16px;overflow:auto">
+                            <h3>Tienda</h3>
+                            <table><thead><tr><th>Objeto</th><th>Precio</th><th data-i18n="dash.table.description">Descripción</th></tr></thead>
+                            <tbody id="economy-shop-body"></tbody></table>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <div id="loading-overlay" class="overlay hidden"><div class="spinner"></div></div>
+    <script src="/static/js/i18n.js?v=5.7"></script>
+    <script src="/static/js/cookies.js?v=2"></script>
+    <script src="/static/js/dashboard.js?v=7.4"></script>
+</body>
+</html>

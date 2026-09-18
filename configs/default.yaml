@@ -1,0 +1,90 @@
+# Default Configuration File for Dabot v3
+
+lang: 'es-ES'
+prefix: '!'
+
+authorizations:
+  # 'USER_ID': LEVEL (0-100)
+  # Owners usually 100, Admins 90, Mods 50, Everyone 0
+  'OWNER_ID_HERE': 100
+  'EVERYONE': 0
+
+# Feature Toggles and Settings
+moderation:
+  mute_role_id: ''
+  appeals_channel: '' # Channel ID where appeals are sent
+  appeal_managers: [] # List of Role IDs or User IDs that can manage appeals
+  antispam:
+    enabled: false
+    max_level_bypass: 90
+
+leveling:
+  enabled: false
+  text_xp:
+    min: 15
+    max: 25
+  voice_xp:
+    min: 10
+    max: 20  # Per minute
+  ignored_channels: [] # List of channel IDs
+  ignored_roles: []    # List of role IDs
+  leaderboard_channel: '' # Channel ID for weekly leaderboard
+  level_up_channel: '' # Channel ID for level-up announcements (leave empty to announce in same channel)
+  remove_xp_on_leave: false # Whether to reset XP if user leaves
+
+# Advanced Logging Configuration
+logs:
+  # Channel IDs for different log types. Leave empty to disable.
+  messages: ''      # Deleted/Edited messages
+  voice: ''         # Voice join/leave/move
+  members: ''       # Profile changes (avatar, name, roles)
+  joins: ''         # Server join/leave
+  moderation: ''    # Sanction logs (ban, kick, warn)
+
+# Custom Messages (replacers: {user}, {server}, {reason}, {duration})
+messages:
+  warn: 'You have been warned in **{server}** for: {reason}'
+  kick: 'You have been kicked from **{server}**. Reason: {reason}'
+  ban: 'You have been banned from **{server}**. Reason: {reason}'
+  tempban: 'You have been temporarily banned from **{server}** for {duration}. Reason: {reason}'
+  unban: 'You have been unbanned from **{server}**.'
+  timeout: 'You have been timed out in **{server}** for {duration}. Reason: {reason}'
+
+economy:
+    enabled: true
+    currency_symbol: '$'
+
+tickets:
+    category_name: 'Tickets'
+    transcript_channel_id: ''  # Channel ID where transcripts are sent
+    staff_roles:  # List of role names that can view and close tickets
+      - 'Staff'
+      - 'Moderator'
+      - 'Support'
+
+welcome:
+    enabled: false
+    channel_id: ''
+    message: 'Welcome {mention} to **{server}**! You are member #{count}!'
+    card_heading: 'WELCOME'
+    member_label: 'Member'
+    embed: true
+    color: '0x00ff00'
+
+goodbye:
+    enabled: true
+    channel_id: ''
+    message: '{user} has left **{server}**. We now have {count} members.'
+    embed: true
+    color: '0xff0000'
+
+music:
+    dj_role_name: 'DJ'
+    max_duration: 0 # 0 for unlimited
+
+# Level permissions for specific commands if needed
+commands:
+  ban: 90
+  kick: 50
+  warn: 50
+  clear: 90

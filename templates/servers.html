@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidores de Discord — Dabot Discovery</title>
+    <link rel="icon" href="https://davito.es/media/dabot.png">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=6.0">
+    <style>
+        .servers-hero {
+            text-align: center;
+            padding: 48px 16px 28px;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .filter-wrap {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .search-row {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 15px;
+        }
+        .search-box input {
+            width: 100%;
+            background: rgba(13, 20, 38, 0.85);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 14px 20px 14px 44px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+        .search-box input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+        }
+        .category-pills {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            scrollbar-width: none;
+        }
+        .category-pills::-webkit-scrollbar { display: none; }
+        .cat-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--muted);
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all .2s ease;
+        }
+        .cat-pill:hover, .cat-pill.active {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: rgba(0, 255, 136, 0.4);
+            color: var(--green);
+        }
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 22px;
+            max-width: 1100px;
+            margin: 0 auto 50px;
+        }
+        .server-card {
+            border-radius: 20px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .server-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 255, 136, 0.35);
+            box-shadow: 0 12px 35px -10px rgba(0, 255, 136, 0.15);
+        }
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 12px;
+        }
+        .bump-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(0, 255, 136, 0.12);
+            color: var(--green);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 11px;
+            border: 1px solid rgba(0, 255, 136, 0.25);
+        }
+        .cat-tag {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+        .server-header {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .server-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            object-fit: cover;
+            background: #1e293b;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            flex-shrink: 0;
+        }
+        .server-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0 0 4px;
+            color: var(--text);
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+        .server-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .server-stats span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .server-desc {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin: 0 0 16px;
+            min-height: 42px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .tags-wrap {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+        .tag-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 3px 8px;
+            font-size: 11px;
+            color: var(--cyan);
+            font-family: var(--mono);
+        }
+        .how-box {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            border-radius: 20px;
+            padding: 32px;
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+            background: linear-gradient(135deg, rgba(17, 26, 48, 0.8) 0%, rgba(13, 20, 38, 0.95) 100%);
+        }
+        .how-item {
+            flex: 1;
+            min-width: 220px;
+        }
+        .how-item h4 {
+            margin: 0 0 6px;
+            color: var(--green);
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .how-item p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient"></div>
+    <div class="shell">
+        <header class="topnav">
+            <a class="brand" href="/"><img src="/static/img/dabot.png" alt=""> Dabot</a>
+            <nav class="topnav-links">
+                <a href="/servers" class="text-neon" style="font-weight:700"><i class="fas fa-compass"></i> Servidores</a>
+                <a href="/comunidad" data-i18n="nav.community">Comunidad</a>
+                <a href="/niveles" data-i18n="nav.levels">Niveles</a>
+                <a href="/normas" data-i18n="nav.rules">Normas</a>
+                <a class="btn btn-ghost btn-sm" href="/invite"><i class="fas fa-plus"></i> Invitar Bot</a>
+                <a class="btn btn-primary btn-sm" href="/login" data-i18n="nav.enter">Entrar</a>
+                <div class="lang-switch" role="group" aria-label="Language">
+                    <select data-lang-select>
+                        <option value="es">ES</option>
+                        <option value="en">EN</option>
+                        <option value="fr">FR</option>
+                        <option value="de">DE</option>
+                    </select>
+                </div>
+            </nav>
+        </header>
+
+        <main class="section">
+            <div class="servers-hero">
+                <div class="badge"><i class="fas fa-rocket"></i> Discovery · Estilo Disboard</div>
+                <h1 class="h-title" style="font-size:2.8rem;margin:16px 0 10px">Encuentra y promociona servidores</h1>
+                <p class="sub" style="font-size:1.1rem;margin:0 auto">Lista pública de servidores en Dabot. Usa <code>/bump</code> en tu servidor cada 2 horas para impulsarlo a las primeras posiciones.</p>
+            </div>
+
+            <div class="filter-wrap">
+                <div class="search-row">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="servers-search" placeholder="Buscar servidores por nombre, temática o etiquetas..." oninput="debounceSearch()">
+                    </div>
+                </div>
+
+                <div class="category-pills">
+                    <button class="cat-pill active" onclick="setCategory('all', this)"><i class="fas fa-border-all"></i> Todos</button>
+                    <button class="cat-pill" onclick="setCategory('Gaming', this)"><i class="fas fa-gamepad"></i> Gaming</button>
+                    <button class="cat-pill" onclick="setCategory('Comunidad', this)"><i class="fas fa-comments"></i> Comunidad</button>
+                    <button class="cat-pill" onclick="setCategory('Anime', this)"><i class="fas fa-tv"></i> Anime</button>
+                    <button class="cat-pill" onclick="setCategory('Música', this)"><i class="fas fa-music"></i> Música</button>
+                    <button class="cat-pill" onclick="setCategory('Tecnología', this)"><i class="fas fa-laptop-code"></i> Tecnología</button>
+                    <button class="cat-pill" onclick="setCategory('Arte', this)"><i class="fas fa-palette"></i> Arte</button>
+                    <button class="cat-pill" onclick="setCategory('Rol', this)"><i class="fas fa-dice-d20"></i> Rol / RPG</button>
+                    <button class="cat-pill" onclick="setCategory('Otros', this)"><i class="fas fa-globe"></i> Otros</button>
+                </div>
+            </div>
+
+            <div id="servers-container" class="servers-grid">
+                <div class="empty" style="grid-column:1/-1;text-align:center;padding:50px 20px;">
+                    <i class="fas fa-circle-notch fa-spin" style="font-size:2rem;color:var(--green)"></i>
+                    <p style="margin-top:14px;color:var(--muted)">Cargando servidores...</p>
+                </div>
+            </div>
+
+            <div class="how-box glass">
+                <div class="how-item">
+                    <h4><i class="fas fa-robot"></i> 1. Invita a Dabot</h4>
+                    <p>Añade Dabot a tu servidor con permisos para crear invitaciones instantáneas.</p>
+                </div>
+                <div class="how-item">
+                    <h4><i class="fas fa-bolt"></i> 2. Escribe /bump</h4>
+                    <p>Cualquier miembro puede usar <code>/bump</code> cada 2 horas para subir el servidor arriba.</p>
+                </div>
+                <div class="how-item">
+                    <h4><i class="fas fa-users-viewfinder"></i> 3. Nuevos miembros</h4>
+                    <p>Tu comunidad aparecerá en la página principal con botón directo para unirse.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentCategory = "all";
+        let searchTimeout = null;
+
+        function setCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
+            if (btn) btn.classList.add("active");
+            loadServers();
+        }
+
+        function debounceSearch() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(loadServers, 300);
+        }
+
+        async function loadServers() {
+            const container = document.getElementById("servers-container");
+            const searchVal = document.getElementById("servers-search").value.trim();
+
+            let url = `/api/public/servers?`;
+            const params = new URLSearchParams();
+            if (currentCategory && currentCategory !== "all") {
+                params.append("category", currentCategory);
+            }
+            if (searchVal) {
+                params.append("search", searchVal);
+            }
+            url += params.toString();
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                const servers = data.servers || [];
+
+                if (!servers.length) {
+                    container.innerHTML = `
+                        <div class="empty glass" style="grid-column:1/-1;text-align:center;padding:60px 20px;border-radius:20px;">
+                            <i class="fas fa-ghost" style="font-size:2.4rem;color:var(--faint);margin-bottom:12px;"></i>
+                            <h3 style="margin:0 0 6px">No se encontraron servidores públicos</h3>
+                            <p style="color:var(--muted);margin:0">La visibilidad es opcional y privada por defecto. Activa el descubrimiento de tu comunidad con <code>/bump_setup visible:True</code> y usa <code>/bump</code> para aparecer aquí.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = servers.map(s => {
+                    const tagsHtml = (s.tags || []).map(t => `<span class="tag-pill">#${t}</span>`).join('');
+                    const memberCount = (s.member_count || 0).toLocaleString();
+                    const bumpText = s.time_ago ? `🔥 ${s.time_ago}` : `🔥 Reciente`;
+
+                    return `
+                        <div class="server-card glass">
+                            <div>
+                                <div class="card-top">
+                                    <span class="cat-tag"><i class="fas fa-folder"></i> ${s.category || 'Comunidad'}</span>
+                                    <span class="bump-badge">${bumpText}</span>
+                                </div>
+                                <div class="server-header">
+                                    <img src="${s.icon_url}" class="server-icon" alt="${s.name}" onerror="this.src='https://davito.es/media/dabot.png'">
+                                    <div style="min-width:0;flex:1">
+                                        <h3 class="server-name" title="${s.name}">${s.name}</h3>
+                                        <div class="server-stats">
+                                            <span><i class="fas fa-users"></i> ${memberCount}</span>
+                                            <span><i class="fas fa-rocket"></i> ${s.bump_count || 1} bumps</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="server-desc">${s.description || 'Comunidad en Discord gestionada con Dabot.'}</p>
+                                ${tagsHtml ? `<div class="tags-wrap">${tagsHtml}</div>` : ''}
+                            </div>
+                            <div>
+                                <a href="${s.invite_url}" target="_blank" rel="noopener" class="btn btn-discord btn-block">
+                                    <i class="fab fa-discord"></i> Unirse al servidor
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                container.innerHTML = `
+                    <div class="empty glass" style="grid-column:1/-1;text-align:center;padding:50px 20px;border-radius:20px;">
+                        <p style="color:var(--danger)">Error al cargar la lista de servidores.</p>
+                    </div>
+                `;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadServers);
+    </script>
+    <script src="/static/js/i18n.js?v=5.7"></script>
+    <script src="/static/js/cookies.js?v=2"></script>
+</body>
+</html>

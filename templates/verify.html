@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="title.verify">Verificación — Dabot</title>
+    <link rel="icon" href="https://davito.es/media/dabot.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=5.8">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <style>
+        .captcha-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .captcha-grid button { font-size: 1.8rem; padding: 14px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); cursor: pointer; }
+        .captcha-grid button:hover { border-color: var(--green); }
+        .account-row { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+        .howto { border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; background: rgba(0,0,0,.18); }
+        .howto summary { cursor: pointer; font-weight: 700; }
+        .howto-grid { display: grid; gap: 14px; margin-top: 12px; }
+        @media (min-width: 720px) { .howto-grid { grid-template-columns: 1fr 1fr 1fr; } }
+        .howto h3 { margin: 0 0 8px; font-size: .95rem; color: var(--green); }
+        .howto ol { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+        .howto li { margin: 0 0 6px; }
+        .vpn-alert { border: 1px solid rgba(249,115,22,.45); background: rgba(249,115,22,.08); border-radius: 14px; padding: 12px 14px; }
+        .vpn-alert b { color: #fb923c; }
+    </style>
+</head>
+<body>
+    <div class="ambient"></div>
+    <div class="shell" style="max-width:860px;margin:0 auto;padding:40px 16px 80px">
+        <header class="topnav" style="padding:0 0 28px;max-width:none">
+            <a class="brand" href="/"><img src="/static/img/dabot.png" alt=""> Dabot</a>
+            <div class="lang-switch" role="group" aria-label="Language"><select data-lang-select><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="it">IT</option><option value="ja">JA</option><option value="ko">KO</option><option value="zh">ZH</option></select></div>
+        </header>
+        <div class="panel glass stack">
+            <p class="kicker">dabot.davito.es/verify</p>
+            <h1 style="margin:0;font-size:1.6rem" data-i18n="vf.title">Verificación</h1>
+            <p class="sub" data-i18n="vf.sub">Verificación de seguridad para acceder a la comunidad. Confirmamos que eres una persona real para mantener el servidor protegido frente a accesos no autorizados.</p>
+            <div id="v-account" class="account-row hidden"></div>
+            <div id="v-guild" class="hidden" style="display:flex;gap:12px;align-items:center"></div>
+            <div id="v-vpn-alert" class="vpn-alert hidden"></div>
+            <div id="v-pick" class="hidden stack"></div>
+            <div id="v-captcha" class="hidden stack">
+                <p class="sub" id="v-hint" data-i18n="vf.captcha">Pulsa la langosta 🦞 para demostrar que no eres un bot.</p>
+                <div class="captcha-grid" id="v-grid"></div>
+                <input type="text" name="website" id="v-hp" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true">
+            </div>
+            <div id="v-status" class="status-pill"><span class="dot"></span> …</div>
+            <p id="v-detail" class="sub"></p>
+            <div><button type="button" class="btn btn-ghost btn-sm hidden" id="v-recheck" data-i18n="vf.vpn.recheck">Recomprobar red</button></div>
+            <details class="howto" open>
+                <summary data-i18n="vf.vpn.howto">Antes de verificar: desactiva VPN, proxies o redes intermediarias</summary>
+                <p class="sub" style="margin:10px 0 0" data-i18n="vf.vpn.lead">Para garantizar la integridad y autenticidad del acceso, el proceso requiere una conexión directa sin redes VPN ni túneles de anonimización. Si utilizas alguno, desactívalo un momento, recarga e inténtalo de nuevo.</p>
+                <div class="howto-grid">
+                    <div>
+                        <h3 data-i18n="vf.vpn.iphone.title">iPhone / iPad</h3>
+                        <ol>
+                            <li data-i18n="vf.vpn.iphone.1"><b>Private Relay:</b> Ajustes → tu nombre → iCloud → Relé privado (Private Relay) → desactivar.</li>
+                            <li data-i18n="vf.vpn.iphone.2"><b>Safari:</b> Ajustes → Safari (o Ajustes → Apps → Safari) → Ocultar dirección IP → Desactivar. Si no aparece, con apagar Private Relay basta.</li>
+                            <li data-i18n="vf.vpn.iphone.3"><b>VPN:</b> Ajustes → General → VPN y gestión de dispositivos (o VPN) → desconecta cualquier perfil. En iOS 18: Ajustes → VPN y gestión de dispositivos.</li>
+                            <li data-i18n="vf.vpn.iphone.4"><b>Apps:</b> cierra Nord, Express, Surfshark, Proton, 1.1.1.1 / WARP, AdGuard VPN, etc. (el icono de VPN en la barra de estado tiene que desaparecer).</li>
+                            <li data-i18n="vf.vpn.iphone.5">Cierra Safari del todo (App Selector → desliza hacia arriba) y abre de nuevo este enlace. Wi‑Fi o datos móviles da igual; lo que no vale es el túnel.</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3 data-i18n="vf.vpn.android.title">Android</h3>
+                        <ol>
+                            <li data-i18n="vf.vpn.android.1">Ajustes → Red e Internet → VPN → desconecta la sesión activa.</li>
+                            <li data-i18n="vf.vpn.android.2">En esa misma pantalla, desactiva <b>VPN siempre activa</b> / Always-on VPN (si está en on, se vuelve a conectar sola).</li>
+                            <li data-i18n="vf.vpn.android.3">Abre Nord / Express / Surfshark / Proton / 1.1.1.1 WARP / Opera y pulsa desconectar. Quita la llave o el escudo de la barra de notificaciones.</li>
+                            <li data-i18n="vf.vpn.android.4">No uses el VPN integrado de Opera ni extensiones tipo Hola / Urban VPN en Chrome.</li>
+                            <li data-i18n="vf.vpn.android.5">Cierra el navegador por completo y vuelve a abrir dabot.davito.es/verify.</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3 data-i18n="vf.vpn.web.title">Navegador (PC)</h3>
+                        <ol>
+                            <li data-i18n="vf.vpn.web.1"><b>Chrome / Edge:</b> chrome://extensions o edge://extensions — desactiva Urban VPN, Proton, Hotspot Shield, Hola, SetupVPN, Touch VPN, etc.</li>
+                            <li data-i18n="vf.vpn.web.2"><b>Firefox:</b> about:addons → extensiones → desactiva cualquier VPN/proxy.</li>
+                            <li data-i18n="vf.vpn.web.3"><b>Opera / Opera GX:</b> Ajustes → Funciones avanzadas / Bloqueador → VPN → Off. El VPN naranja de Opera también cuenta.</li>
+                            <li data-i18n="vf.vpn.web.4">Cierra Tor Browser. Desconecta WARP / 1.1.1.1, Tailscale exit nodes, ZeroTier, WireGuard o OpenVPN del sistema (bandeja de Windows / icono de macOS).</li>
+                            <li data-i18n="vf.vpn.web.5">Recarga esta página (o pulsa Recomprobar red). No hace falta cambiar de Wi‑Fi si el túnel ya está apagado.</li>
+                        </ol>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <p class="sub" style="margin-top:18px"><span data-i18n="vf.privacy">Al continuar aceptas los términos y la política de privacidad. Los datos técnicos de conexión se procesan de forma seudonimizada con fines exclusivos de seguridad conforme al RGPD.</span> <a href="/privacy" data-i18n="nav.privacy">Privacidad</a> · <a href="/cookies">Cookies</a>.</p>
+    </div>
+    <script src="/static/js/i18n.js?v=5.7"></script>
+    <script src="/static/js/cookies.js?v=2"></script>
+    <script src="/static/js/fingerprint.js?v=5.3"></script>
+    <script>
+    (() => {
+        const originalFetch = window.fetch.bind(window);
+        const cookie = (name) => document.cookie.split(";").map(v => v.trim()).find(v => v.startsWith(`${name}=`))?.slice(name.length + 1) || "";
+        window.fetch = (input, init = {}) => {
+            const method = String(init.method || (input && input.method) || "GET").toUpperCase();
+            if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
+                const headers = new Headers(init.headers || {});
+                const token = cookie("csrf_token");
+                if (token) headers.set("X-CSRF-Token", token);
+                init = { ...init, headers };
+            }
+            return originalFetch(input, init);
+        };
+    })();
+    </script>
+    <script>
+    (async () => {
+        const status = document.getElementById("v-status");
+        const detail = document.getElementById("v-detail");
+        const pick = document.getElementById("v-pick");
+        const guildBox = document.getElementById("v-guild");
+        const accBox = document.getElementById("v-account");
+        const capBox = document.getElementById("v-captcha");
+        const grid = document.getElementById("v-grid");
+        const vpnAlert = document.getElementById("v-vpn-alert");
+        const recheckBtn = document.getElementById("v-recheck");
+        const parts = location.pathname.split("/").filter(Boolean);
+        let guildId = parts[0] === "verify" && parts[1] ? parts[1] : new URLSearchParams(location.search).get("g");
+        let challenge = null;
+        let me = null;
+        let netBlocked = false;
+
+        function t(key) {
+            if (window.DabotI18n && window.DabotI18n.t) return window.DabotI18n.t(key);
+            return key;
+        }
+        function set(txt, ok) {
+            status.innerHTML = `<span class="dot${ok === true ? " on" : ""}"></span> ${txt}`;
+            status.style.borderColor = ok === true ? "var(--green)" : ok === false ? "var(--danger)" : "";
+        }
+        function icon(g) {
+            if (g && g.icon) return `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`;
+            return "https://cdn.discordapp.com/embed/avatars/0.png";
+        }
+        function avatar(u) {
+            if (u && u.avatar) return `https://cdn.discordapp.com/avatars/${u.user_id}/${u.avatar}.png`;
+            return "https://cdn.discordapp.com/embed/avatars/0.png";
+        }
+        function paintVpnAlert(proxy) {
+            const p = proxy || {};
+            const reasons = (p.reasons || []).map(r => String(r).replace(/</g, "")).join(" · ");
+            vpnAlert.classList.remove("hidden");
+            vpnAlert.innerHTML = `<b>${t("vf.vpn.blocked")}</b><div class="sub" style="margin-top:6px">${reasons || t("vf.vpn.lead")}</div>`;
+            recheckBtn.classList.remove("hidden");
+            if (window.DabotI18n) window.DabotI18n.apply();
+        }
+        function clearVpnAlert() {
+            vpnAlert.classList.add("hidden");
+            vpnAlert.innerHTML = "";
+            recheckBtn.classList.add("hidden");
+            netBlocked = false;
+        }
+        async function checkNetwork() {
+            try {
+                const n = await (await fetch("/api/verify/network")).json();
+                netBlocked = !!n.blocked;
+                if (netBlocked) {
+                    paintVpnAlert(n);
+                    capBox.classList.add("hidden");
+                    set(t("vf.vpn.blocked"), false);
+                    detail.innerText = t("vf.vpn.lead");
+                    return false;
+                }
+                clearVpnAlert();
+                return true;
+            } catch (e) {
+                return true;
+            }
+        }
+        function paintAccount() {
+            if (!me) return;
+            accBox.classList.remove("hidden");
+            const switchUrl = "/api/verify/switch-account" + (guildId ? ("?g=" + guildId) : "");
+            accBox.innerHTML = `<div style="display:flex;gap:10px;align-items:center">
+                <img src="${avatar(me)}" width="36" height="36" style="border-radius:50%" alt="">
+                <div><b>${me.username || me.user_id}</b><div class="sub" data-i18n="vf.as">Verificando como esta cuenta</div></div>
+            </div>
+            <a class="btn btn-ghost btn-sm" href="${switchUrl}" data-i18n="vf.switch">No soy yo · cambiar cuenta</a>`;
+            if (window.DabotI18n) window.DabotI18n.apply();
+        }
+        async function loadChallenge() {
+            const okNet = await checkNetwork();
+            if (!okNet) return;
+            const ch = await (await fetch("/api/verify/challenge")).json();
+            challenge = ch;
+            capBox.classList.remove("hidden");
+            grid.innerHTML = (ch.options || []).map((em, i) =>
+                `<button type="button" data-i="${i}">${em}</button>`
+            ).join("");
+            grid.querySelectorAll("button").forEach(btn => {
+                btn.onclick = () => run(guildId, Number(btn.getAttribute("data-i")));
+            });
+            set(t("vf.captcha"));
+        }
+        async function run(id, pickIdx) {
+            set(t("vf.reading"));
+            capBox.classList.add("hidden");
+            const fp = await window.dabotFingerprint();
+            set(t("vf.sending"));
+            const res = await fetch("/api/verify/complete", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    guild_id: String(id),
+                    ...fp,
+                    js_device_id: window.dabotDeviceId ? window.dabotDeviceId() : "",
+                    challenge_token: challenge && challenge.token,
+                    challenge_pick: pickIdx,
+                    website: document.getElementById("v-hp").value || ""
+                })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (data.code === "vpn" || (data.detail && data.detail.code === "vpn")) {
+                netBlocked = true;
+                paintVpnAlert(data.proxy || data.detail || {});
+                set(t("vf.vpn.blocked"), false);
+                detail.innerText = t("vf.vpn.lead");
+                return;
+            }
+            if (!res.ok) {
+                set(t("vf.fail"), false);
+                const d = data.detail;
+                detail.innerText = typeof d === "string" ? d : (d && d.message) || t("vf.fail");
+                await loadChallenge();
+                return;
+            }
+            if (data.pending) {
+                set(t("vf.pending"), true);
+                detail.innerText = t("vf.pending.detail");
+            } else if (data.already_verified) {
+                set(t("vf.ok"), true);
+                detail.innerText = t("vf.already");
+            } else if (data.verified) {
+                set(t("vf.ok"), true);
+                detail.innerText = t("vf.ok.detail");
+            } else {
+                set(t("vf.recorded"), true);
+                const map = { noconfig: t("vf.not_configured"), role: t("vf.fail") };
+                detail.innerText = map[data.code] || t("vf.recorded");
+            }
+        }
+
+        recheckBtn.onclick = () => loadChallenge();
+
+        try {
+            const meRes = await fetch("/api/user/me");
+            if (meRes.status === 401) {
+                const next = guildId ? `/verify/${guildId}` : "/verify";
+                location.href = "/login?next=" + encodeURIComponent(next);
+                return;
+            }
+            me = await meRes.json();
+            paintAccount();
+            if (guildId) {
+                const prev = await (await fetch(`/api/verify/preview/${guildId}`)).json();
+                guildBox.classList.remove("hidden");
+                guildBox.innerHTML = `<img src="${icon(prev)}" width="40" height="40" style="border-radius:10px" alt="">
+                    <div><b>${prev.name || guildId}</b><div class="sub">${prev.configured ? t("vf.configured") : t("vf.not_configured")}</div></div>`;
+                if (!prev.in_guild) {
+                    set(t("vf.fail"), false);
+                    detail.innerText = t("vf.need_server");
+                    return;
+                }
+                await loadChallenge();
+                return;
+            }
+            const data = await (await fetch("/api/verify/targets")).json();
+            const list = data.guilds || [];
+            if (!list.length) {
+                set(t("vf.none"), false);
+                return;
+            }
+            set(t("vf.pick"));
+            detail.innerText = t("vf.pick.sub");
+            pick.classList.remove("hidden");
+            pick.className = "guild-pick";
+            pick.innerHTML = list.map(g => `<button type="button" data-gid="${g.id}">
+                <img src="${icon(g)}" alt="">
+                <div><b>${g.name}</b><div class="sub">${g.configured ? t("vf.configured") : t("vf.not_configured")}</div></div>
+            </button>`).join("");
+            pick.querySelectorAll("button").forEach(btn => {
+                btn.onclick = () => { location.href = "/verify/" + btn.getAttribute("data-gid"); };
+            });
+        } catch (e) {
+            set(t("vf.network"), false);
+            detail.innerText = String(e);
+        }
+    })();
+    </script>
+</body>
+</html>

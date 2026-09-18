@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="title.help">Dabot - Centro de Ayuda & Comandos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=5.7">
+    <style>
+        .accordion-btn::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            float: right;
+            transition: transform 0.2s ease;
+        }
+        .accordion-btn.active::after {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen flex flex-col overflow-y-auto">
+    <div class="ambient-background"></div>
+
+    <header class="w-full py-5 px-8 max-w-7xl mx-auto flex justify-between items-center z-10">
+        <a href="/" class="brand"><img src="/static/img/dabot.png" alt="" style="width:32px;height:32px"> Dabot</a>
+        <div class="flex items-center gap-4">
+            <a href="/" class="text-gray-300 hover:text-white font-semibold transition-all" data-i18n="nav.home">Inicio</a>
+            <a href="/privacy" class="text-gray-300 hover:text-white font-semibold transition-all" data-i18n="nav.privacy">Privacidad</a>
+            <a href="/dashboard" class="btn btn-primary btn-sm" data-i18n="nav.panel">Panel</a>
+            <div class="lang-switch" role="group" aria-label="Language"><select data-lang-select><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="it">IT</option><option value="ja">JA</option><option value="ko">KO</option><option value="zh">ZH</option></select></div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4" data-i18n="help.title">Centro de Ayuda & Comandos</h1>
+            <p class="text-gray-400 font-inter max-w-xl mx-auto text-sm md:text-base" data-i18n="help.lead">Los nombres de slash se quedan en inglés (así Discord no rompe el registro). La web, el panel y las respuestas del bot sí hablan tu idioma.</p>
+        </div>
+
+        <div class="relative w-full max-w-xl mx-auto mb-12">
+            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+            <input type="text" id="search-input" onkeyup="searchCommands()" data-i18n-placeholder="help.search" placeholder="Buscar comando o palabra clave (ej: ban, xp, ticket)..."
+                   class="w-full pl-12 pr-4 py-4 rounded-2xl bg-glass border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-400/40 font-inter shadow-2xl transition-all">
+        </div>
+
+        <div class="flex flex-col gap-8" id="help-container">
+            <div class="category-block bg-glass rounded-3xl p-6 border border-white/5 shadow-xl">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-neon text-base"><i class="fas fa-brain"></i></span>
+                    <span data-i18n="help.cat.ai">Inteligencia Artificial</span>
+                </h2>
+                <div class="flex flex-col gap-3">
+                    <div class="command-card border border-white/5 hover:border-white/10 rounded-2xl p-4 transition-all">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1 bg-white/5 rounded-lg text-emerald-400 font-mono text-sm font-bold">/chat</span>
+                                <span class="text-sm font-bold text-gray-300" data-i18n="help.chat.short">Habla con el Chatbot de IA</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform duration-200"></i>
+                        </div>
+                        <div class="hidden details-panel mt-3 pt-3 border-t border-white/5 font-inter text-sm text-gray-400 flex flex-col gap-2">
+                            <p><strong data-i18n="help.label.desc">Descripción:</strong> <span data-i18n="help.chat.desc">Inicia una conversación interactiva con el bot usando Gemini o Groq. Posee memoria a largo plazo.</span></p>
+                            <p><strong data-i18n="help.label.syntax">Sintaxis:</strong> <code>/chat [mensaje]</code></p>
+                            <p><strong data-i18n="help.label.perms">Permisos requeridos:</strong> <span data-i18n="help.chat.perms">Ninguno (Premium en mención directa).</span></p>
+                        </div>
+                    </div>
+                    <div class="command-card border border-white/5 hover:border-white/10 rounded-2xl p-4 transition-all">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1 bg-white/5 rounded-lg text-emerald-400 font-mono text-sm font-bold">/setpersonality</span>
+                                <span class="text-sm font-bold text-gray-300" data-i18n="help.setpersonality.short">Cambia la personalidad de la IA</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform duration-200"></i>
+                        </div>
+                        <div class="hidden details-panel mt-3 pt-3 border-t border-white/5 font-inter text-sm text-gray-400 flex flex-col gap-2">
+                            <p><strong data-i18n="help.label.desc">Descripción:</strong> <span data-i18n="help.setpersonality.desc">Configura un prompt del sistema personalizado para moldear la personalidad, tono y respuestas del bot en el servidor.</span></p>
+                            <p><strong data-i18n="help.label.syntax">Sintaxis:</strong> <code>/setpersonality [prompt]</code></p>
+                            <p><strong data-i18n="help.label.perms">Permisos requeridos:</strong> <span data-i18n="help.setpersonality.perms">Administrador (Premium).</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-block bg-glass rounded-3xl p-6 border border-white/5 shadow-xl">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 text-base"><i class="fas fa-shield-halved"></i></span>
+                    <span data-i18n="help.cat.mod">Seguridad y Moderación</span>
+                </h2>
+                <div class="flex flex-col gap-3">
+                    <div class="command-card border border-white/5 hover:border-white/10 rounded-2xl p-4 transition-all">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1 bg-white/5 rounded-lg text-blue-400 font-mono text-sm font-bold">/ban</span>
+                                <span class="text-sm font-bold text-gray-300" data-i18n="help.ban.short">Banea a un miembro</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform duration-200"></i>
+                        </div>
+                        <div class="hidden details-panel mt-3 pt-3 border-t border-white/5 font-inter text-sm text-gray-400 flex flex-col gap-2">
+                            <p><strong data-i18n="help.label.desc">Descripción:</strong> <span data-i18n="help.ban.desc">Expulsa permanentemente a un usuario del servidor registrando la infracción.</span></p>
+                            <p><strong data-i18n="help.label.syntax">Sintaxis:</strong> <code>/ban [usuario] [razon]</code></p>
+                            <p><strong data-i18n="help.label.perms">Permisos requeridos:</strong> <span data-i18n="help.ban.perms">Banear Miembros / Rol de Moderador.</span></p>
+                        </div>
+                    </div>
+                    <div class="command-card border border-white/5 hover:border-white/10 rounded-2xl p-4 transition-all">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1 bg-white/5 rounded-lg text-blue-400 font-mono text-sm font-bold">/timeout</span>
+                                <span class="text-sm font-bold text-gray-300" data-i18n="help.timeout.short">Aísla temporalmente a un miembro</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform duration-200"></i>
+                        </div>
+                        <div class="hidden details-panel mt-3 pt-3 border-t border-white/5 font-inter text-sm text-gray-400 flex flex-col gap-2">
+                            <p><strong data-i18n="help.label.desc">Descripción:</strong> <span data-i18n="help.timeout.desc">Silencia a un usuario impidiéndole chatear o hablar en canales de voz por una duración específica.</span></p>
+                            <p><strong data-i18n="help.label.syntax">Sintaxis:</strong> <code>/timeout [usuario] [duracion] [razon]</code></p>
+                            <p><strong data-i18n="help.label.perms">Permisos requeridos:</strong> <span data-i18n="help.timeout.perms">Aislar Miembros / Rol de Moderador.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-block bg-glass rounded-3xl p-6 border border-white/5 shadow-xl">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 text-base"><i class="fas fa-chart-simple"></i></span>
+                    <span data-i18n="help.cat.level">Nivelación y Economía</span>
+                </h2>
+                <div class="flex flex-col gap-3">
+                    <div class="command-card border border-white/5 hover:border-white/10 rounded-2xl p-4 transition-all">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1 bg-white/5 rounded-lg text-purple-400 font-mono text-sm font-bold">/rank</span>
+                                <span class="text-sm font-bold text-gray-300" data-i18n="help.rank.short">Muestra el nivel de un usuario</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform duration-200"></i>
+                        </div>
+                        <div class="hidden details-panel mt-3 pt-3 border-t border-white/5 font-inter text-sm text-gray-400 flex flex-col gap-2">
+                            <p><strong data-i18n="help.label.desc">Descripción:</strong> <span data-i18n="help.rank.desc">Obtén una tarjeta de perfil visual o texto indicando el nivel actual, XP total y porcentaje hacia el siguiente nivel.</span></p>
+                            <p><strong data-i18n="help.label.syntax">Sintaxis:</strong> <code>/rank [usuario]</code></p>
+                            <p><strong data-i18n="help.label.perms">Permisos requeridos:</strong> <span data-i18n="help.rank.perms">Ninguno.</span></p>
+                        </div>
+                    </div>
+                    <div class="command-card border border-white/5 hover:border-white/10 rounded-2xl p-4 transition-all">
+                        <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1 bg-white/5 rounded-lg text-purple-400 font-mono text-sm font-bold">/leaderboard</span>
+                                <span class="text-sm font-bold text-gray-300" data-i18n="help.leaderboard.short">Clasificación del Servidor</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 text-xs transition-transform duration-200"></i>
+                        </div>
+                        <div class="hidden details-panel mt-3 pt-3 border-t border-white/5 font-inter text-sm text-gray-400 flex flex-col gap-2">
+                            <p><strong data-i18n="help.label.desc">Descripción:</strong> <span data-i18n="help.leaderboard.desc">Muestra el Top 10 de usuarios con mayor nivel del servidor actual.</span></p>
+                            <p><strong data-i18n="help.label.syntax">Sintaxis:</strong> <code>/leaderboard</code></p>
+                            <p><strong data-i18n="help.label.perms">Permisos requeridos:</strong> <span data-i18n="help.leaderboard.perms">Ninguno.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full py-8 border-t border-white/5 text-center text-gray-500 font-inter mt-auto">
+        <p data-i18n="help.footer">Desarrollado con ❤️ por Davito • Dabot © 2026</p>
+    </footer>
+
+    <script>
+        function toggleDetails(element) {
+            const card = element.parentElement;
+            const panel = card.querySelector('.details-panel');
+            const icon = element.querySelector('i');
+            panel.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+        function searchCommands() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            document.querySelectorAll('.category-block').forEach(block => {
+                let matchesInBlock = 0;
+                block.querySelectorAll('.command-card').forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(query)) { card.style.display = 'block'; matchesInBlock++; }
+                    else card.style.display = 'none';
+                });
+                block.style.display = matchesInBlock > 0 ? 'block' : 'none';
+            });
+        }
+    </script>
+    <script src="/static/js/i18n.js?v=5.7"></script>
+    <script src="/static/js/cookies.js?v=2"></script>
+</body>
+</html>

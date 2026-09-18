@@ -1,0 +1,13 @@
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+*.db
+*.db-wal
+*.db-shm
+logs/
+data/
+backups/
+configs/*.yaml
+!configs/default.yaml

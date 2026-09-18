@@ -1,0 +1,90 @@
+{
+  "🦞 Semana en este servidor": {
+    "es": "🦞 Semana en este servidor",
+    "en": "🦞 This week on this server",
+    "fr": "🦞 Cette semaine sur ce serveur",
+    "de": "🦞 Diese Woche auf diesem Server",
+    "pt": "🦞 Esta semana neste servidor",
+    "it": "🦞 Questa settimana in questo server",
+    "ja": "🦞 このサーバーの今週",
+    "ko": "🦞 이 서버의 이번 주",
+    "zh": "🦞 本服务器本周"
+  },
+  "🧑‍🤝‍🧑 In Channel": {
+    "es": "🧑‍🤝‍🧑 In Channel",
+    "en": "🧑‍🤝‍🧑 In Channel",
+    "fr": "🧑‍🤝‍🧑 In Channel",
+    "de": "🧑‍🤝‍🧑 In Channel",
+    "pt": "🧑‍🤝‍🧑 In Channel",
+    "it": "🧑‍🤝‍🧑 In Channel",
+    "ja": "🧑‍🤝‍🧑 In Channel",
+    "ko": "🧑‍🤝‍🧑 In Channel",
+    "zh": "🧑‍🤝‍🧑 In Channel"
+  },
+  "🧠 Guardado en mi memoria a largo plazo.": {
+    "es": "🧠 Guardado en mi memoria a largo plazo.",
+    "en": "🧠 Saved to my long-term memory.",
+    "fr": "🧠 Enregistré dans ma mémoire long terme.",
+    "de": "🧠 In meinem Langzeitgedächtnis gespeichert.",
+    "pt": "🧠 Guardado na minha memória de longo prazo.",
+    "it": "🧠 Salvato nella mia memoria a lungo termine.",
+    "ja": "🧠 長期記憶に保存しました。",
+    "ko": "🧠 장기 기억에 저장했습니다.",
+    "zh": "🧠 已存入我的长期记忆。"
+  },
+  "🧠 He olvidado todo sobre ti en este servidor.": {
+    "es": "🧠 He olvidado todo sobre ti en este servidor.",
+    "en": "🧠 I've forgotten everything about you on this server.",
+    "fr": "🧠 J'ai tout oublié sur toi sur ce serveur.",
+    "de": "🧠 Ich habe auf diesem Server alles über dich vergessen.",
+    "pt": "🧠 Esqueci tudo sobre ti neste servidor.",
+    "it": "🧠 Ho dimenticato tutto su di te in questo server.",
+    "ja": "🧠 このサーバーであなたに関することをすべて忘れました。",
+    "ko": "🧠 이 서버에서 당신에 대한 모든 것을 잊었습니다.",
+    "zh": "🧠 我已忘记此服务器上关于你的一切。"
+  },
+  "🧠 Trivia Time!": {
+    "es": "🧠 Trivia Time!",
+    "en": "🧠 Trivia Time!",
+    "fr": "🧠 Trivia Time!",
+    "de": "🧠 Trivia Time!",
+    "pt": "🧠 Trivia Time!",
+    "it": "🧠 Trivia Time!",
+    "ja": "🧠 Trivia Time!",
+    "ko": "🧠 Trivia Time!",
+    "zh": "🧠 Trivia Time!"
+  },
+  "🧮 Solve: **{expression} = ?**": {
+    "es": "🧮 Solve: **{expression} = ?**",
+    "en": "🧮 Solve: **{expression} = ?**",
+    "fr": "🧮 Solve: **{expression} = ?**",
+    "de": "🧮 Solve: **{expression} = ?**",
+    "pt": "🧮 Solve: **{expression} = ?**",
+    "it": "🧮 Solve: **{expression} = ?**",
+    "ja": "🧮 Solve: **{expression} = ?**",
+    "ko": "🧮 Solve: **{expression} = ?**",
+    "zh": "🧮 Solve: **{expression} = ?**"
+  },
+  "🪄 AI PromptCraft — Master Prompts": {
+    "es": "🪄 AI PromptCraft — prompts maestros",
+    "en": "🪄 AI PromptCraft — Master Prompts",
+    "fr": "🪄 AI PromptCraft — prompts maîtres",
+    "de": "🪄 AI PromptCraft — Master-Prompts",
+    "pt": "🪄 AI PromptCraft — prompts mestres",
+    "it": "🪄 AI PromptCraft — prompt master",
+    "ja": "🪄 AI PromptCraft — マスタープロンプト",
+    "ko": "🪄 AI PromptCraft — 마스터 프롬프트",
+    "zh": "🪄 AI PromptCraft — 大师级提示词"
+  },
+  "🪄 Turns a simple idea into 3 highly detailed premium prompts for /imagine.": {
+    "es": "🪄 Convierte una idea simple en 3 prompts premium muy detallados para /imagine.",
+    "en": "🪄 Turns a simple idea into 3 highly detailed premium prompts for /imagine.",
+    "fr": "🪄 Transforme une idée simple en 3 prompts premium très détaillés pour /imagine.",
+    "de": "🪄 Macht aus einer einfachen Idee 3 detaillierte Premium-Prompts für /imagine.",
+    "pt": "🪄 Transforma uma ideia simples em 3 prompts premium muito detalhados para /imagine.",
+    "it": "🪄 Trasforma un'idea semplice in 3 prompt premium molto dettagliati per /imagine.",
+    "ja": "🪄 シンプルなアイデアを /imagine 向けの詳細プレミアムプロンプト 3 本にします。",
+    "ko": "🪄 간단한 아이디어를 /imagine용 상세 프리미엄 프롬프트 3개로 바꿉니다.",
+    "zh": "🪄 把一个简单想法变成 3 条高度详细的 /imagine 高级提示词。"
+  }
+}

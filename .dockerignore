@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.env
+*.db
+*.db-wal
+*.db-shm
+restart_state.json
+logs/
+backups/
+data/

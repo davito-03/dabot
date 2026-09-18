@@ -1,0 +1,61 @@
+services:
+  bot:
+    build: .
+    container_name: dabot-bot
+    restart: always
+    environment:
+      - DATABASE_PATH=/app/data/dabot.db
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./templates:/app/templates
+      - ./static:/app/static
+      - ./cogs:/app/cogs
+      - ./utils:/app/utils
+      - ./langs:/app/langs
+      - ./configs:/app/configs
+      - ./assets:/app/assets
+      - ./logs:/app/logs
+      - ./.env:/app/.env
+      - ./main.py:/app/main.py
+      - ./dashboard_server.py:/app/dashboard_server.py
+    command: python main.py
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import time, os; exit(0 if os.path.exists('/tmp/bot_alive') and time.time() - float(open('/tmp/bot_alive').read().strip()) < 60 else 1)\""]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+
+  api:
+    build: .
+    container_name: dabot-api
+    restart: always
+    ports:
+      - "127.0.0.1:${PORT:-8090}:${PORT:-8090}"
+    environment:
+      - DATABASE_PATH=/app/data/dabot.db
+      - PORT=${PORT:-8090}
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./templates:/app/templates
+      - ./static:/app/static
+      - ./cogs:/app/cogs
+      - ./utils:/app/utils
+      - ./langs:/app/langs
+      - ./configs:/app/configs
+      - ./assets:/app/assets
+      - ./logs:/app/logs
+      - ./.env:/app/.env
+      - ./main.py:/app/main.py
+      - ./dashboard_server.py:/app/dashboard_server.py
+    command: uvicorn dashboard_server:app --host 0.0.0.0 --port ${PORT:-8090}
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request, sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:${PORT:-8090}/healthz', timeout=5).getcode() == 200 else 1)\""]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

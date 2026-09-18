@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="title.home">Dabot — La comunidad, organizada</title>
+    <meta name="description" content="Normas, niveles, apelaciones, tickets y el servidor de Discord, todo conectado a tu cuenta. El bot de davito.es.">
+    <meta property="og:title" content="Dabot 🦞 — La comunidad, organizada">
+    <meta property="og:image" content="https://davito.es/media/dabot.png">
+    <meta name="theme-color" content="#00ff88">
+    <link rel="icon" href="https://davito.es/media/dabot.png">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=6.0">
+</head>
+<body>
+    <div class="ambient"></div>
+    <div class="shell">
+        <header class="topnav">
+            <a class="brand" href="/"><img src="/static/img/dabot.png" alt=""> Dabot</a>
+            <nav class="topnav-links">
+                <a href="/servers"><i class="fas fa-compass"></i> Servidores</a>
+                <a href="/comunidad" data-i18n="nav.community">Comunidad</a>
+                <a href="/niveles" data-i18n="nav.levels">Niveles</a>
+                <a href="/normas" data-i18n="nav.rules">Normas</a>
+                <a href="/help" data-i18n="nav.help">Comandos</a>
+                <a class="btn btn-ghost btn-sm" href="/login" data-i18n="nav.login">Entrar con Discord</a>
+                <a class="btn btn-primary btn-sm" href="/invite" data-i18n="nav.invite">Invitar</a>
+                <div class="lang-switch" role="group" aria-label="Language"><select data-lang-select><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option><option value="de">DE</option><option value="pt">PT</option><option value="it">IT</option><option value="ja">JA</option><option value="ko">KO</option><option value="zh">ZH</option></select></div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="kicker" data-i18n="hero.kicker">La comunidad, organizada</p>
+                <h1 data-i18n="hero.title" data-i18n-html>Todo lo que mueve<br>la comunidad,<br><em>en un solo lugar.</em></h1>
+                <p class="lead" data-i18n="hero.lead">
+                    Normas, niveles, apelaciones, tickets y la configuración de Discord
+                    conectadas a tu cuenta. El staff modera desde la web. Tú ves tu progreso.
+                </p>
+                <div class="hero-cta">
+                    <a class="btn btn-primary" href="/login"><i class="fab fa-discord"></i> <span data-i18n="hero.cta.login">Entrar con Discord</span></a>
+                    <a class="btn btn-ghost" href="/comunidad" data-i18n="hero.cta.explore">Explorar comunidad</a>
+                </div>
+                <div class="sys-links">
+                    <a class="sys-link" href="/normas"><span><span class="n">01</span><strong data-i18n="hero.sys.rules"> Normas</strong> <span data-i18n="hero.sys.rules.s">· convivencia</span></span> →</a>
+                    <a class="sys-link" href="/niveles"><span><span class="n">02</span><strong data-i18n="hero.sys.levels"> Niveles</strong> <span data-i18n="hero.sys.levels.s">· actividad</span></span> →</a>
+                    <a class="sys-link" href="/cuenta"><span><span class="n">03</span><strong data-i18n="hero.sys.appeals"> Apelaciones</strong> <span data-i18n="hero.sys.appeals.s">· tu cuenta</span></span> →</a>
+                    <a class="sys-link" href="/login"><span><span class="n">04</span><strong data-i18n="hero.sys.staff"> Staff</strong> <span data-i18n="hero.sys.staff.s">· mesa de moderación</span></span> →</a>
+                    <a class="sys-link" href="/dashboard"><span><span class="n">05</span><strong data-i18n="hero.sys.server"> Servidor</strong> <span data-i18n="hero.sys.server.s">· canales, roles, miembros</span></span> →</a>
+                </div>
+            </div>
+            <div class="hero-mascot">
+                <img src="/static/img/langosta.png" alt="Langosta Dabot">
+                <div class="status-pill" style="margin:16px auto 0;width:fit-content" id="live-badge"><span class="dot" id="live-dot"></span> Conectando…</div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat glass"><b id="stat-guilds">—</b><span data-i18n="stats.guilds">Servidores</span></div>
+            <div class="stat glass"><b id="stat-users">—</b><span data-i18n="stats.members">Miembros</span></div>
+            <div class="stat glass"><b id="stat-ping">—</b><span data-i18n="stats.latency">Latencia</span></div>
+            <div class="stat glass"><b>Online</b><span>Dabot</span></div>
+        </section>
+
+        <section class="section">
+            <p class="kicker" data-i18n="home.section.kicker">Tu comunidad</p>
+            <h2 data-i18n="home.section.title">Más fácil de entender. Más fácil de usar.</h2>
+            <p class="sub" data-i18n="home.section.sub">Cada herramienta tiene su espacio. Todo forma parte del mismo sistema.</p>
+            <div class="hub-grid">
+                <a class="hub-card glass" href="/normas">
+                    <div><div class="cat" data-i18n="home.card.rules.cat">Convivencia</div><h3 data-i18n="home.card.rules.h">Las normas, siempre a mano.</h3><p data-i18n="home.card.rules.p">Reglas de texto, voz y motivos de sanción, publicadas por cada servidor.</p></div>
+                    <span>→</span>
+                </a>
+                <a class="hub-card glass" href="/niveles">
+                    <div><div class="cat" data-i18n="home.card.levels.cat">Actividad</div><h3 data-i18n="home.card.levels.h">Sube de nivel.</h3><p data-i18n="home.card.levels.p">XP de texto y voz, rankings públicos y tu posición al iniciar sesión.</p></div>
+                    <span>→</span>
+                </a>
+                <a class="hub-card glass" href="/cuenta">
+                    <div><div class="cat" data-i18n="home.card.mod.cat">Moderación</div><h3 data-i18n="home.card.mod.h">Tus apelaciones.</h3><p data-i18n="home.card.mod.p">Revisa sanciones ligadas a tu Discord y pide revisión cuando toque.</p></div>
+                    <span>→</span>
+                </a>
+                <a class="hub-card glass" href="/login">
+                    <div><div class="cat" data-i18n="home.card.staff.cat">Staff</div><h3 data-i18n="home.card.staff.h">Mesa de moderación.</h3><p data-i18n="home.card.staff.p">Casos, registros, miembros, canales y roles. Sin pelearte con comandos.</p></div>
+                    <span>→</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <p class="kicker" data-i18n="home.space.kicker">Tu espacio</p>
+            <h2 data-i18n="home.space.title">Tu cuenta de Discord, conectada con Dabot.</h2>
+            <p class="sub" data-i18n="home.space.sub">Inicia sesión para ver tu XP, tus sanciones y, si eres staff, el servidor entero.</p>
+            <a class="btn btn-primary" href="/login" data-i18n="hero.cta.login">Entrar con Discord</a>
+        </section>
+
+        <footer class="site-footer">
+            <nav>
+                <a href="/comunidad" data-i18n="nav.community">Comunidad</a>
+                <a href="/privacy" data-i18n="nav.privacy">Privacidad</a>
+                <a href="/cookies">Cookies</a>
+                <a href="/terms" data-i18n="nav.terms">Términos</a>
+                <a href="https://davito.es">davito.es</a>
+            </nav>
+            <span data-i18n="footer.made">Hecho por Davito · Dabot · No afiliado a Discord Inc.</span>
+        </footer>
+    </div>
+    <script src="/static/js/i18n.js?v=5.7"></script>
+    <script src="/static/js/cookies.js?v=2"></script>
+    <script>
+        function paintStatus(s) {
+            const fmt = n => n >= 1000 ? (n/1000).toFixed(1).replace('.0','') + 'k' : String(n);
+            document.getElementById('stat-guilds').textContent = s.guilds || '—';
+            document.getElementById('stat-users').textContent = s.users ? fmt(s.users) : '—';
+            document.getElementById('stat-ping').textContent = (s.latency_ms != null && s.latency_ms !== '') ? s.latency_ms + ' ms' : '—';
+            const badge = document.getElementById('live-badge');
+            if (s.online) badge.innerHTML = '<span class="dot on"></span> ' + t('hero.online');
+            else badge.innerHTML = '<span class="dot"></span> ' + t('hero.offline');
+        }
+        let lastStatus = null;
+        function refreshStatus() {
+            fetch('/api/status?_=' + Date.now(), { cache: 'no-store' })
+                .then(r => r.json())
+                .then(s => { lastStatus = s; paintStatus(s); })
+                .catch(() => {});
+        }
+        refreshStatus();
+        setInterval(refreshStatus, 60000);
+        document.addEventListener('dabot:lang', () => { if (lastStatus) paintStatus(lastStatus); });
+    </script>
+</body>
+</html>
