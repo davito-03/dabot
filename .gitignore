@@ -8,15 +8,24 @@ ENV/
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache/
+.ruff_cache/
+
 # Bases de datos y logs
 *.sqlite3
 *.db
+*.db-wal
+*.db-shm
 *.log
 logs/
+data/
+backups/
+restart_state.json
+
+# Config viva por guild (la plantilla sí va)
+configs/*.yaml
+!configs/default.yaml
+
 # Aider y temporales
 .aider*
 .env
-configs/*.yaml
-!configs/default.yaml
-data/
-*.pyc
