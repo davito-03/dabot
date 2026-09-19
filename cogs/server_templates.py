@@ -7,7 +7,7 @@ from discord.ext import commands
 from utils.helpers import DASHBOARD_URL, DABOT_GREEN
 from utils.server_templates import TEMPLATES, list_templates, resolve_template, save_template_config
 
-SUPER_OWNER_ID = int(os.getenv("SUPER_OWNER_ID", "600041740124160011"))
+SUPER_OWNER_ID = int(os.getenv("SUPER_OWNER_ID") or "0")
 log = logging.getLogger("Dabot.Templates")
 
 

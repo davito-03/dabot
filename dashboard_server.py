@@ -40,6 +40,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("Dabot.Dashboard")
 
 from webapp.routers.health import router as health_router
+from webapp.routers.status import router as status_router
 
 app = FastAPI(
     title="Dabot — Panel web",
@@ -47,6 +48,7 @@ app = FastAPI(
     version="3.1.0"
 )
 app.include_router(health_router)
+app.include_router(status_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -3468,124 +3470,6 @@ async def resolve_discord_user(user_id: str) -> dict:
         logger.warning(f"resolve user {user_id}: {e}")
     _user_cache[str(user_id)] = (now, profile)
     return profile
-
-
-# Shared live status probe: refresh at most about once per minute so every
-# dashboard load/poll sees fresh ping + guild/user counts without hammering Discord.
-_LIVE_STATUS_TTL = 55.0
-_live_status_cache: dict = {"ts": 0.0, "data": None}
-_live_status_lock = asyncio.Lock()
-
-
-async def _probe_discord_live() -> dict:
-    """Measure Discord REST latency and fetch live guild/user totals."""
-    out = {"ok": False, "latency_ms": None, "guilds": None, "users": None}
-    if not DISCORD_TOKEN:
-        return out
-    try:
-        timeout = aiohttp.ClientTimeout(total=8, connect=4)
-        headers = {"Authorization": f"Bot {DISCORD_TOKEN}", "User-Agent": DISCORD_USER_AGENT}
-        async with aiohttp.ClientSession(timeout=timeout) as session:
-            t0 = time.perf_counter()
-            async with session.get("https://discord.com/api/v10/gateway/bot", headers=headers) as res:
-                ping_ms = int((time.perf_counter() - t0) * 1000)
-                if res.status == 200:
-                    out["ok"] = True
-                    out["latency_ms"] = ping_ms
-            async with session.get(
-                "https://discord.com/api/v10/users/@me/guilds?with_counts=true",
-                headers=headers,
-            ) as res:
-                if res.status == 200:
-                    guilds = await res.json()
-                    if isinstance(guilds, list):
-                        out["guilds"] = len(guilds)
-                        out["users"] = sum(
-                            int(g.get("approximate_member_count") or 0) for g in guilds
-                        )
-                elif res.status == 429:
-                    logger.warning("live guilds probe rate-limited")
-    except Exception as e:
-        logger.warning("live /api/status Discord ping failed: %s", e)
-    return out
-
-
-@app.get("/api/status")
-async def public_bot_status(db: sqlite3.Connection = Depends(get_db)):
-    """Live Discord ping + guild/user counts (cached ~55s; refreshed on dashboard load/poll)."""
-    cursor = db.cursor()
-    cursor.execute(
-        "SELECT latency_ms, guilds, users, commands, started_at, updated_at, version, username FROM bot_runtime WHERE id = 1"
-    )
-    row = cursor.fetchone()
-    heartbeat_online = False
-    payload = {
-        "online": False,
-        "latency_ms": None,
-        "gateway_latency_ms": None,
-        "guilds": 0,
-        "users": 0,
-        "commands": 0,
-        "started_at": None,
-        "updated_at": None,
-        "version": "3.1.0",
-        "username": "Dabot",
-        "invite_url": invite_url(DISCORD_CLIENT_ID) if DISCORD_CLIENT_ID else None,
-        "dashboard": DASHBOARD_URL,
-        "client_id": DISCORD_CLIENT_ID,
-        "checked_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        "source": "heartbeat",
-    }
-    if row:
-        updated = row["updated_at"]
-        try:
-            updated_dt = datetime.datetime.fromisoformat(updated)
-            if updated_dt.tzinfo is None:
-                delta = datetime.datetime.utcnow() - updated_dt
-            else:
-                delta = datetime.datetime.now(datetime.timezone.utc) - updated_dt
-            heartbeat_online = delta.total_seconds() < 300
-        except Exception:
-            heartbeat_online = False
-        payload.update({
-            "gateway_latency_ms": row["latency_ms"],
-            "latency_ms": row["latency_ms"],
-            "guilds": row["guilds"] or 0,
-            "users": row["users"] or 0,
-            "commands": row["commands"] or 0,
-            "started_at": row["started_at"],
-            "updated_at": row["updated_at"],
-            "version": row["version"] or "3.1.0",
-            "username": row["username"] or "Dabot",
-        })
-
-    now = time.monotonic()
-    live = None
-    if _live_status_cache["data"] and (now - _live_status_cache["ts"]) < _LIVE_STATUS_TTL:
-        live = _live_status_cache["data"]
-    else:
-        async with _live_status_lock:
-            now = time.monotonic()
-            if _live_status_cache["data"] and (now - _live_status_cache["ts"]) < _LIVE_STATUS_TTL:
-                live = _live_status_cache["data"]
-            else:
-                live = await _probe_discord_live()
-                _live_status_cache["ts"] = time.monotonic()
-                _live_status_cache["data"] = live
-
-    live_ok = bool(live and live.get("ok"))
-    if live:
-        if live.get("latency_ms") is not None:
-            payload["latency_ms"] = live["latency_ms"]
-            payload["source"] = "live"
-        if live.get("guilds") is not None:
-            payload["guilds"] = live["guilds"]
-        if live.get("users") is not None:
-            payload["users"] = live["users"]
-
-    payload["online"] = bool(live_ok or heartbeat_online)
-    payload["checked_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    return payload
 
 
 @app.post("/api/users/resolve")

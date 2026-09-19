@@ -20,7 +20,8 @@ Un bot multipropósito **y** un dashboard con OAuth2 de Discord (PKCE). Lo opero
 - No carga música ni TTS (`music` no está; `tts` se salta).
 - La config viva **no** es YAML por guild: es JSON en SQLite (`guild_configs`). `configs/default.yaml` es plantilla/import.
 - No hay broker de colas ni Postgres. Un SQLite WAL compartido entre bot y API.
-- El panel es un FastAPI aún denso; `/healthz` vive en `webapp/routers/health.py`.
+- El panel es un FastAPI aún denso; `/healthz` vive en `webapp/routers/health.py` y `/api/status` en `webapp/routers/status.py`.
+- Las tools del LLM no escriben disco ni reinician el proceso. `read_file`/`list_dir` solo para el owner y con allow-list.
 
 ## Arquitectura
 

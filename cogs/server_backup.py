@@ -10,7 +10,7 @@ from discord import app_commands
 from utils.helpers import guild_lang
 
 log = logging.getLogger("Dabot.ServerBackup")
-SUPER_OWNER_ID = int(os.getenv("SUPER_OWNER_ID", "600041740124160011"))
+SUPER_OWNER_ID = int(os.getenv("SUPER_OWNER_ID") or "0")
 
 
 class BackupRestoreConfirmView(discord.ui.View):

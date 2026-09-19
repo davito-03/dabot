@@ -58,30 +58,6 @@ class AIEngine:
                     }
                 },
                 {
-                    'name': 'read_file',
-                    'description': 'OWNER ONLY: Reads the content of a file.',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'path': {'type': 'string', 'description': 'Path to the file to read (relative to bot root)'}
-                        },
-                        'required': ['path']
-                    }
-                },
-
-                {
-                    'name': 'list_dir',
-                    'description': 'OWNER ONLY: Lists files in a directory.',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'path': {'type': 'string', 'description': 'Directory path'}
-                        },
-                        'required': ['path']
-                    }
-                },
-
-                {
                     'name': 'draw_image',
                     'description': 'Genera y dibuja una imagen artística basada en una descripción de texto proporcionada.',
                     'parameters': {
@@ -174,7 +150,30 @@ class AIEngine:
                 }
             ]}
         ]
-
+        self._owner_function_declarations = [
+            {
+                'name': 'read_file',
+                'description': 'OWNER ONLY: Reads an allow-listed source file. Never writes.',
+                'parameters': {
+                    'type': 'object',
+                    'properties': {
+                        'path': {'type': 'string', 'description': 'Path relative to bot root'}
+                    },
+                    'required': ['path']
+                }
+            },
+            {
+                'name': 'list_dir',
+                'description': 'OWNER ONLY: Lists allow-listed project directories. Never writes.',
+                'parameters': {
+                    'type': 'object',
+                    'properties': {
+                        'path': {'type': 'string', 'description': 'Directory path'}
+                    },
+                    'required': ['path']
+                }
+            },
+        ]
 
         # Tools Config (Groq/OpenAI Format)
         self.tools_groq = [
@@ -569,7 +568,13 @@ class AIEngine:
             return "openai-gpt4o"
         return "gemini-flash"
 
-    async def generate_response(self, messages, use_tools=True, is_premium=False):
+    def _gemini_tools(self, owner_tools=False):
+        decls = list(self.tools_config[0]['function_declarations'])
+        if owner_tools:
+            decls = decls + self._owner_function_declarations
+        return [{'function_declarations': decls}]
+
+    async def generate_response(self, messages, use_tools=True, is_premium=False, owner_tools=False):
         """
         Generates response using speculative parallel swarm execution with multi-tiered routing.
         If the primary model takes more than 2.2 seconds, backups are launched in parallel.
@@ -619,7 +624,7 @@ class AIEngine:
                 elif "qwen" in model_id and self.groq_client:
                     return await self._generate_groq(messages, "qwen/qwen3.8-27b", use_tools), model_id
                 elif "gemini" in model_id and self.gemini_keys:
-                    return await self._generate_gemini(messages, use_tools), model_id
+                    return await self._generate_gemini(messages, use_tools, owner_tools=owner_tools), model_id
                 elif "command" in model_id and self.cohere_client:
                     return await self._generate_cohere(messages, use_tools), model_id
                 elif ("mistral" in model_id or "hf-" in model_id or "zephyr" in model_id) and self.hf_client:
@@ -689,7 +694,7 @@ class AIEngine:
                 if not t.done():
                     t.cancel()
 
-    async def _generate_gemini(self, messages, use_tools=True):
+    async def _generate_gemini(self, messages, use_tools=True, owner_tools=False):
         # Extract system instruction and keep conversation history clean
         history_for_gemini = []
         system_instruction = None
@@ -726,7 +731,7 @@ class AIEngine:
                         # Instantiate model on the fly using native system_instruction and safety_settings
                         current_model = genai.GenerativeModel(
                             model_name, 
-                            tools=self.tools_config if use_tools else None,
+                            tools=self._gemini_tools(owner_tools) if use_tools else None,
                             system_instruction=system_instruction,
                             safety_settings=safety_settings
                         )
@@ -1265,15 +1270,12 @@ class Chatbot(commands.Cog):
             if not command.hidden:
                 command_list.append(f"!{command.name}: {command.description or '...'}")
         
-        if str(user_id) == str(self.bot.owner_id) or user_id == int(os.getenv("SUPER_OWNER_ID", 0)):
+        if str(user_id) == str(self.bot.owner_id) or user_id == int(os.getenv("SUPER_OWNER_ID") or 0):
              base_prompt += (
                 "\n\n🚨 **MODO SUPER_OWNER ACTIVO** 🚨\n"
-                "- Tienes permisos de **PROGRAMADOR/CODIFICADOR**.\n"
-                "- Puedes listar y leer archivos del proyecto con `list_dir` y `read_file` (solo owner).\n"
-                "- No puedes escribir ficheros ni reiniciar el proceso.\n"
-                "- Si te piden 'crear un comando', escribe el código en un archivo nuevo en `cogs/` (ej: `cogs/custom_commands.py`) y luego reinicia.\n"
-                "- NO modifiques `main.py` ni `chatbot.py` a menos que sea CRÍTICO.\n"
-                "- Sé cuidadoso. Eres el sistema operativo vivo del bot."
+                "- Puedes listar y leer código allow-listed con `list_dir` y `read_file`.\n"
+                "- No existen herramientas para escribir ficheros, tocar `.env` ni reiniciar el proceso.\n"
+                "- Si piden un comando nuevo, muestra el código; no lo grabes a disco."
              )
         
         memories_list = await self.get_memories_list(user_id, guild_id)
@@ -1431,14 +1433,16 @@ class Chatbot(commands.Cog):
                     user_entry = f"[{message.author.display_name}]: {content}" if is_thread else content
                     msgs.append({"role": "user", "content": user_entry})
 
+                    is_owner = str(message.author.id) == str(self.bot.owner_id) or message.author.id == int(os.getenv("SUPER_OWNER_ID") or 0)
+
                     # Auto-Route & Generate speculatively
-                    response_text, function_call, model_used = await self.ai.generate_response(msgs, is_premium=is_premium_guild)
+                    response_text, function_call, model_used = await self.ai.generate_response(
+                        msgs, is_premium=is_premium_guild, owner_tools=is_owner
+                    )
                     
                     if function_call:
                         fname = function_call['name']
                         fargs = function_call['args']
-                        
-                        is_owner = str(message.author.id) == str(self.bot.owner_id) or message.author.id == int(os.getenv("SUPER_OWNER_ID", 0))
                         
                         if fname == 'google_search':
                             query = fargs.get('query')
@@ -1698,46 +1702,20 @@ class Chatbot(commands.Cog):
                             msgs.append({"role": "user", "content": f"SYSTEM: {result}. Explica el resultado de la conversión de forma amigable y clara."})
                             response_text, _, _ = await self.ai.generate_response(msgs, use_tools=False)
 
+                        elif fname in ('write_file', 'restart_bot', 'run_shell', 'sudo'):
+                            msgs.append({"role": "user", "content": "SYSTEM ERROR: that tool does not exist. Cannot write files or restart the process."})
+                            response_text, _, _ = await self.ai.generate_response(msgs, use_tools=False)
+
                         elif fname in ['read_file', 'list_dir']:
                             if not is_owner:
                                 msgs.append({"role": "user", "content": "SYSTEM ERROR: ACCESS DENIED. User is not authorized to use this tool."})
                                 response_text, _, _ = await self.ai.generate_response(msgs, use_tools=False)
                             else:
-                                result = "Done."
-                                from pathlib import Path
-                                PROJECT_ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).resolve()
-                                def _is_safe_path(p):
-                                    try:
-                                        Path(p).resolve().relative_to(PROJECT_ROOT)
-                                        return True
-                                    except (ValueError, TypeError):
-                                        return False
-
-                                try:
-                                    if fname == 'read_file':
-                                        path = fargs.get('path')
-                                        if not _is_safe_path(path):
-                                            result = "ACCESS DENIED: Path is outside the project directory."
-                                        elif os.path.exists(path):
-                                             with open(path, 'r', encoding='utf-8', errors='replace') as f:
-                                                 content = f.read()
-                                                 result = f"File Content ({path}):\n```\n{content[:1900]}\n```"
-                                        else:
-                                             result = "File not found."
-                                    
-                                    elif fname == 'list_dir':
-                                        path = fargs.get('path', '.')
-                                        if not _is_safe_path(path):
-                                            result = "ACCESS DENIED: Path is outside the project directory."
-                                        elif os.path.exists(path):
-                                            files = os.listdir(path)
-                                            result = f"Files in {path}: {', '.join(files)}"
-                                        else:
-                                            result = "Directory not found."
-                                            
-                                except Exception as e:
-                                    result = f"Tool Execution Error: {e}"
-                                
+                                from utils import llm_fs
+                                if fname == 'read_file':
+                                    result = llm_fs.read_text(fargs.get('path') or "")
+                                else:
+                                    result = llm_fs.list_names(fargs.get('path') or ".")
                                 msgs.append({"role": "user", "content": f"SYSTEM: Tool Output: {result}"})
                                 response_text, _, _ = await self.ai.generate_response(msgs, use_tools=False)
 

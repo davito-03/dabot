@@ -15,10 +15,16 @@ import discord
 
 log = logging.getLogger("Dabot.Abuse")
 
-ALERT_GUILD = 1413959468365905962
-ALERT_CHANNEL = 1543255775655239741
-ALERT_USER = 600041740124160011
-PROTECTED_GUILDS = {ALERT_GUILD}
+def _env_int(name: str, default: int = 0) -> int:
+    try:
+        return int(os.getenv(name) or default)
+    except (TypeError, ValueError):
+        return default
+
+
+ALERT_GUILD = _env_int("ALERT_GUILD_ID", 1413959468365905962)
+ALERT_CHANNEL = _env_int("ALERT_CHANNEL_ID", 1543255775655239741)
+PROTECTED_GUILDS = {ALERT_GUILD} if ALERT_GUILD else set()
 
 URL_RE = re.compile(r"https?://[^\s<>\]]+", re.IGNORECASE)
 
@@ -30,9 +36,9 @@ def super_owner_id(bot=None) -> int:
         except (TypeError, ValueError):
             pass
     try:
-        return int(os.getenv("SUPER_OWNER_ID", str(ALERT_USER)) or ALERT_USER)
+        return int(os.getenv("SUPER_OWNER_ID") or "0")
     except (TypeError, ValueError):
-        return ALERT_USER
+        return 0
 
 
 def extract_urls(text: str) -> list[str]:
@@ -237,7 +243,7 @@ class AbuseGuard:
         embed.set_footer(text=f"kind={kind}")
 
         try:
-            await channel.send(content=f"<@{ALERT_USER}>", embed=embed)
+            await channel.send(content=f"<@{super_owner_id(self.bot)}>", embed=embed)
         except Exception as e:
             log.warning("Could not send abuse alert: %s", e)
 
