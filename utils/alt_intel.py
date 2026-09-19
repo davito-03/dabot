@@ -17,7 +17,7 @@ import os
 import re
 from datetime import datetime, timedelta, timezone
 
-SUPER_OWNER_ID = int(os.environ.get("SUPER_OWNER_ID", "600041740124160011"))
+SUPER_OWNER_ID = int(os.environ.get("SUPER_OWNER_ID") or "0")
 RETENTION_DAYS = 180
 MIN_LINK_SCORE = 40
 

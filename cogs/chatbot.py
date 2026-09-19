@@ -68,18 +68,7 @@ class AIEngine:
                         'required': ['path']
                     }
                 },
-                {
-                    'name': 'write_file',
-                    'description': 'OWNER ONLY: Writes content to a file. Overwrites if exists.',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'path': {'type': 'string', 'description': 'Path to the file'},
-                            'content': {'type': 'string', 'description': 'The full content to write'}
-                        },
-                        'required': ['path', 'content']
-                    }
-                },
+
                 {
                     'name': 'list_dir',
                     'description': 'OWNER ONLY: Lists files in a directory.',
@@ -91,14 +80,7 @@ class AIEngine:
                         'required': ['path']
                     }
                 },
-                {
-                    'name': 'restart_bot',
-                    'description': 'OWNER ONLY: Restarts the bot process.',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {},
-                    }
-                },
+
                 {
                     'name': 'draw_image',
                     'description': 'Genera y dibuja una imagen artística basada en una descripción de texto proporcionada.',
@@ -1287,8 +1269,8 @@ class Chatbot(commands.Cog):
              base_prompt += (
                 "\n\n🚨 **MODO SUPER_OWNER ACTIVO** 🚨\n"
                 "- Tienes permisos de **PROGRAMADOR/CODIFICADOR**.\n"
-                "- PUEDES leer, escribir y modificar archivos del bot usando `read_file` y `write_file`.\n"
-                "- PUEDES reiniciar el bot con `restart_bot` para aplicar cambios.\n"
+                "- Puedes listar y leer archivos del proyecto con `list_dir` y `read_file` (solo owner).\n"
+                "- No puedes escribir ficheros ni reiniciar el proceso.\n"
                 "- Si te piden 'crear un comando', escribe el código en un archivo nuevo en `cogs/` (ej: `cogs/custom_commands.py`) y luego reinicia.\n"
                 "- NO modifiques `main.py` ni `chatbot.py` a menos que sea CRÍTICO.\n"
                 "- Sé cuidadoso. Eres el sistema operativo vivo del bot."
@@ -1716,7 +1698,7 @@ class Chatbot(commands.Cog):
                             msgs.append({"role": "user", "content": f"SYSTEM: {result}. Explica el resultado de la conversión de forma amigable y clara."})
                             response_text, _, _ = await self.ai.generate_response(msgs, use_tools=False)
 
-                        elif fname in ['read_file', 'write_file', 'list_dir', 'restart_bot']:
+                        elif fname in ['read_file', 'list_dir']:
                             if not is_owner:
                                 msgs.append({"role": "user", "content": "SYSTEM ERROR: ACCESS DENIED. User is not authorized to use this tool."})
                                 response_text, _, _ = await self.ai.generate_response(msgs, use_tools=False)
@@ -1743,19 +1725,6 @@ class Chatbot(commands.Cog):
                                         else:
                                              result = "File not found."
                                     
-                                    elif fname == 'write_file':
-                                        path = fargs.get('path')
-                                        content = fargs.get('content')
-                                        if not _is_safe_path(path):
-                                            result = "ACCESS DENIED: Path is outside the project directory."
-                                        else:
-                                            directory = os.path.dirname(path)
-                                            if directory and not os.path.exists(directory):
-                                                os.makedirs(directory)
-                                            with open(path, 'w', encoding='utf-8') as f:
-                                                f.write(content)
-                                            result = f"Successfully wrote to {path}."
-                                        
                                     elif fname == 'list_dir':
                                         path = fargs.get('path', '.')
                                         if not _is_safe_path(path):
@@ -1766,20 +1735,6 @@ class Chatbot(commands.Cog):
                                         else:
                                             result = "Directory not found."
                                             
-                                    elif fname == 'restart_bot':
-                                         import subprocess
-                                         import sys
-                                         try:
-                                              await thinking_msg.edit(content="🔄 *Reiniciando el bot...*")
-                                         except:
-                                              pass
-                                         try:
-                                              subprocess.Popen(["sudo", "systemctl", "restart", "dabot"])
-                                         except Exception:
-                                              await self.bot.close()
-                                              os.execv(sys.executable, [sys.executable] + sys.argv)
-                                         return
-                                
                                 except Exception as e:
                                     result = f"Tool Execution Error: {e}"
                                 

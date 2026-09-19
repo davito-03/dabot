@@ -1,0 +1,21 @@
+[project]
+name = "dabot"
+version = "3.1.0"
+description = "Discord bot + FastAPI dashboard (production)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+exclude = ["data", "logs", "langs", "static", "templates", "__pycache__"]
+
+[tool.ruff.lint]
+# CI starts narrow: syntax and undefined names. Expand later.
+select = ["E9", "F821"]

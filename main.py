@@ -6,6 +6,7 @@ import time
 from datetime import datetime, timezone, timedelta, time as dtime
 from discord.ext import commands
 from dotenv import load_dotenv
+from utils.envcheck import require_runtime_env
 from utils.database import Database
 from utils.config import ConfigManager
 from utils.i18n import I18n, DiscordTranslator
@@ -90,14 +91,24 @@ logger = logging.getLogger('Dabot')
 
 # Load environment variables
 load_dotenv()
+require_runtime_env("bot")
 TOKEN = os.getenv('DISCORD_TOKEN')
-SUPER_OWNER_ID = int(os.getenv('SUPER_OWNER_ID', 0))
+SUPER_OWNER_ID = int(os.environ['SUPER_OWNER_ID'])
 
 # Apply Permission Patch
 patch_permissions(SUPER_OWNER_ID)
 
-# Bot Configuration
-intents = discord.Intents.all()
+# Bot Configuration — explicit intents (not Intents.all())
+intents = discord.Intents.default()
+intents.message_content = True
+intents.members = True
+intents.presences = True
+intents.moderation = True
+intents.voice_states = True
+intents.invites = True
+intents.webhooks = True
+intents.auto_moderation_configuration = True
+intents.auto_moderation_execution = True
 
 
 class LocalizedContext(commands.Context):

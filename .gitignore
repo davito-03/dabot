@@ -1,13 +1,22 @@
+# Entornos virtuales
 venv/
 .venv/
+env/
+ENV/
+
+# Python cache
 __pycache__/
 *.py[cod]
-.env
+*$py.class
+# Bases de datos y logs
+*.sqlite3
 *.db
-*.db-wal
-*.db-shm
+*.log
 logs/
-data/
-backups/
+# Aider y temporales
+.aider*
+.env
 configs/*.yaml
 !configs/default.yaml
+data/
+*.pyc

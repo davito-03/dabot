@@ -1044,7 +1044,7 @@ class Database:
         if guild_id is None:
             return False
         guild_obj = bot.get_guild(int(guild_id)) if isinstance(guild, int) else guild
-        super_owner_id = int(os.getenv("SUPER_OWNER_ID", "600041740124160011") or 0)
+        super_owner_id = int(os.getenv("SUPER_OWNER_ID") or "0")
         if bot and getattr(bot, "super_owner_id", 0):
             super_owner_id = int(bot.super_owner_id)
 

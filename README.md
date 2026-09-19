@@ -5,56 +5,63 @@
 <h1 align="center">Dabot</h1>
 
 <p align="center">
-  <strong>Bot de Discord + dashboard</strong> que diseño, programo y dejo corriendo yo.<br>
+  Bot de Discord + panel FastAPI en producción.<br>
   <a href="https://dabot.davito.es">dabot.davito.es</a>
   ·
-  <a href="https://davito.es/proyectos">portfolio</a>
-  ·
-  <a href="https://github.com/davito-03">@davito-03</a>
+  <a href="https://davito.es/proyectos/dabot">ficha</a>
 </p>
 
-<p align="center">
-  <img alt="Python" src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white">
-  <img alt="discord.py" src="https://img.shields.io/badge/discord.py-2.x-5865F2?logo=discord&logoColor=white">
-  <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-dashboard-009688?logo=fastapi&logoColor=white">
-  <img alt="Docker" src="https://img.shields.io/badge/Docker-compose-2496ED?logo=docker&logoColor=white">
-  <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow">
-</p>
+## Qué es
 
-Esta es la copia de **producción**. `dabot-v2` es un archivo de 2025 con otra arquitectura; no lo uses como base.
+Un bot multipropósito **y** un dashboard con OAuth2 de Discord (PKCE). Lo opero yo en un VPS: no es un tutorial.
 
-Ficha larga (módulos, panel, OAuth, IA): [davito.es/proyectos/dabot](https://davito.es/proyectos/dabot) · diagrama interno: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+## Qué no es
 
-## Qué hay aquí
+- No carga música ni TTS (`music` no está; `tts` se salta).
+- La config viva **no** es YAML por guild: es JSON en SQLite (`guild_configs`). `configs/default.yaml` es plantilla/import.
+- No hay broker de colas ni Postgres. Un SQLite WAL compartido entre bot y API.
+- El panel es un FastAPI aún denso; `/healthz` vive en `webapp/routers/health.py`.
 
-| Capa | Qué hace |
-| --- | --- |
-| Bot (`main.py`, `cogs/`) | Moderación, automod, tickets, niveles (texto y voz), economía, IA, música, bienvenidas, logs, backups, giveaways, starboard, verificación |
-| Web (`dashboard_server.py`, `templates/`, `static/`) | Panel público en [dabot.davito.es](https://dabot.davito.es) con OAuth de Discord, i18n, staff y cuenta de usuario |
-| Datos | SQLite + `configs/default.yaml` como plantilla. Las configs por guild y las bases no se publican |
+## Arquitectura
 
-Lo hice para usarlo de verdad, no como demo: Docker, healthchecks, rotación de logs y un pool de proveedores de IA.
+```
+Discord Gateway → main.py (cogs/) ⇄ dabot.db (WAL) ⇄ dashboard_server.py → dabot.davito.es
+```
+
+Compose: `bot` (`python main.py`) y `api` (`uvicorn`, `127.0.0.1:8090`). Health: `/tmp/bot_alive` y `GET /healthz`.
+
+## Stack
+
+Python 3.11, discord.py 2, FastAPI, aiosqlite/sqlite3, Docker.
 
 ## Arranque
 
 ```bash
-cp .env.example .env
-# DISCORD_TOKEN, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, DISCORD_REDIRECT_URI
+cp .env.example .env   # DISCORD_TOKEN, SUPER_OWNER_ID, OAuth client, …
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
+pytest
 docker compose up -d --build
 ```
 
 Sin Docker: `python main.py` y `uvicorn dashboard_server:app --host 127.0.0.1 --port 8090`.
 
-Intents en el portal: **Server Members**, **Message Content**. Presence si usas estados.
+Intents en el portal: **Server Members**, **Message Content**, Presence.
+
+## Tests
+
+```bash
+pip install pytest ruff
+pytest
+ruff check .
+```
+
+CI: `.github/workflows/ci.yml`.
 
 ## Secretos
 
-Nada de tokens en el repo. `.env` local. `configs/<guild_id>.yaml` y `*.db` fuera de git.
+Nada en git. Sin `DISCORD_TOKEN` / `SUPER_OWNER_ID` el proceso **sale**. `data/`, `logs/`, configs por guild y `*.db` fuera del repo.
 
 ## Relacionado
 
-- Portfolio: [davito.es/proyectos](https://davito.es/proyectos)
-- Hub: [davito.es](https://davito.es)
-- Nexo (TypeScript): [nexo-bot](https://github.com/davito-03/nexo-bot)
+[nexo-bot](https://github.com/davito-03/nexo-bot) · [telegram-drive](https://github.com/davito-03/telegram-drive) · [davito.es](https://davito.es)

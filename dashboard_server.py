@@ -32,16 +32,21 @@ from utils import live_cache as live_cache_lib
 from utils.lastfm import LastFMClient, get_spotify_search_url
 
 load_dotenv()
+from utils.envcheck import require_runtime_env
+require_runtime_env("api")
 
 # Setup logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("Dabot.Dashboard")
+
+from webapp.routers.health import router as health_router
 
 app = FastAPI(
     title="Dabot — Panel web",
     description="Dashboard y API de Dabot (davito.es).",
     version="3.1.0"
 )
+app.include_router(health_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -116,7 +121,7 @@ async def csrf_protection(request: Request, call_next):
     return response
 
 DB_PATH = os.environ.get("DATABASE_PATH", "dabot.db")
-SUPER_OWNER_ID = int(os.environ.get("SUPER_OWNER_ID", "600041740124160011"))
+SUPER_OWNER_ID = int(os.environ["SUPER_OWNER_ID"])
 
 
 def _as_bool(value) -> bool:
@@ -2667,18 +2672,6 @@ async def download_db_backup(user = Depends(get_current_user)):
     except Exception as e:
         logger.error(f"Error generating DB backup: {e}")
         raise HTTPException(status_code=500, detail=f"Error al generar backup: {str(e)}")
-
-@app.get("/healthz")
-@app.get("/api/healthz")
-async def healthcheck(db: sqlite3.Connection = Depends(get_db)):
-    try:
-        cursor = db.cursor()
-        cursor.execute("SELECT 1")
-        cursor.fetchone()
-        db_status = "connected"
-    except Exception as e:
-        return JSONResponse(status_code=503, content={"status": "unhealthy", "database": f"error: {e}"})
-    return {"status": "healthy", "service": "dabot-api", "database": db_status}
 
 @app.get("/api/admin/live-logs")
 async def get_admin_live_logs(

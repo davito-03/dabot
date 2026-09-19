@@ -7,8 +7,11 @@ import logging
 
 log = logging.getLogger("Dabot.PrivacyCrypto")
 
-# Secret pepper from environment or fallback
-PEPPER = os.environ.get("PRIVACY_SECRET_PEPPER") or os.environ.get("SESSION_SECRET") or "dabot_rgpd_secure_salt_2026"
+# Pepper must come from env. No baked-in default.
+PEPPER = os.environ.get("PRIVACY_SECRET_PEPPER") or os.environ.get("SESSION_SECRET") or ""
+if not PEPPER:
+    log.error("PRIVACY_SECRET_PEPPER/SESSION_SECRET unset; IP HMAC uses a per-process nonce")
+    PEPPER = secrets.token_hex(32)
 
 def encrypt_ip_fingerprint(ip: str, user_id: int) -> tuple[str, str]:
     """
